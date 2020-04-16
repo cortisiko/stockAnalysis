@@ -12,23 +12,22 @@ def getStatistics(ticker):
 def getDebtToEquity(financialData,ticker):
     debtToEquity = financialData[ticker].get('debtToEquity', None)
     if debtToEquity is not None:
-        print("this is the debt to equity ratio MRQ: {:0.2f}\n".format(debtToEquity))
+        return   print("this is the debt to equity ratio MRQ: {:0.2f}\n".format(debtToEquity))
     else:
-        print("No Debt to Equity Ratio here here")
-    return
+        return   print("No Debt to Equity Ratio here here")
+
 
 def getReturnOnEquity(financialData,ticker):
     returnOnEquity = financialData[ticker].get('returnOnEquity', None)
     if returnOnEquity is not None:
-        print("this is the return on equity ratio TTM: {:0.2f}\n".format(returnOnEquity))
+        return  print("this is the return on equity ratio TTM: {:0.2f}\n".format(returnOnEquity))
     else:
-        print("No return on equity ratio here")
-    return
+        return print("No return on equity ratio here")
+
 
 def getProfitMargins(financialData,ticker):
     profitMargins = financialData[ticker].get('profitMargins', None)
     if profitMargins is not None:
-        print("The net profit margin is: {:0.2f}\n".format(profitMargins))
+       return print("The net profit margin is: {:0.2f}\n".format(profitMargins))
     else:
-        print("No net profit margin here")
-    return
+        return print("No net profit margin here")

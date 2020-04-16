@@ -15,6 +15,8 @@ freeCashFlow = cashFlow.getFreeCashFlow(getCashFlowDataFrame)
 
 getstats = stat.getStatistics(getTicker)
 getDERatio = stat.getDebtToEquity(getstats,tickerSymbol)
+getROE = stat.getReturnOnEquity(getstats,tickerSymbol)
+getProfitMargin = stat.getProfitMargins(getstats,tickerSymbol)
 
 
 #print(getCashFlowDataFrame)
