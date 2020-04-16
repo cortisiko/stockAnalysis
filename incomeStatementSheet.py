@@ -1,3 +1,5 @@
+## This is the income statement tab on the financials page in yahoo finance
+
 import pandas as pd
 
 
@@ -11,9 +13,9 @@ def getIncomeStatements(ticker):
 
     return incomeStatements
 
+## Basic EPS no need for this. YET
 def getEarningsPerShare(incomeStatements):
-    asOfDate = incomeStatements['asOfDate'].astype(str)
-    BasicEPS = incomeStatements["BasicEPS"]
+    basicEPS = incomeStatements["BasicEPS"]
 
-    return
+    return basicEPS
 

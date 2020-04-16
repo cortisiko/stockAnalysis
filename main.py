@@ -1,26 +1,37 @@
 import ticker as Ticker
-import cashFlowSheet as cashFlow
+import cashFlowSheet as cashFlowPage
 from helpers import getDate as date
 import  balanceSheet as bs
 import incomeStatementSheet as incomeStatement
-import statistics as stat
+import statistics as statsPage
+import summary as summaryPage
+
+
+
 Frequency = 'q'
-tickerSymbol = 'C'
+tickerSymbol = 'GIS'
 
-getTicker = Ticker.getTicker(tickerSymbol)
-getCashFlowDataFrame = cashFlow.getCashFlowData(getTicker,Frequency)
-freeCashFlow = cashFlow.getFreeCashFlow(getCashFlowDataFrame)
+getTickerObject = Ticker.getTicker(tickerSymbol)
+getCashFlowDataFrame = cashFlowPage.getCashFlowData(getTickerObject,Frequency)
+freeCashFlow = cashFlowPage.getFreeCashFlow(getCashFlowDataFrame)
 
-#getDateInFrame = date.getDates(getCashFlow)
+getDateInFrame = date.getDates(getCashFlowDataFrame)
 
-getstats = stat.getStatistics(getTicker)
-getDERatio = stat.getDebtToEquity(getstats,tickerSymbol)
-getROE = stat.getReturnOnEquity(getstats,tickerSymbol)
-getProfitMargin = stat.getProfitMargins(getstats,tickerSymbol)
+getstats = statsPage.getStatistics(getTickerObject)
+getDERatio = statsPage.getDebtToEquity(getTickerObject,tickerSymbol)
+getROE = statsPage.getReturnOnEquity(getTickerObject,tickerSymbol)
+getProfitMargin = statsPage.getProfitMargins(getTickerObject,tickerSymbol)
 
 
+#### Calculating the PE ratio
+eps = summaryPage.getEarningsPerShare(getTickerObject,tickerSymbol)
+currentStockPrice = statsPage.getCurrentStockPrice(getTickerObject,tickerSymbol)
+peRatio = summaryPage.getPERatio(eps,currentStockPrice)
 #print(getCashFlowDataFrame)
 #print(getDateInFrame)
-print(getstats)
+
+print("This is the earnings per share is:",eps)
+print("This is the PE ratio",peRatio)
+
 
 

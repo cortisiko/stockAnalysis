@@ -1,3 +1,5 @@
+## This is the cashflow tab on the financials page in yahoo finance
+
 import matplotlib
 from yahooquery import Ticker
 import pandas as pd
