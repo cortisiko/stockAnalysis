@@ -1,37 +1,38 @@
 import ticker as Ticker
 import cashFlowSheet as cashFlowPage
 from helpers import getDate as date
-import  balanceSheet as bs
-import incomeStatementSheet as incomeStatement
+import  balanceSheet as balanceSheetPage
+import incomeStatementSheet as incomeStatementPage
 import statistics as statsPage
 import summary as summaryPage
 
 
 
 Frequency = 'q'
-tickerSymbol = 'GIS'
+tickerSymbol = 'JPM'
 
-getTickerObject = Ticker.getTicker(tickerSymbol)
+getTickerObject = Ticker.getTicker(tickerSymbol) ## Gets the ticker object so you can access the various objects
 getCashFlowDataFrame = cashFlowPage.getCashFlowData(getTickerObject,Frequency)
-freeCashFlow = cashFlowPage.getFreeCashFlow(getCashFlowDataFrame)
 
+## Need these two to plot the cash flow chart
+freeCashFlow = cashFlowPage.getFreeCashFlow(getCashFlowDataFrame)
 getDateInFrame = date.getDates(getCashFlowDataFrame)
 
-getstats = statsPage.getStatistics(getTickerObject)
-getDERatio = statsPage.getDebtToEquity(getTickerObject,tickerSymbol)
-getROE = statsPage.getReturnOnEquity(getTickerObject,tickerSymbol)
-getProfitMargin = statsPage.getProfitMargins(getTickerObject,tickerSymbol)
 
+#### Fundamentals ###
+debtToEquityRatio = statsPage.getDebtToEquity(getTickerObject,tickerSymbol)
+returnOnEquity = statsPage.getReturnOnEquity(getTickerObject,tickerSymbol)
+profitMargin = statsPage.getProfitMargins(getTickerObject,tickerSymbol)
 
-#### Calculating the PE ratio
 eps = summaryPage.getEarningsPerShare(getTickerObject,tickerSymbol)
 currentStockPrice = statsPage.getCurrentStockPrice(getTickerObject,tickerSymbol)
 peRatio = summaryPage.getPERatio(eps,currentStockPrice)
-#print(getCashFlowDataFrame)
-#print(getDateInFrame)
 
-print("This is the earnings per share is:",eps)
-print("This is the PE ratio",peRatio)
 
+print("The earnings per share is:",eps)
+print("The PE ratio is:",peRatio)
+print("The MRQ debt to equity ratio is:",debtToEquityRatio)## MRQ (most recent quarter)
+print("The return on equity ratio is:",returnOnEquity)
+print("The net profit margin is:",profitMargin)
 
 

@@ -22,10 +22,12 @@ def getCurrentStockPrice(tickerObject,tickerSymbol):
 def getDebtToEquity(tickerObject,tickerSymbol):
     financialData = getStatistics(tickerObject)
     debtToEquity = financialData[tickerSymbol].get('debtToEquity', None)
+
     if debtToEquity is not None:
-        return   print("this is the debt to equity ratio MRQ: {:0.2f}\n".format(debtToEquity))
+        debtToEquity = float(round(debtToEquity, 2))
+        return   debtToEquity
     else:
-        return   print("No Debt to Equity Ratio here here")
+        return   print("No Debt to Equity Ratio for",tickerSymbol)
 
 
 def getReturnOnEquity(tickerObject,tickerSymbol):
@@ -33,9 +35,10 @@ def getReturnOnEquity(tickerObject,tickerSymbol):
     returnOnEquity = financialData[tickerSymbol].get('returnOnEquity', None)
 
     if returnOnEquity is not None:
-        return  print("this is the return on equity ratio TTM: {:0.2f}\n".format(returnOnEquity))
+        returnOnEquity = float(round(returnOnEquity, 2))
+        return returnOnEquity
     else:
-        return print("No return on equity ratio here")
+        return print("No return on equity ratio for",tickerSymbol)
 
 
 def getProfitMargins(tickerObject,tickerSymbol):
@@ -43,6 +46,7 @@ def getProfitMargins(tickerObject,tickerSymbol):
     profitMargins = financialData[tickerSymbol].get('profitMargins', None)
 
     if profitMargins is not None:
-       return print("The net profit margin is: {:0.2f}\n".format(profitMargins))
+        profitMargins = float(round(profitMargins * 100, 2))
+        return profitMargins
     else:
-        return print("No net profit margin here")
+        return print("No net profit margin for",tickerSymbol)
