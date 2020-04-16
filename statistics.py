@@ -27,7 +27,7 @@ def getDebtToEquity(tickerObject,tickerSymbol):
         debtToEquity = float(round(debtToEquity, 2))
         return   debtToEquity
     else:
-        return   print("No Debt to Equity Ratio for",tickerSymbol)
+        return   print("There is no Debt to Equity Ratio for",tickerSymbol)
 
 
 def getReturnOnEquity(tickerObject,tickerSymbol):
@@ -35,10 +35,10 @@ def getReturnOnEquity(tickerObject,tickerSymbol):
     returnOnEquity = financialData[tickerSymbol].get('returnOnEquity', None)
 
     if returnOnEquity is not None:
-        returnOnEquity = float(round(returnOnEquity, 2))
+        returnOnEquity = float(round(returnOnEquity*100, 2))
         return returnOnEquity
     else:
-        return print("No return on equity ratio for",tickerSymbol)
+        return print("There is no return on equity ratio for",tickerSymbol)
 
 
 def getProfitMargins(tickerObject,tickerSymbol):
@@ -49,4 +49,4 @@ def getProfitMargins(tickerObject,tickerSymbol):
         profitMargins = float(round(profitMargins * 100, 2))
         return profitMargins
     else:
-        return print("No net profit margin for",tickerSymbol)
+        return print("There is no net profit margin for",tickerSymbol)
