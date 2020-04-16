@@ -16,7 +16,4 @@ def getCashFlowData(ticks,Frequency):
 
 def getFreeCashFlow(cashFlowData):
      freeCashFlow = cashFlowData['FreeCashFlow'].astype(str)
-     asOfDate = cashFlowData['asOfDate'].astype(str)
-
-
-     return freeCashFlow,asOfDate
+     return freeCashFlow

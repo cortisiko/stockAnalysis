@@ -1,14 +1,24 @@
 import ticker as Ticker
 import cashFlowSheet as cashFlow
-import balanceSheet as bs
+from helpers import getDate as date
+import  balanceSheet as bs
 import incomeStatementSheet as incomeStatement
-
+import statistics as stat
 Frequency = 'q'
-tickerSymbol = 'GIS'
+tickerSymbol = 'C'
 
 getTicker = Ticker.getTicker(tickerSymbol)
-getCashFlow = cashFlow.getCashFlowData(getTicker,Frequency)
-freeCashFlow = cashFlow.getFreeCashFlow(getCashFlow)
+getCashFlowDataFrame = cashFlow.getCashFlowData(getTicker,Frequency)
+freeCashFlow = cashFlow.getFreeCashFlow(getCashFlowDataFrame)
 
-print(getCashFlow)
-#print(freeCashFlow)
+#getDateInFrame = date.getDates(getCashFlow)
+
+getstats = stat.getStatistics(getTicker)
+getDERatio = stat.getDebtToEquity(getstats,tickerSymbol)
+
+
+#print(getCashFlowDataFrame)
+#print(getDateInFrame)
+print(getstats)
+
+
