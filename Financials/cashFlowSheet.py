@@ -13,5 +13,8 @@ def getCashFlowData(tickerObject,Frequency):
 
 
 def getFreeCashFlow(cashFlowData):
-     freeCashFlow = cashFlowData['FreeCashFlow'].astype(str)
+     freeCashFlow = cashFlowData['FreeCashFlow']
+     freeCashFlow = freeCashFlow / 1e3
+     #freeCashFlow = cashFlowData['FreeCashFlow'].astype(str)
+
      return freeCashFlow

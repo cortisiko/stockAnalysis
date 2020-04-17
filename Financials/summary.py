@@ -1,4 +1,4 @@
-
+## This is the summary tab
 
 def getSummaryData(tickerObject):
     summaryData = tickerObject.key_stats

@@ -1,23 +1,25 @@
-import ticker as Ticker
-import cashFlowSheet as cashFlowPage
+from click._compat import raw_input
+
+from Financials import cashFlowSheet as cashFlowPage
+from Financials import statistics as statisticsTab
+from Financials import summary as summaryPage
+
+from helpers import Ticker as ticker
+from helpers import plotChart as plot
 from helpers import getDate as date
-import  balanceSheet as balanceSheetPage
-import incomeStatementSheet as incomeStatementPage
-import statistics as statisticsTab
-import summary as summaryPage
 
 
+Frequency = 'a'
+#tickerSymbol = 'gis'.upper()
 
-Frequency = 'q'
-tickerSymbol = 'AMD'
-
-tickerObject = Ticker.getTicker(tickerSymbol) ## Gets the ticker object so you can access the various objects
+tickerSymbol = raw_input("Enter Symbol: ")
+tickerSymbol = tickerSymbol.upper()
+tickerObject = ticker.getTicker(tickerSymbol) ## Gets the ticker object so you can access the various objects
 getCashFlowDataFrame = cashFlowPage.getCashFlowData(tickerObject,Frequency)
 
 ## Need these two to plot the cash flow chart
 freeCashFlow = cashFlowPage.getFreeCashFlow(getCashFlowDataFrame)
-getDateInDataFrame = date.getDates(getCashFlowDataFrame)
-
+getdate = date.getDates(getCashFlowDataFrame)
 
 #### Fundamentals ###
 debtToEquityRatio = statisticsTab.getDebtToEquity(tickerObject,tickerSymbol)
@@ -35,4 +37,4 @@ print("The MRQ debt to equity ratio is:",debtToEquityRatio)## MRQ (most recent q
 print("The return on equity ratio is {:0.2f}%".format(returnOnEquity))
 print("The net profit margin is {:0.2f}%\n".format(profitMargin))
 
-
+plot.plotGraph(getdate,freeCashFlow) ## plotting free cash flow
