@@ -4,10 +4,11 @@ from pandas.plotting import register_matplotlib_converters
 
 fig, ax = plt.subplots()
 
-def plotGraph(dateRange,data):
-    ax.set_title('Free cash flow')
+def plotGraph(dateRange,data,tickerSymbol,graphTitle):
+    graphTitle = tickerSymbol +" "+graphTitle
+    ax.set_title(graphTitle)
     ax.set_xlabel('Years')
-    ax.set_ylabel('Free Cash flow in $')
+    ax.set_ylabel('Cash flow in $')
 
     register_matplotlib_converters()
     plt.bar(dateRange, data)
