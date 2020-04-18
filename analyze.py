@@ -9,7 +9,7 @@ from helpers import plotChart as plot
 from helpers import getDate as date
 
 
-Frequency = 'q'
+Frequency = 'a'
 #tickerSymbol = 'gis'.upper()
 
 tickerSymbol = raw_input("Enter Symbol: ")
