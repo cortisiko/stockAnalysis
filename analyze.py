@@ -9,7 +9,7 @@ from helpers import plotChart as plot
 from helpers import getDate as date
 
 
-Frequency = 'q'
+Frequency = 'a'
 #tickerSymbol = 'gis'.upper()
 
 tickerSymbol = raw_input("Enter Symbol: ")
@@ -41,7 +41,7 @@ print("The net profit margin is {:0.2f}%\n".format(profitMargin))
 
 ## Plotting graphs
 cashFlowGraphTitle = 'Free cash flow'
-#plot.plotGraph(date,freeCashFlow,tickerSymbol,cashFlowGraphTitle) ## plotting free cash flow
+plot.plotGraph(date,freeCashFlow,tickerSymbol,cashFlowGraphTitle) ## plotting free cash flow
 
 netIncomeGraphTitle = 'Net Income'
-plot.plotGraph(date,netIncome,tickerSymbol,netIncomeGraphTitle) ## plotting net income
+#plot.plotGraph(date,netIncome,tickerSymbol,netIncomeGraphTitle) ## plotting net income
