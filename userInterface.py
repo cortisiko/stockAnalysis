@@ -14,14 +14,20 @@ class UserInterface():
         self.root.geometry('600x240')
         self.label = tk.Label(self.root, text="Stock Symbol: ")
         self.label.pack(side="top")
-        self.textExample = tk.Text(self.root, height=1, width=6)
-        self.button = tk.Button(self.root,
-                                text='Analyze',
+        self.textInputBox = tk.Text(self.root, relief=RIDGE, height=1, width = 6, borderwidth=2)
+        self.analyzeButton = tk.Button(self.root,
+                                text='Analyze',relief=RIDGE,
                                 command=lambda: [self.getEPS(), self.getPERatio(), self.getReturnOnEquity(),
                                                  self.currentStockPrice(), self.getDebtToEquityRatio(),
                                                  self.getProfitMargin()])
-        self.textExample.pack()
-        self.button.pack()
+
+        #self.label = tk.Label(self.root, text="This will be cleared.")
+        self.clearButton = tk.Button(self.root, text="Clear",
+                           command=lambda: self.clear_widget())
+
+        self.textInputBox.pack()
+        self.analyzeButton.pack()
+        self.clearButton.pack()
 
         self.labelA = tk.Label(self.root, text="Earnings Per Share:")
         self.labelB = tk.Label(self.root, text="PE Ratio:")
@@ -36,43 +42,43 @@ class UserInterface():
         self.labelD.pack()
         self.labelE.pack()
         self.labelF.pack()
-
+        self.root.iconbitmap("stockx.ico")
         self.root.mainloop()
 
     def getEPS(self):
         tickerFromUser = self.getTextInput()
         eps = anlyze.getEPS(tickerFromUser)
 
-        self.labelA["text"] = eps
+        self.labelA["text"] = self.labelA["text"] + str(eps)
 
     def getPERatio(self):
         tickerFromUser = self.getTextInput()
         peRatio = anlyze.getPERatio(tickerFromUser)
 
-        self.labelB["text"] = peRatio
+        self.labelB["text"] = self.labelB["text"] + str(peRatio)
 
     def getReturnOnEquity(self):
         tickerFromUser = self.getTextInput()
         returnOnEquity = anlyze.getReturnOnEquity(tickerFromUser)
-        self.labelC["text"] = returnOnEquity
+        self.labelC["text"] = self.labelC["text"] + str(returnOnEquity)
 
     def currentStockPrice(self):
         tickerFromUser = self.getTextInput()
         peRatio = anlyze.getCurrentStockPrice(tickerFromUser)
-        self.labelD["text"] = peRatio
+        self.labelD["text"] = self.labelD["text"] + str(peRatio)
 
     def getDebtToEquityRatio(self):
         tickerFromUser = self.getTextInput()
         debtToEquityRatio = anlyze.getDebtToEquity(tickerFromUser)
-        self.labelE["text"] = debtToEquityRatio
+        self.labelE["text"] = self.labelE["text"] + str(debtToEquityRatio)
 
     def getProfitMargin(self):
         tickerFromUser = self.getTextInput()
         profitMargin = anlyze.getProfitMargin(tickerFromUser)
-        self.labelF["text"] = profitMargin
+        self.labelF["text"] = self.labelF["text"] + str(profitMargin)
 
     def getTextInput(self):
-        result = self.textExample.get("1.0", "end")
+        result = self.textInputBox.get("1.0", "end")
         results = result.upper()
         results = results.rstrip()
         return results
@@ -80,6 +86,9 @@ class UserInterface():
     def getStockInfo(self):
         userInput = self.getTextInput()
         anlyze.analyzeStock(userInput)
+
+    def clear_widget(widget):
+        widget.destroy()
 
 
 app = UserInterface()

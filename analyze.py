@@ -19,7 +19,6 @@ def graphFreeCashFlow(tickerSymbol):
 
 
         ## Fundamentals ###
-
 def getCurrentStockPrice(tickerSymbol):
     tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
     currentStockPrice = statisticsTab.getCurrentStockPrice(tickerObject,tickerSymbol)
