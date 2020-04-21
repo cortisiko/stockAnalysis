@@ -1,4 +1,4 @@
-import analyze as anlyze
+from Financials import analyze as anlyze
 from helpers import plotChart as plot
 
 try:
