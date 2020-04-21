@@ -1,6 +1,8 @@
 from Financials import cashFlowSheet as cashFlowPage
 from Financials import statistics as statisticsTab
 from Financials import summary as summaryPage
+from Financials import price as priceData
+
 from Financials import incomeStatementSheet as income
 from helpers import Ticker as ticker
 from helpers import plotChart as plot
@@ -18,10 +20,16 @@ def graphFreeCashFlow(tickerSymbol):
 
 
 
+def getStockName(tickerSymbol):
+    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+    stockName = priceData.getCompanyName(tickerObject,tickerSymbol)
+
+    return stockName
+
         ## Fundamentals ###
 def getCurrentStockPrice(tickerSymbol):
     tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
-    currentStockPrice = statisticsTab.getCurrentStockPrice(tickerObject,tickerSymbol)
+    currentStockPrice = priceData.getCurrentStockPrice(tickerObject,tickerSymbol)
 
     return currentStockPrice
 
