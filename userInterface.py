@@ -1,4 +1,5 @@
 import analyze as anlyze
+from helpers import plotChart as plot
 
 try:
     import Tkinter as tk
@@ -10,7 +11,7 @@ class UserInterface():
     def __init__(self):
         self.root = tk.Tk()
         self.windowTitle = self.root.title("Stock Analyzer")
-        self.root.geometry('600x240')
+        self.root.geometry('700x440')
         self.stockSymbolText = tk.Label(self.root, text="Stock Symbol: ")
         self.stockSymbolText.pack(side="top")
         self.textInputBox = tk.Text(self.root, relief=tk.RIDGE, height=1, width = 6, borderwidth=2)
@@ -20,11 +21,14 @@ class UserInterface():
                                                  self.currentStockPrice(), self.getDebtToEquityRatio(),
                                                  self.getProfitMargin()])
 
-        #self.label = tk.Label(self.root, text="This will be cleared.")
-        self.clearButton = tk.Button(self.root, text="Clear", command=self.clearValues)
+        self.graphCashFlow = tk.Button(self.root, text="See Cash Flow Graph",command=self.plotCashFlowGraph)
+
+
+        self.clearButton = tk.Button(self.root, text="Clear",command=self.clearValues)
 
         self.textInputBox.pack()
         self.analyzeButton.pack()
+        self.graphCashFlow.pack()
         self.clearButton.pack()
 
         self.earningsPerShareLabelText = tk.Label(self.root, text="Earnings Per Share:")
@@ -92,6 +96,13 @@ class UserInterface():
         userInput = self.getTextInput()
         anlyze.analyzeStock(userInput)
 
+    def plotCashFlowGraph(self):
+        userInput = self.getTextInput()
+        anlyze.graphFreeCashFlow(userInput)
+
+    def destroyGraph(self):
+        plot.killGraph()
+
     def clearValues(self):
         self.earningsPerShareLabelText["text"]  = self.earningsPerShareLabelDefault
         self.peRatioLabelText["text"]           = self.peRatioLabelDefault
@@ -100,5 +111,5 @@ class UserInterface():
         self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioLabelDefault
         self.profitMarginLabelText["text"]      = self.profitMarginLabelDefault
         self.textInputBox.delete("1.0", "end")
-
+        self.destroyGraph()
 app = UserInterface()

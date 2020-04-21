@@ -18,3 +18,6 @@ def plotGraph(dateRange,data,tickerSymbol,graphTitle):
     fig.tight_layout()
     plt.show()
 
+
+def killGraph():
+    plt.close('all')
