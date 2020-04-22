@@ -36,7 +36,7 @@ class Application(Frame):
         self.currentStockPriceLabelDefault = "Current Stock Price: "
         self.debtToEquityRatioLabelDefault = "Debt to Equity Ratio: "
         self.profitMarginLabelDefault = "Profit Margin: "
-        self.noInputText = "Enter a value"
+        self.noInputText = "Enter something int"
 
 
         self.stockSymbolText.grid(row=0, column=1,columnspan=2)
@@ -46,12 +46,12 @@ class Application(Frame):
         self.graphCashFlowButton.grid(row=3, column=4, ipadx=10)
 
         self.CompanyNameLabelText.grid(row=5, column=2)
-        self.earningsPerShareLabelText.grid(row=6, column=2)
-        self.peRatioLabelText.grid(row=7, column=2)
-        self.returnOnEquityLabelText.grid(row=8, column=2)
-        self.currentStockPriceLabelText.grid(row=9, column=2)
-        self.debtToEquityRatioLabelText.grid(row=10, column=2)
-        self.profitMarginLabelText.grid(row=11, column=2)
+        self.earningsPerShareLabelText.grid(row=7, column=2)
+        self.peRatioLabelText.grid(row=8, column=2)
+        self.returnOnEquityLabelText.grid(row=9, column=2)
+        self.currentStockPriceLabelText.grid(row=10, column=2)
+        self.debtToEquityRatioLabelText.grid(row=11, column=2)
+        self.profitMarginLabelText.grid(row=12, column=2)
 
 
     def getTextInput(self):
@@ -63,10 +63,7 @@ class Application(Frame):
     def getStockInfo(self):
         userInput = self.getTextInput()
 
-        if len(userInput) == 0:
-            anlyze.analyzeStock(userInput)
-        else:
-            print("enter some valid shit")
+        return userInput
 
     def getCompanyName(self):
         tickerFromUser = self.getTextInput()

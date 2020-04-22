@@ -39,9 +39,8 @@ def getEPS(tickerSymbol):
     return eps
 
 def getPERatio(tickerSymbol):
-    eps = getEPS(tickerSymbol)
-    currentStockPrice = getCurrentStockPrice(tickerSymbol)
-    peRatio = summaryPage.getPERatio(eps, currentStockPrice)
+    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+    peRatio = summaryPage.getPERatio(tickerObject,tickerSymbol)
 
     return peRatio
 
