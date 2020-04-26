@@ -10,13 +10,14 @@ from helpers import getDate as date
 
 Frequency = 'a'
 
-def graphFreeCashFlow(tickerSymbol):
+def graphFreeCashFlow(tickerSymbol,self):
     tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
     cashFlowDataFrame = cashFlowPage.getCashFlowData(tickerObject, Frequency)
     freeCashFlow = cashFlowPage.getFreeCashFlow(cashFlowDataFrame)
+    companyName = priceData.getCompanyName(tickerObject,tickerSymbol)
     dates = date.getDates(cashFlowDataFrame)
-    cashFlowGraphTitle = 'Free cash flow'
-    plot.plotGraph(dates, freeCashFlow, tickerSymbol, cashFlowGraphTitle)  ## plotting free cash flow
+    cashFlowGraphTitle = 'Free cash flow '
+    plot.plotGraph(dates, freeCashFlow, companyName, cashFlowGraphTitle,self)  ## plotting free cash flow
 
 
 
