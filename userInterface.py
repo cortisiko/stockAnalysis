@@ -1,5 +1,5 @@
 from Financials import analyze as anlyze
-from helpers import plotChart as plot
+from helpers import plotChart as pyt
 from tkinter import *
 import tkinter.font
 
@@ -7,6 +7,7 @@ class Application(Frame):
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
+
         self.master.title("Stock Analyzer")
         self.my_font = tkinter.font.Font(root, family="Comic Sans MS",size=20)
         self.stockSymbolText = Label(root, text="Enter Stock Symbol: ")
@@ -106,10 +107,10 @@ class Application(Frame):
 
     def plotCashFlowGraph(self):
         userInput = self.getTextInput()
-        anlyze.graphFreeCashFlow(userInput,root)
+        plot.plotCashGraph(self,userInput)
 
     def destroyGraph(self):
-        plot.killGraph()
+        plot.clearPlotPage()
 
     def clearValues(self):
         self.earningsPerShareLabelText["text"] = self.earningsPerShareLabelDefault
@@ -122,7 +123,7 @@ class Application(Frame):
         self.textInputBox.delete("1.0", "end")
         self.destroyGraph()
 
-
+plot = pyt.PlotGraph() #initiate a class instance
 root = Tk()
 root.geometry("780x500")
 root.iconbitmap('stockx.ico')
