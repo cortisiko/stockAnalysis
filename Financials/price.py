@@ -1,7 +1,10 @@
 
 def getPriceDataObject(tickerObject):
-    priceObject = tickerObject.price
-    return priceObject
+    if tickerObject is not None:
+        priceObject = tickerObject.price
+        return priceObject
+    else:
+        return print("User did not enter a valid ticker")
 
 
 def getCurrentStockPrice(tickerObject,tickerSymbol):
