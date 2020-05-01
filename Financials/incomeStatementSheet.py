@@ -8,12 +8,21 @@ def getIncomeStatements(tickerObject,Frequency):
 
 def getNetIncome(incomeStatementData):
     netIncome = incomeStatementData['NetIncome']
-    netIncome = netIncome / 1e3
-    return netIncome
+
+    if netIncome is not None:
+         netIncome = netIncome / 1e3
+         return netIncome
+    else:
+         print("There is no net income for", netIncome)
+
 
 ## Basic EPS no need for this. YET
 def getEarningsPerShare(incomeStatements):
     basicEPS = incomeStatements["BasicEPS"]
 
-    return basicEPS
+    if basicEPS is not None:
+        return basicEPS
+    else:
+         print("There is no basic EPS for", basicEPS)
+
 

@@ -5,19 +5,6 @@ from Financials import price as priceData
 
 from Financials import incomeStatementSheet as income
 from helpers import Ticker as ticker
-from helpers import plotChart as plot
-from helpers import getDate as date
-
-Frequency = 'a'
-
-def graphFreeCashFlow(tickerSymbol):
-    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
-    cashFlowDataFrame = cashFlowPage.getCashFlowData(tickerObject, Frequency)
-    freeCashFlow = cashFlowPage.getFreeCashFlow(cashFlowDataFrame)
-    dates = date.getDates(cashFlowDataFrame)
-    cashFlowGraphTitle = 'Free cash flow'
-    plot.plotGraph(dates, freeCashFlow, tickerSymbol, cashFlowGraphTitle)  ## plotting free cash flow
-
 
 
 def getStockName(tickerSymbol):
@@ -39,9 +26,8 @@ def getEPS(tickerSymbol):
     return eps
 
 def getPERatio(tickerSymbol):
-    eps = getEPS(tickerSymbol)
-    currentStockPrice = getCurrentStockPrice(tickerSymbol)
-    peRatio = summaryPage.getPERatio(eps, currentStockPrice)
+    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+    peRatio = summaryPage.getPERatio(tickerObject,tickerSymbol)
 
     return peRatio
 
