@@ -71,9 +71,9 @@ class Startpage(tk.Frame):
         self.textInputBox = Text(self, relief=RIDGE, height=1, width = 10, borderwidth=4)
         self.analyzeButton = Button(self,
                                        text='Analyze Stock', relief=RIDGE,
-                                       command=lambda: [self.getCompanyName(),self.getEPS(), self.getPERatio(), self.getReturnOnEquity(),
-                                                        self.currentStockPrice(), self.getDebtToEquityRatio(),
-                                                        self.getProfitMargin()])
+                                       command=self.combineFunc(self.getCompanyName,self.getEPS, self.getPERatio, self.getReturnOnEquity,
+                                                        self.currentStockPrice, self.getDebtToEquityRatio,
+                                                        self.getProfitMargin))
         self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues)
         self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotChart))
 
@@ -148,9 +148,14 @@ class Startpage(tk.Frame):
 
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")
-        results = result.upper()
-        results = results.rstrip()
-        return results
+        result = result.rstrip()
+        if len(result) > 0:
+            results = result.upper()
+            results = str(results)
+            return results
+
+        else:
+            self.showErrorMessage()
 
     def getStockInfo(self):
         userInput = self.getTextInput()
@@ -165,6 +170,19 @@ class Startpage(tk.Frame):
         self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioLabelDefault
         self.profitMarginLabelText["text"]      = self.profitMarginLabelDefault
         self.textInputBox.delete("1.0", "end")
+
+
+    def combineFunc(self, *funcs):
+
+        def combinedFunc(*args, **kwargs):
+            for f in funcs:
+                f(*args, **kwargs)
+
+        return combinedFunc
+
+    def showErrorMessage(self):
+
+        messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
 
 
 #   *****   PAGES   *****
@@ -206,7 +224,7 @@ class PlotChart(tk.Frame):
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messageBox.showerror("Error", "Sorry, you need to enter something into the textbox")
+            messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
