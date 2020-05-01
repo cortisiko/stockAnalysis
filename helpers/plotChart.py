@@ -35,7 +35,7 @@ class PlotGraph:
 
         if not self.canvas:
             self.canvas = FigureCanvasTkAgg(self.fig, container)
-            self.canvas.get_tk_widget().pack(side="bottom", fill="both", expand=True)
+            self.canvas.get_tk_widget().pack(side="center", fill="both", expand=True)
         self.canvas.draw_idle()
 
 
