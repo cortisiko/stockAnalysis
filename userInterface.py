@@ -2,7 +2,7 @@ try:
     import Tkinter as tk
 except:
     import tkinter as tk
-from helpers import plotCashFlow as pyt
+from helpers import plotChart as pyt
 import tkinter.font
 from Financials import analyze as anlyze
 from tkinter import *
@@ -39,14 +39,15 @@ class UserInterFace(tk.Tk):
 
         menu.add_cascade(menu=Charts, label="Charts")
 
-        Charts.add_command(label="Cash Flow Chart", command=lambda: self.show_frame(PlotChart))
+        Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(PlotCashFlowChart))
+        Charts.add_command(label="Income Statement", command=lambda: self.show_frame(PlotIncomeStatementChart))
 
         menu.add_separator()
 
 
         tk.Tk.config(self, menu=menu)
 
-        for F in (Startpage,PlotChart):
+        for F in (Startpage,PlotCashFlowChart,PlotIncomeStatementChart):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -75,7 +76,7 @@ class Startpage(tk.Frame):
                                                         self.currentStockPrice, self.getDebtToEquityRatio,
                                                         self.getProfitMargin))
         self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues)
-        self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotChart))
+        self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
 
         self.earningsPerShareLabelText = Label(self, text="Earnings Per Share: ")
         self.peRatioLabelText = Label(self, text="PE Ratio: ")
@@ -187,7 +188,7 @@ class Startpage(tk.Frame):
 
 #   *****   PAGES   *****
 
-class PlotChart(tk.Frame):
+class PlotCashFlowChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
@@ -197,7 +198,7 @@ class PlotChart(tk.Frame):
 
         self.textInputBox = tk.Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
         self.frequencyText = tk.Label(self, text="Frequency")
-        self.quarterlyRadioButton = Radiobutton(self, text="Quarterly", variable=self.RadioText, value=self.quarterlyTextString,command=self.selectedRadioButtonOption)
+        self.quarterlyRadioButton = Radiobutton(self, text="Quartersly",variable=self.RadioText, value=self.quarterlyTextString,command=self.selectedRadioButtonOption)
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,command=self.selectedRadioButtonOption)
 
         self.plotGraphButton = tk.Button(self, text='plot cash Flow Graph', command=self.plotCashFlowGraph)
@@ -249,7 +250,62 @@ class PlotChart(tk.Frame):
         plot.plotCashGraph(self, userInput)
 
 
+class PlotIncomeStatementChart(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
 
+        self.RadioText = StringVar()
+        self.quarterlyTextString = 'q'
+        self.yearlyTextString = 'a'
+
+        self.textInputBox = tk.Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
+        self.frequencyText = tk.Label(self, text="Frequency")
+        self.quarterlyRadioButton = Radiobutton(self, text="Quarterly",variable=self.RadioText, value=self.quarterlyTextString,command=self.selectedRadioButtonOption)
+        self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,command=self.selectedRadioButtonOption)
+
+        #self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
+
+        self.clearButton = tk.Button(self, text='Clear', command=self.clear)
+
+        self.textInputBox.pack()
+        self.quarterlyRadioButton.pack()
+        self.yearlyRadioButton.pack()
+        self.clearButton.pack()
+
+        button1 = tk.Button(self, text="Back to Home",
+                            command=lambda: controller.show_frame(Startpage))
+        #button1.pack()
+
+    def getTextInput(self):
+        result = self.textInputBox.get("1.0", "end")
+        result = result.rstrip()
+        if len(result) > 0:
+            results = result.upper()
+            results = str(results)
+            return results
+
+        else:
+            self.yearlyRadioButton.deselect()
+            self.quarterlyRadioButton.deselect()
+            messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
+
+    def selectedRadioButtonOption(self):
+        userInput = self.getTextInput()
+        radioButtonFrequencyOption = self.RadioText.get()
+        print("printing this income")
+        plot.incomeStatementChart(self, userInput,radioButtonFrequencyOption)
+
+    def destroyGraph(self):
+        plot.clearPlotPage()
+
+    def clearChart(self): ## redundant
+        plot.clearPlotPage()
+
+    def clear(self):
+        self.textInputBox.delete("1.0", "end")
+        plot.clearPlotPage()
+        self.yearlyRadioButton.deselect()
+        self.quarterlyRadioButton.deselect()
 
 app = UserInterFace()
 plot = pyt.PlotGraph()

@@ -4,6 +4,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from Financials import cashFlowSheet as cashFlowPage
 from Financials import price as priceData
+from Financials import incomeStatementSheet as income
 
 from helpers import Ticker as ticker
 from helpers import getDate as date
@@ -13,8 +14,7 @@ class PlotGraph:
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)
 
-    def plotCashGraph(self, container,tickerSymbol):
-        Frequency='q'
+    def plotCashGraph(self, container,tickerSymbol,Frequency):
         tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
         cashFlowDataFrame = cashFlowPage.getCashFlowData(tickerObject, Frequency)
         freeCashFlow = cashFlowPage.getFreeCashFlow(cashFlowDataFrame)
@@ -31,14 +31,37 @@ class PlotGraph:
         ax.set_ylabel(yLabelText)
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
-        ax.plot(dates, freeCashFlow, '-o', color='orange')
+        ax.plot(dates, freeCashFlow, '-o', color='green')
 
         if not self.canvas:
             self.canvas = FigureCanvasTkAgg(self.fig, container)
-            self.canvas.get_tk_widget().pack(side="center", fill="both", expand=True)
+            self.canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
         self.canvas.draw_idle()
 
 
+    def incomeStatementChart(self, container,tickerSymbol,Frequency):
+        tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+        incomeStatementsDataFrame = income.getIncomeStatements(tickerObject, Frequency)
+        incomeStatement = income.getNetIncome(incomeStatementsDataFrame)
+        companyName = priceData.getCompanyName(tickerObject, tickerSymbol)
+        dates = date.getDates(incomeStatementsDataFrame)
+        incomeStatementGraphTitle = 'Income Statement'
+
+        ax = self.fig.add_subplot(111)
+
+        yLabelText = "Income Statement in $"
+        graphTitle = companyName + " " + incomeStatementGraphTitle
+        ax.set_title(graphTitle)
+        ax.set_xlabel('Years')
+        ax.set_ylabel(yLabelText)
+
+        ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
+        ax.plot(dates, incomeStatement, '-o', color='orange')
+
+        if not self.canvas:
+            self.canvas = FigureCanvasTkAgg(self.fig, container)
+            self.canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
+        self.canvas.draw_idle()
 
     def clearPlotPage(self):
         self.fig.clear()  # clear your figure

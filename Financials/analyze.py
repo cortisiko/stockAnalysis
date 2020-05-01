@@ -5,20 +5,6 @@ from Financials import price as priceData
 
 from Financials import incomeStatementSheet as income
 from helpers import Ticker as ticker
-from helpers import plotChart as plot
-from helpers import getDate as date
-
-Frequency = 'a'
-
-def graphFreeCashFlow(tickerSymbol,root):
-    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
-    cashFlowDataFrame = cashFlowPage.getCashFlowData(tickerObject, Frequency)
-    freeCashFlow = cashFlowPage.getFreeCashFlow(cashFlowDataFrame)
-    companyName = priceData.getCompanyName(tickerObject,tickerSymbol)
-    dates = date.getDates(cashFlowDataFrame)
-    cashFlowGraphTitle = 'Free cash flow '
-    plot.plotGraph(dates, freeCashFlow, companyName, cashFlowGraphTitle,root)  ## plotting free cash flow
-
 
 
 def getStockName(tickerSymbol):

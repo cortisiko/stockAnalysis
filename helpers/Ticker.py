@@ -6,4 +6,4 @@ def getTicker(ticker):
                 stockTicker = Ticker(ticker)
                 return stockTicker
         else:
-                return print("User did not enter a valid ticker")
+         print("User did not enter a valid ticker")

@@ -13,9 +13,8 @@ def getNetIncome(incomeStatementData):
          netIncome = netIncome / 1e3
          return netIncome
     else:
-        return print("There is no net income for", netIncome)
+         print("There is no net income for", netIncome)
 
-    return netIncome
 
 ## Basic EPS no need for this. YET
 def getEarningsPerShare(incomeStatements):
@@ -24,7 +23,6 @@ def getEarningsPerShare(incomeStatements):
     if basicEPS is not None:
         return basicEPS
     else:
-        return print("There is no basic EPS for", basicEPS)
+         print("There is no basic EPS for", basicEPS)
 
-    return basicEPS
 
