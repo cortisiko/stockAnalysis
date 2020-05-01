@@ -6,6 +6,7 @@ from helpers import plotCashFlow as pyt
 import tkinter.font
 from Financials import analyze as anlyze
 from tkinter import *
+from tkinter import messagebox as messageBox
 
 
 class UserInterFace(tk.Tk):
@@ -196,14 +197,20 @@ class PlotChart(tk.Frame):
 
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")
-        results = result.upper()
-        results = results.rstrip()
-        results = str(results)
-        return results
+        result = result.rstrip()
+        if len(result) > 0:
+            results = result.upper()
+            results = str(results)
+            return results
+
+        else:
+            self.yearlyRadioButton.deselect()
+            self.quarterlyRadioButton.deselect()
+            messageBox.showerror("Error", "Sorry, you need to enter something into the textbox")
 
     def selectedRadioButtonOption(self):
-        radioButtonFrequencyOption = self.RadioText.get()
         userInput = self.getTextInput()
+        radioButtonFrequencyOption = self.RadioText.get()
         plot.plotCashGraph(self, userInput,radioButtonFrequencyOption)
 
     def destroyGraph(self):
