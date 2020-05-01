@@ -76,7 +76,7 @@ class Startpage(tk.Frame):
                                                         self.currentStockPrice, self.getDebtToEquityRatio,
                                                         self.getProfitMargin))
         self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues)
-        self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
+        #self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
 
         self.earningsPerShareLabelText = Label(self, text="Earnings Per Share: ")
         self.peRatioLabelText = Label(self, text="PE Ratio: ")
@@ -93,14 +93,13 @@ class Startpage(tk.Frame):
         self.currentStockPriceLabelDefault = "Current Stock Price: "
         self.debtToEquityRatioLabelDefault = "Debt to Equity Ratio: "
         self.profitMarginLabelDefault = "Profit Margin: "
-        self.noInputText = "Enter something int"
 
 
         self.stockSymbolText.grid(row=0, column=3)
         self.textInputBox.grid(row=0, column=4,sticky="nsew")
         self.analyzeButton.grid(row=3, column=3, pady=4,sticky="nsew")
         self.clearButton.grid(row=3, column=4, ipadx=10)
-        self.graphCashFlowButton.grid(row=3, column=5, ipadx=10)
+        #self.graphCashFlowButton.grid(row=3, column=5, ipadx=10)
 
         self.CompanyNameLabelText.grid(row=5, column=4)
         self.currentStockPriceLabelText.grid(row=6, column=4)
@@ -191,20 +190,22 @@ class Startpage(tk.Frame):
 class PlotCashFlowChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-
+        self.my_font = tkinter.font.Font(self, family="Sans Serif",size=20)
+        self.pageTitle = Label(self, text="Cash Flow Page",font=self.my_font)
         self.RadioText = StringVar()
         self.quarterlyTextString = 'q'
         self.yearlyTextString = 'a'
 
         self.textInputBox = tk.Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
         self.frequencyText = tk.Label(self, text="Frequency")
-        self.quarterlyRadioButton = Radiobutton(self, text="Quartersly",variable=self.RadioText, value=self.quarterlyTextString,command=self.selectedRadioButtonOption)
+        self.quarterlyRadioButton = Radiobutton(self, text="Quarterly",variable=self.RadioText, value=self.quarterlyTextString,command=self.selectedRadioButtonOption)
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,command=self.selectedRadioButtonOption)
 
         self.plotGraphButton = tk.Button(self, text='plot cash Flow Graph', command=self.plotCashFlowGraph)
 
         self.clearButton = tk.Button(self, text='Clear', command=self.clear)
 
+        self.pageTitle.pack()
         self.textInputBox.pack()
         self.quarterlyRadioButton.pack()
         self.yearlyRadioButton.pack()
@@ -253,7 +254,8 @@ class PlotCashFlowChart(tk.Frame):
 class PlotIncomeStatementChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-
+        self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
+        self.pageTitle = Label(self, text="Income Statement Page", font=self.my_font)
         self.RadioText = StringVar()
         self.quarterlyTextString = 'q'
         self.yearlyTextString = 'a'
@@ -267,6 +269,7 @@ class PlotIncomeStatementChart(tk.Frame):
 
         self.clearButton = tk.Button(self, text='Clear', command=self.clear)
 
+        self.pageTitle.pack()
         self.textInputBox.pack()
         self.quarterlyRadioButton.pack()
         self.yearlyRadioButton.pack()
@@ -292,7 +295,6 @@ class PlotIncomeStatementChart(tk.Frame):
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
-        print("printing this income")
         plot.incomeStatementChart(self, userInput,radioButtonFrequencyOption)
 
     def destroyGraph(self):

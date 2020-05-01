@@ -56,7 +56,7 @@ class PlotGraph:
         ax.set_ylabel(yLabelText)
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
-        ax.plot(dates, incomeStatement, '-o', color='orange')
+        ax.plot(dates, incomeStatement, '-o', color='green')
 
         if not self.canvas:
             self.canvas = FigureCanvasTkAgg(self.fig, container)
