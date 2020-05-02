@@ -3,6 +3,7 @@ try:
 except:
     import tkinter as tk
 from helpers import plotChart as pyt
+from helpers import plotIncome as pltIncome
 import tkinter.font
 from Financials import analyze as anlyze
 from tkinter import *
@@ -210,6 +211,7 @@ class PlotCashFlowChart(tk.Frame):
         self.quarterlyRadioButton.pack()
         self.yearlyRadioButton.pack()
         self.clearButton.pack()
+        #self.plotGraphButton.pack()
 
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
@@ -287,6 +289,7 @@ class PlotIncomeStatementChart(tk.Frame):
             results = str(results)
             return results
 
+
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
@@ -295,7 +298,7 @@ class PlotIncomeStatementChart(tk.Frame):
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
-        plot.incomeStatementChart(self, userInput,radioButtonFrequencyOption)
+        plotIncome.incomeStatementChart(self, userInput,radioButtonFrequencyOption)
 
     def destroyGraph(self):
         plot.clearPlotPage()
@@ -305,11 +308,13 @@ class PlotIncomeStatementChart(tk.Frame):
 
     def clear(self):
         self.textInputBox.delete("1.0", "end")
-        plot.clearPlotPage()
+        plotIncome.clearPlotPage()
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
 
 app = UserInterFace()
 plot = pyt.PlotGraph()
+plotIncome = pltIncome.PlotGraph()
+
 app.geometry("1200x600")
 app.mainloop()
