@@ -71,12 +71,12 @@ class Startpage(tk.Frame):
         self.my_font = tkinter.font.Font(self, family="Comic Sans MS",size=20)
         self.stockSymbolText = Label(self, text="Enter Stock Symbol: ")
         self.textInputBox = Text(self, relief=RIDGE, height=1, width = 10, borderwidth=4)
-        self.analyzeButton = Button(self,
+        self.analyzeButton = Button(self, bg='green',
                                        text='Analyze Stock', relief=RIDGE,
                                        command=self.combineFunc(self.getCompanyName,self.getEPS, self.getPERatio, self.getReturnOnEquity,
                                                         self.currentStockPrice, self.getDebtToEquityRatio,
                                                         self.getProfitMargin))
-        self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues)
+        self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues, bg='red')
         #self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
 
         self.earningsPerShareLabelText = Label(self, text="Earnings Per Share: ", width=30, anchor="w")
@@ -240,7 +240,7 @@ class PlotCashFlowChart(tk.Frame):
 
         self.plotGraphButton = tk.Button(self, text='plot cash Flow Graph', command=self.plotCashFlowGraph)
 
-        self.clearButton = tk.Button(self, text='Clear', command=self.clear)
+        self.clearButton = tk.Button(self, text='Clear', command=self.clear, bg='red')
 
         self.pageTitle.pack()
         self.textInputBox.pack()
