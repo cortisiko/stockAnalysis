@@ -31,8 +31,8 @@ class UserInterFace(tk.Tk):
         menu.add_cascade(menu=Charts, label="Charts")
 
         Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(PlotCashFlowChart))
-        Charts.add_command(label="Income Statement", command=lambda: self.show_frame(PlotIncomeStatementChart))
         Charts.add_command(label="Earnings", command=lambda: self.show_frame(plotEarningsChart))
+        Charts.add_command(label="Income Statement", command=lambda: self.show_frame(PlotIncomeStatementChart))
 
 
         menu.add_separator()
@@ -94,6 +94,15 @@ class Startpage(tk.Frame):
         self.returnOnEquityLabelText.grid(row=9, column=4)
         self.debtToEquityRatioLabelText.grid(row=10, column=4)
         self.profitMarginLabelText.grid(row=11, column=4)
+
+    def func(event,self):
+        print("You hit return.")
+        self.bind('<Return>',
+                  self.combineFunc(self.getCompanyName, self.getEPS, self.getPERatio, self.getReturnOnEquity,
+                                   self.currentStockPrice, self.getDebtToEquityRatio,
+                                   self.getProfitMargin)
+                  )
+
 
     def getCompanyName(self):
         tickerFromUser = self.getTextInput()

@@ -4,7 +4,6 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from Financials import cashFlowSheet as cashFlowPage
 from Financials import price as priceData
-from Financials import incomeStatementSheet as income
 
 from helpers import Ticker as ticker
 from helpers import getDate as date

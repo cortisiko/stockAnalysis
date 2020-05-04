@@ -4,9 +4,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from Financials import price as priceData
 from Financials import earnings as earning
-
 from helpers import Ticker as ticker
-from helpers import getDate as date
 
 class PlotGraph:
     def __init__(self):
