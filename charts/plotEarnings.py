@@ -16,19 +16,20 @@ class PlotGraph:
     def plotEarnings(self, container,tickerSymbol,Frequency):
         tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
         earningsData = earning.getEarningsData(tickerObject)
-        YearlyfinaincalEarnings = earningsData[tickerSymbol]['financialsChart']['yearly']
-        quarterlyfinaincalEarnings = earningsData[tickerSymbol]['financialsChart']['quarterly']
         companyName = priceData.getCompanyName(tickerObject, tickerSymbol)
         EarningsTitle = 'Earnings'
 
+        data = self.getFreqency(earningsData, Frequency, tickerSymbol)
+
         dates, revs, earns = [], [], []
-        for a in quarterlyfinaincalEarnings:
+
+        for a in data:
             dates.append(a['date'])
             revs.append(a['revenue'])
             earns.append(a['earnings'])
 
-        ax = self.fig.add_subplot(111)
 
+        ax = self.fig.add_subplot(111)
         yLabelText = "Earnings in $"
         graphTitle = companyName + " " + EarningsTitle
         ax.set_title(graphTitle)
@@ -46,6 +47,14 @@ class PlotGraph:
             self.canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
         self.canvas.draw_idle()
 
+
+    def getFreqency(self,earningsData,Frequency,tickerSymbol):
+        if Frequency=='yearly':
+            yearlyFinaincalEarnings = earningsData[tickerSymbol]['financialsChart'][Frequency]
+            return yearlyFinaincalEarnings
+        else:
+            quarterlyfinaincalEarnings = earningsData[tickerSymbol]['financialsChart'][Frequency]
+            return quarterlyfinaincalEarnings
 
     def clearPlotPage(self):
         self.fig.clear()  # clear your figure

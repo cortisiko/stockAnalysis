@@ -298,8 +298,8 @@ class plotEarningsChart(tk.Frame):
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Earnings Page", font=self.my_font)
         self.RadioText = StringVar()
-        self.quarterlyTextString = 'q'
-        self.yearlyTextString = 'a'
+        self.quarterlyTextString = 'quarterly'
+        self.yearlyTextString = 'yearly'
 
         self.textInputBox = tk.Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
         self.frequencyText = tk.Label(self, text="Frequency")
@@ -312,8 +312,8 @@ class plotEarningsChart(tk.Frame):
 
         self.pageTitle.pack()
         self.textInputBox.pack()
-        self.quarterlyRadioButton.pack()
         self.yearlyRadioButton.pack()
+        self.quarterlyRadioButton.pack()
         self.clearButton.pack()
 
         button1 = tk.Button(self, text="Back to Home",
@@ -347,7 +347,7 @@ class plotEarningsChart(tk.Frame):
 
     def clear(self):
         self.textInputBox.delete("1.0", "end")
-        plotIncome.clearPlotPage()
+        plotEarnings.clearPlotPage()
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
 
