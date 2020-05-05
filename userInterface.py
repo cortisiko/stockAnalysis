@@ -58,7 +58,7 @@ class Startpage(tk.Frame):
         self.stockSymbolText = Label(self, text="Enter Stock Symbol: ")
         self.textInputBox = Text(self, relief=RIDGE, height=1, width = 10, borderwidth=4)
         self.analyzeButton = Button(self,
-                                       text='Analyze Stock', relief=RIDGE,
+                                       text='Analyze Stock', relief=RAISED, borderwidth = 7, bg='green',
                                        command=self.analyze)
         self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues)
         self.textInputBox.focus()
@@ -121,7 +121,6 @@ class Startpage(tk.Frame):
         self.currentStockPrice()
         self.getDebtToEquityRatio()
         self.getProfitMargin()
-=======
 #New Fields for values
         self.currentStockPriceLabelValueText.grid(row=6, column=5)
         self.earningsPerShareLabelValueText.grid(row=7, column=5)
@@ -353,7 +352,7 @@ class plotEarningsChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
-        self.pageTitle = Label(self, text="Earnings Page", font=self.my_font)
+        self.pageTitle = Label(self, text="Earnings Charts", font=self.my_font)
         self.RadioText = StringVar()
         self.quarterlyTextString = 'quarterly'
         self.yearlyTextString = 'yearly'
@@ -365,12 +364,12 @@ class plotEarningsChart(tk.Frame):
 
         #self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
 
-        self.clearButton = tk.Button(self, text='Clear', command=self.clear)
+        self.clearButton = tk.Button(self, text='Clear', command=self.clear, bg='red')
         self.pageTitle.pack()
         self.textInputBox.pack()
-        self.yearlyRadioButton.pack()
-        self.quarterlyRadioButton.pack()
-        self.clearButton.pack()
+        self.quarterlyRadioButton.pack(side='left', padx=50)
+        self.yearlyRadioButton.pack(side='right', padx=50)
+        self.clearButton.pack(side='bottom')
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
         #button1.pack()
@@ -410,5 +409,5 @@ plotCashFlow = pltCashFlow.PlotGraph()
 plotIncome = pltIncome.PlotGraph()
 plotEarnings = pltEarnings.PlotGraph()
 
-app.geometry("700x300")
+app.geometry("1300x600")
 app.mainloop()
