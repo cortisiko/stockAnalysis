@@ -2,7 +2,7 @@ try:
     import Tkinter as tk
 except:
     import tkinter as tk
-from charts import plotCashFlow as pltCashFlow, plotIncome as pltIncome, plotEarnings as pltEarnings
+from charts import plotCashFlow as pltCashFlow, plotNetIncome as pltIncome, plotEarnings as pltEarnings
 import tkinter.font
 from Financials import analyze as anlyze
 from tkinter import *
@@ -32,7 +32,7 @@ class UserInterFace(tk.Tk):
 
         Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(PlotCashFlowChart))
         Charts.add_command(label="Earnings", command=lambda: self.show_frame(plotEarningsChart))
-        Charts.add_command(label="Income Statement", command=lambda: self.show_frame(PlotIncomeStatementChart))
+        Charts.add_command(label="Net Income", command=lambda: self.show_frame(PlotIncomeStatementChart))
 
 
         menu.add_separator()
@@ -288,7 +288,7 @@ class PlotIncomeStatementChart(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
-        self.pageTitle = Label(self, text="Income Statement Charts", font=self.my_font)
+        self.pageTitle = Label(self, text="Net Income Charts", font=self.my_font)
         self.RadioText = StringVar()
         self.quarterlyTextString = 'q'
         self.yearlyTextString = 'a'
@@ -328,7 +328,7 @@ class PlotIncomeStatementChart(tk.Frame):
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
-        plotIncome.incomeStatementChart(self, userInput,radioButtonFrequencyOption)
+        plotIncome.netIncomeChart(self, userInput,radioButtonFrequencyOption)
 
     def destroyGraph(self):
         plotIncome.clearPlotPage()
@@ -352,15 +352,16 @@ class plotEarningsChart(tk.Frame):
         self.quarterlyTextString = 'quarterly'
         self.yearlyTextString = 'yearly'
 
-        self.textInputBox = tk.Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
-        self.frequencyText = tk.Label(self, text="Frequency")
+        self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
+        self.frequencyText = Label(self, text="Frequency")
         self.quarterlyRadioButton = Radiobutton(self, text="Quarterly",variable=self.RadioText, value=self.quarterlyTextString,command=self.selectedRadioButtonOption)
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,command=self.selectedRadioButtonOption)
 
         #self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
 
-        self.clearButton = tk.Button(self, text='Clear', command=self.clear, bg='red')
+        self.clearButton = Button(self, text='Clear', command=self.clear, bg='red')
         self.pageTitle.pack()
+        self.textInputBox.pack()
         self.quarterlyRadioButton.pack(side='left', padx=50)
         self.yearlyRadioButton.pack(side='right', padx=50)
         self.clearButton.pack(side='bottom')
@@ -383,13 +384,14 @@ class plotEarningsChart(tk.Frame):
             messagebox.showErrorMessage(self)
 
     def selectedRadioButtonOption(self):
-        #userInput = self.getTextInput()
+        userInput = self.getTextInput()
         startPageObject = self.controller.get_page(Startpage)
-        userInputFromStartPage = startPageObject.getTextInput()
+        #userInputFromStartPage = startPageObject.getTextInput()
         #print(userInputFromStartPage)
 
+        #radioButtonFrequencyOption = self.RadioText.set(self.yearlyTextString)
         radioButtonFrequencyOption = self.RadioText.get()
-        plotEarnings.plotEarnings(self, userInputFromStartPage,radioButtonFrequencyOption)
+        plotEarnings.plotEarnings(self, userInput,radioButtonFrequencyOption)
 
     def destroyGraph(self):
         plotEarnings.clearPlotPage()
