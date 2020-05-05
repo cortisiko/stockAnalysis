@@ -28,7 +28,7 @@ class PlotGraph:
         yLabelText = "Amount in $"
         graphTitle = companyName + " " + EarningsTitle
         ax.set_title(graphTitle)
-        ax.set_xlabel('Years')
+        ax.set_xlabel('Period')
         ax.set_ylabel(yLabelText)
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
@@ -41,7 +41,6 @@ class PlotGraph:
             self.canvas = FigureCanvasTkAgg(self.fig, container)
             self.canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
         self.canvas.draw_idle()
-
 
     def getFreqency(self,earningsData,Frequency,tickerSymbol):
         if Frequency=='yearly':
