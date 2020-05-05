@@ -2,8 +2,7 @@ try:
     import Tkinter as tk
 except:
     import tkinter as tk
-from helpers import plotChart as pyt
-from helpers import plotIncome as pltIncome
+from charts import plotCashFlow as pyt, plotIncome as pltIncome
 import tkinter.font
 from Financials import analyze as anlyze
 from tkinter import *
@@ -11,7 +10,6 @@ from tkinter import messagebox as messageBox
 
 
 class UserInterFace(tk.Tk):
-
     def __init__(self):
         tk.Tk.__init__(self)
         container = tk.Frame(self)
@@ -19,45 +17,31 @@ class UserInterFace(tk.Tk):
         self.iconbitmap('charticon2ICO.ico')
 
         container.pack(side="top", fill="both", expand=True)
-
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-
         menu = tk.Menu(container)
-
         Home = tk.Menu(menu, tearoff=0)
-
         menu.add_cascade(menu=Home, label="Main")
-
         Home.add_command(label="Home",
                             command=lambda: self.show_frame(Startpage))
-
-
         menu.add_separator()
 
         Charts = tk.Menu(menu, tearoff=0)
-
         menu.add_cascade(menu=Charts, label="Charts")
 
         Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(PlotCashFlowChart))
         Charts.add_command(label="Income Statement", command=lambda: self.show_frame(PlotIncomeStatementChart))
 
         menu.add_separator()
-
-
         tk.Tk.config(self, menu=menu)
 
         for F in (Startpage,PlotCashFlowChart,PlotIncomeStatementChart):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
-
         self.show_frame(Startpage)
-
-
-
 
     def show_frame(self, cont):
 
@@ -106,7 +90,7 @@ class Startpage(tk.Frame):
         self.currentStockPriceLabelDefault = "Current Stock Price: "
         self.debtToEquityRatioLabelDefault = "Debt to Equity Ratio: "
         self.profitMarginLabelDefault = "Profit Margin: "
-#Making new spots for text value
+      
         self.earningsPerShareLabelValueDefault = ""
         self.peRatioLabelValueDefault = ""
         self.returnOnEquityLabelValueDefault = ""
@@ -198,10 +182,6 @@ class Startpage(tk.Frame):
         else:
             self.showErrorMessage()
 
-    def getStockInfo(self):
-        userInput = self.getTextInput()
-        anlyze.analyzeStock(userInput)
-
     def clearValues(self):
         self.CompanyNameLabelText["text"]  = ""
         self.earningsPerShareLabelText["text"]  = self.earningsPerShareLabelDefault
@@ -231,7 +211,6 @@ class Startpage(tk.Frame):
     def showErrorMessage(self):
 
         messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
-
 
 #   *****   PAGES   *****
 
