@@ -6,8 +6,7 @@ from charts import plotCashFlow as pltCashFlow, plotIncome as pltIncome, plotEar
 import tkinter.font
 from Financials import analyze as anlyze
 from tkinter import *
-from tkinter import messagebox as messageBox
-
+from helpers import getMessageBox as messagebox
 
 class UserInterFace(tk.Tk):
     def __init__(self):
@@ -59,9 +58,7 @@ class Startpage(tk.Frame):
         self.textInputBox = Text(self, relief=RIDGE, height=1, width = 10, borderwidth=4)
         self.analyzeButton = Button(self,
                                        text='Analyze Stock', relief=RIDGE,
-                                       command=self.combineFunc(self.getCompanyName,self.getEPS, self.getPERatio, self.getReturnOnEquity,
-                                                        self.currentStockPrice, self.getDebtToEquityRatio,
-                                                        self.getProfitMargin))
+                                       command=self.analyze)
         self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues)
         #self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
 
@@ -86,6 +83,7 @@ class Startpage(tk.Frame):
         self.analyzeButton.grid(row=3, column=3, pady=4,sticky="nsew")
         self.clearButton.grid(row=3, column=4, ipadx=10)
         #self.graphCashFlowButton.grid(row=3, column=5, ipadx=10)
+        #self.bind('<Return>', lambda event: self.analyze)
 
         self.CompanyNameLabelText.grid(row=5, column=4)
         self.currentStockPriceLabelText.grid(row=6, column=4)
@@ -95,14 +93,14 @@ class Startpage(tk.Frame):
         self.debtToEquityRatioLabelText.grid(row=10, column=4)
         self.profitMarginLabelText.grid(row=11, column=4)
 
-    def func(event,self):
-        print("You hit return.")
-        self.bind('<Return>',
-                  self.combineFunc(self.getCompanyName, self.getEPS, self.getPERatio, self.getReturnOnEquity,
-                                   self.currentStockPrice, self.getDebtToEquityRatio,
-                                   self.getProfitMargin)
-                  )
-
+    def analyze(self):
+        self.getCompanyName()
+        self.getEPS()
+        self.getPERatio()
+        self.getReturnOnEquity()
+        self.currentStockPrice()
+        self.getDebtToEquityRatio()
+        self.getProfitMargin()
 
     def getCompanyName(self):
         tickerFromUser = self.getTextInput()
@@ -150,7 +148,7 @@ class Startpage(tk.Frame):
             return results
 
         else:
-            self.showErrorMessage()
+            messagebox.showErrorMessage(self)
 
     def clearValues(self):
         self.CompanyNameLabelText["text"]  = ""
@@ -171,12 +169,7 @@ class Startpage(tk.Frame):
 
         return combinedFunc
 
-    def showErrorMessage(self):
-
-        messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
-
 #   *****   PAGES   *****
-
 class PlotCashFlowChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -194,14 +187,12 @@ class PlotCashFlowChart(tk.Frame):
         self.plotGraphButton = tk.Button(self, text='plot cash Flow Graph', command=self.plotCashFlowGraph)
 
         self.clearButton = tk.Button(self, text='Clear', command=self.clear)
-
         self.pageTitle.pack()
         self.textInputBox.pack()
-        self.quarterlyRadioButton.pack()
+        self.quarterlyRadioButton.pack(side="top",anchor = 'center')
         self.yearlyRadioButton.pack()
         self.clearButton.pack()
         #self.plotGraphButton.pack()
-
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
         #button1.pack()
@@ -217,7 +208,7 @@ class PlotCashFlowChart(tk.Frame):
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
+            messagebox.showErrorMessage(self)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
@@ -241,7 +232,6 @@ class PlotCashFlowChart(tk.Frame):
         userInput = self.getTextInput()
         plotCashFlow.plotCashGraph(self, userInput)
 
-
 class PlotIncomeStatementChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -257,15 +247,12 @@ class PlotIncomeStatementChart(tk.Frame):
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,command=self.selectedRadioButtonOption)
 
         #self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
-
         self.clearButton = tk.Button(self, text='Clear', command=self.clear)
-
         self.pageTitle.pack()
         self.textInputBox.pack()
         self.quarterlyRadioButton.pack()
         self.yearlyRadioButton.pack()
         self.clearButton.pack()
-
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
         #button1.pack()
@@ -277,12 +264,10 @@ class PlotIncomeStatementChart(tk.Frame):
             results = result.upper()
             results = str(results)
             return results
-
-
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
+            messagebox.showErrorMessage(self)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
@@ -318,13 +303,11 @@ class plotEarningsChart(tk.Frame):
         #self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
 
         self.clearButton = tk.Button(self, text='Clear', command=self.clear)
-
         self.pageTitle.pack()
         self.textInputBox.pack()
         self.yearlyRadioButton.pack()
         self.quarterlyRadioButton.pack()
         self.clearButton.pack()
-
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
         #button1.pack()
@@ -336,12 +319,10 @@ class plotEarningsChart(tk.Frame):
             results = result.upper()
             results = str(results)
             return results
-
-
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
+            messagebox.showErrorMessage(self)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
@@ -366,5 +347,5 @@ plotCashFlow = pltCashFlow.PlotGraph()
 plotIncome = pltIncome.PlotGraph()
 plotEarnings = pltEarnings.PlotGraph()
 
-app.geometry("1200x600")
+app.geometry("700x300")
 app.mainloop()

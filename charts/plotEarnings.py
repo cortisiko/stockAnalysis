@@ -28,7 +28,7 @@ class PlotGraph:
 
 
         ax = self.fig.add_subplot(111)
-        yLabelText = "Earnings in $"
+        yLabelText = "Amount in $"
         graphTitle = companyName + " " + EarningsTitle
         ax.set_title(graphTitle)
         ax.set_xlabel('Years')
