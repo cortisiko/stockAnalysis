@@ -49,11 +49,13 @@ class UserInterFace(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
-
+    def get_page(self, page_class):
+        return self.frames[page_class]
 class Startpage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.controller = controller
         self.my_font = tkinter.font.Font(self, family="Comic Sans MS",size=20)
         self.stockSymbolText = Label(self, text="Enter Stock Symbol: ")
         self.textInputBox = Text(self, relief=RIDGE, height=1, width = 10, borderwidth=4)
@@ -139,23 +141,18 @@ class Startpage(tk.Frame):
     def getEPS(self):
         tickerFromUser = self.getTextInput()
         eps = anlyze.getEPS(tickerFromUser)
-#Commented out Previous method added new method
-        #self.earningsPerShareLabelText["text"] = self.earningsPerShareLabelText["text"] + str(eps)
         self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueDefault
         self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueText["text"] + str(eps)
 
     def getPERatio(self):
         tickerFromUser = self.getTextInput()
         peRatio = anlyze.getPERatio(tickerFromUser)
-
-        #self.peRatioLabelText["text"] = self.peRatioLabelText["text"] + str(peRatio)
         self.peRatioLabelValueText["text"] = self.peRatioLabelValueDefault
         self.peRatioLabelValueText["text"] = self.peRatioLabelValueText["text"] + str(peRatio)
 
     def getReturnOnEquity(self):
         tickerFromUser = self.getTextInput()
         returnOnEquity = anlyze.getReturnOnEquity(tickerFromUser)
-        #self.returnOnEquityLabelText["text"] = self.returnOnEquityLabelText["text"] + str(returnOnEquity)
         self.returnOnEquityLabelValueText["text"] = self.returnOnEquityLabelValueDefault
         self.returnOnEquityLabelValueText["text"] = self.returnOnEquityLabelValueText["text"] + str(returnOnEquity)
 
@@ -209,18 +206,13 @@ class Startpage(tk.Frame):
         self.debtToEquityRatioLabelValueText["text"] = self.debtToEquityRatioLabelValueDefault
         self.profitMarginLabelValueText["text"] = self.profitMarginLabelValueDefault
 
-    def combineFunc(self, *funcs):
 
-        def combinedFunc(*args, **kwargs):
-            for f in funcs:
-                f(*args, **kwargs)
-
-        return combinedFunc
 
 #   *****   PAGES   *****
 class PlotCashFlowChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.controller = controller
         self.my_font = tkinter.font.Font(self, family="Sans Serif",size=20)
         self.pageTitle = Label(self, text="Cash Flow Charts",font=self.my_font)
         self.RadioText = StringVar()
@@ -252,7 +244,9 @@ class PlotCashFlowChart(tk.Frame):
                             command=lambda: controller.show_frame(Startpage))
         #button1.pack()
 
+
     def getTextInput(self):
+
         result = self.textInputBox.get("1.0", "end")
         result = result.rstrip()
         if len(result) > 0:
@@ -292,6 +286,7 @@ class PlotCashFlowChart(tk.Frame):
 class PlotIncomeStatementChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.controller = controller
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Income Statement Charts", font=self.my_font)
         self.RadioText = StringVar()
@@ -305,7 +300,6 @@ class PlotIncomeStatementChart(tk.Frame):
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,command=self.selectedRadioButtonOption)
 
         #self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
-
 
         self.clearButton = tk.Button(self, text='Clear', command=self.clear, bg='red')
 
@@ -351,6 +345,7 @@ class PlotIncomeStatementChart(tk.Frame):
 class plotEarningsChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.controller = controller
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Earnings Charts", font=self.my_font)
         self.RadioText = StringVar()
@@ -366,13 +361,14 @@ class plotEarningsChart(tk.Frame):
 
         self.clearButton = tk.Button(self, text='Clear', command=self.clear, bg='red')
         self.pageTitle.pack()
-        self.textInputBox.pack()
         self.quarterlyRadioButton.pack(side='left', padx=50)
         self.yearlyRadioButton.pack(side='right', padx=50)
         self.clearButton.pack(side='bottom')
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
         #button1.pack()
+
+
 
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")
@@ -387,9 +383,13 @@ class plotEarningsChart(tk.Frame):
             messagebox.showErrorMessage(self)
 
     def selectedRadioButtonOption(self):
-        userInput = self.getTextInput()
+        #userInput = self.getTextInput()
+        startPageObject = self.controller.get_page(Startpage)
+        userInputFromStartPage = startPageObject.getTextInput()
+        #print(userInputFromStartPage)
+
         radioButtonFrequencyOption = self.RadioText.get()
-        plotEarnings.plotEarnings(self, userInput,radioButtonFrequencyOption)
+        plotEarnings.plotEarnings(self, userInputFromStartPage,radioButtonFrequencyOption)
 
     def destroyGraph(self):
         plotEarnings.clearPlotPage()
@@ -402,7 +402,6 @@ class plotEarningsChart(tk.Frame):
         plotEarnings.clearPlotPage()
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
-
 
 app = UserInterFace()
 plotCashFlow = pltCashFlow.PlotGraph()
