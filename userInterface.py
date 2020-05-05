@@ -2,12 +2,11 @@ try:
     import Tkinter as tk
 except:
     import tkinter as tk
-from charts import plotCashFlow as pyt, plotIncome as pltIncome
+from charts import plotCashFlow as pltCashFlow, plotIncome as pltIncome, plotEarnings as pltEarnings
 import tkinter.font
 from Financials import analyze as anlyze
 from tkinter import *
-from tkinter import messagebox as messageBox
-
+from helpers import getMessageBox as messagebox
 
 class UserInterFace(tk.Tk):
     def __init__(self):
@@ -32,12 +31,14 @@ class UserInterFace(tk.Tk):
         menu.add_cascade(menu=Charts, label="Charts")
 
         Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(PlotCashFlowChart))
+        Charts.add_command(label="Earnings", command=lambda: self.show_frame(plotEarningsChart))
         Charts.add_command(label="Income Statement", command=lambda: self.show_frame(PlotIncomeStatementChart))
+
 
         menu.add_separator()
         tk.Tk.config(self, menu=menu)
 
-        for F in (Startpage,PlotCashFlowChart,PlotIncomeStatementChart):
+        for F in (Startpage,PlotCashFlowChart,PlotIncomeStatementChart,plotEarningsChart):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -56,13 +57,12 @@ class Startpage(tk.Frame):
         self.my_font = tkinter.font.Font(self, family="Comic Sans MS",size=20)
         self.stockSymbolText = Label(self, text="Enter Stock Symbol: ")
         self.textInputBox = Text(self, relief=RIDGE, height=1, width = 10, borderwidth=4)
+        self.analyzeButton = Button(self,
+                                       text='Analyze Stock', relief=RIDGE,
+                                       command=self.analyze)
+        self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues)
         self.textInputBox.focus()
-        self.analyzeButton = Button(self, bg='green',
-                                       text='Analyze Stock', relief=RAISED, border= '7',
-                                       command=self.combineFunc(self.getCompanyName,self.getEPS, self.getPERatio, self.getReturnOnEquity,
-                                                        self.currentStockPrice, self.getDebtToEquityRatio,
-                                                        self.getProfitMargin))
-
+      
         self.bind('<Return>', self.analyzeButton)
         self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues, bg='red')
         #self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
@@ -103,6 +103,7 @@ class Startpage(tk.Frame):
         self.analyzeButton.grid(row=3, column=3, pady=4,sticky="nsew")
         self.clearButton.grid(row=3, column=4, ipadx=10)
         #self.graphCashFlowButton.grid(row=3, column=5, ipadx=10)
+        #self.bind('<Return>', lambda event: self.analyze)
 
         self.CompanyNameLabelText.grid(row=5, column=4)
         self.currentStockPriceLabelText.grid(row=6, column=4)
@@ -112,6 +113,15 @@ class Startpage(tk.Frame):
         self.debtToEquityRatioLabelText.grid(row=10, column=4)
         self.profitMarginLabelText.grid(row=11, column=4)
 
+    def analyze(self):
+        self.getCompanyName()
+        self.getEPS()
+        self.getPERatio()
+        self.getReturnOnEquity()
+        self.currentStockPrice()
+        self.getDebtToEquityRatio()
+        self.getProfitMargin()
+=======
 #New Fields for values
         self.currentStockPriceLabelValueText.grid(row=6, column=5)
         self.earningsPerShareLabelValueText.grid(row=7, column=5)
@@ -180,7 +190,7 @@ class Startpage(tk.Frame):
             return results
 
         else:
-            self.showErrorMessage()
+            messagebox.showErrorMessage(self)
 
     def clearValues(self):
         self.CompanyNameLabelText["text"]  = ""
@@ -208,12 +218,7 @@ class Startpage(tk.Frame):
 
         return combinedFunc
 
-    def showErrorMessage(self):
-
-        messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
-
 #   *****   PAGES   *****
-
 class PlotCashFlowChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -232,6 +237,11 @@ class PlotCashFlowChart(tk.Frame):
         self.plotGraphButton = tk.Button(self, text='plot cash Flow Graph', command=self.plotCashFlowGraph)
 
         self.clearButton = tk.Button(self, text='Clear', command=self.clear, bg='red')
+        self.pageTitle.pack()
+        self.textInputBox.pack()
+        self.quarterlyRadioButton.pack(side="top",anchor = 'center')
+        self.yearlyRadioButton.pack()
+        self.clearButton.pack()
 
         self.pageTitle.pack()
         self.textInputBox.pack()
@@ -239,7 +249,6 @@ class PlotCashFlowChart(tk.Frame):
         self.yearlyRadioButton.pack(side='right', padx=50)
         self.clearButton.pack(side='bottom')
         #self.plotGraphButton.pack()
-
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
         #button1.pack()
@@ -255,22 +264,22 @@ class PlotCashFlowChart(tk.Frame):
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
+            messagebox.showErrorMessage(self)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
-        plot.plotCashGraph(self, userInput,radioButtonFrequencyOption)
+        plotCashFlow.plotCashGraph(self, userInput,radioButtonFrequencyOption)
 
     def destroyGraph(self):
-        plot.clearPlotPage()
+        plotCashFlow.clearPlotPage()
 
     def clearChart(self): ## redundant
-        plot.clearPlotPage()
+        plotCashFlow.clearPlotPage()
 
     def clear(self):
         self.textInputBox.delete("1.0", "end")
-        plot.clearPlotPage()
+        plotCashFlow.clearPlotPage()
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
         self.textInputBox.focus()
@@ -278,8 +287,7 @@ class PlotCashFlowChart(tk.Frame):
      ## no need for this puppy. keeping for now
     def plotCashFlowGraph(self):
         userInput = self.getTextInput()
-        self.clearChart()
-        plot.plotCashGraph(self, userInput)
+        plotCashFlow.plotCashGraph(self, userInput)
 
 
 class PlotIncomeStatementChart(tk.Frame):
@@ -299,6 +307,7 @@ class PlotIncomeStatementChart(tk.Frame):
 
         #self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
 
+
         self.clearButton = tk.Button(self, text='Clear', command=self.clear, bg='red')
 
         self.pageTitle.pack()
@@ -318,12 +327,10 @@ class PlotIncomeStatementChart(tk.Frame):
             results = result.upper()
             results = str(results)
             return results
-
-
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messageBox.showerror("Error", "Sorry, you need to enter a ticker symbol")
+            messagebox.showErrorMessage(self)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
@@ -331,10 +338,10 @@ class PlotIncomeStatementChart(tk.Frame):
         plotIncome.incomeStatementChart(self, userInput,radioButtonFrequencyOption)
 
     def destroyGraph(self):
-        plot.clearPlotPage()
+        plotIncome.clearPlotPage()
 
     def clearChart(self): ## redundant
-        plot.clearPlotPage()
+        plotIncome.clearPlotPage()
 
     def clear(self):
         self.textInputBox.delete("1.0", "end")
@@ -342,9 +349,66 @@ class PlotIncomeStatementChart(tk.Frame):
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
 
-app = UserInterFace()
-plot = pyt.PlotGraph()
-plotIncome = pltIncome.PlotGraph()
+class plotEarningsChart(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
+        self.pageTitle = Label(self, text="Earnings Page", font=self.my_font)
+        self.RadioText = StringVar()
+        self.quarterlyTextString = 'quarterly'
+        self.yearlyTextString = 'yearly'
 
-app.geometry("1200x600")
+        self.textInputBox = tk.Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
+        self.frequencyText = tk.Label(self, text="Frequency")
+        self.quarterlyRadioButton = Radiobutton(self, text="Quarterly",variable=self.RadioText, value=self.quarterlyTextString,command=self.selectedRadioButtonOption)
+        self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,command=self.selectedRadioButtonOption)
+
+        #self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
+
+        self.clearButton = tk.Button(self, text='Clear', command=self.clear)
+        self.pageTitle.pack()
+        self.textInputBox.pack()
+        self.yearlyRadioButton.pack()
+        self.quarterlyRadioButton.pack()
+        self.clearButton.pack()
+        button1 = tk.Button(self, text="Back to Home",
+                            command=lambda: controller.show_frame(Startpage))
+        #button1.pack()
+
+    def getTextInput(self):
+        result = self.textInputBox.get("1.0", "end")
+        result = result.rstrip()
+        if len(result) > 0:
+            results = result.upper()
+            results = str(results)
+            return results
+        else:
+            self.yearlyRadioButton.deselect()
+            self.quarterlyRadioButton.deselect()
+            messagebox.showErrorMessage(self)
+
+    def selectedRadioButtonOption(self):
+        userInput = self.getTextInput()
+        radioButtonFrequencyOption = self.RadioText.get()
+        plotEarnings.plotEarnings(self, userInput,radioButtonFrequencyOption)
+
+    def destroyGraph(self):
+        plotEarnings.clearPlotPage()
+
+    def clearChart(self): ## redundant
+        plotEarnings.clearPlotPage()
+
+    def clear(self):
+        self.textInputBox.delete("1.0", "end")
+        plotEarnings.clearPlotPage()
+        self.yearlyRadioButton.deselect()
+        self.quarterlyRadioButton.deselect()
+
+
+app = UserInterFace()
+plotCashFlow = pltCashFlow.PlotGraph()
+plotIncome = pltIncome.PlotGraph()
+plotEarnings = pltEarnings.PlotGraph()
+
+app.geometry("700x300")
 app.mainloop()
