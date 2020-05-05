@@ -1,5 +1,6 @@
 import matplotlib
 matplotlib.use("TkAgg")
+import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from Financials import price as priceData
@@ -18,14 +19,10 @@ class PlotGraph:
         EarningsTitle = 'Earnings'
 
         data = self.getFreqency(earningsData, Frequency, tickerSymbol)
-
-        dates, revs, earns = [], [], []
-
-        for a in data:
-            dates.append(a['date'])
-            revs.append(a['revenue'])
-            earns.append(a['earnings'])
-
+        earningsDataFrame = pd.DataFrame(data)
+        dates = earningsDataFrame['date'].astype(str)
+        revs = earningsDataFrame['revenue']
+        earns = earningsDataFrame['earnings']
 
         ax = self.fig.add_subplot(111)
         yLabelText = "Amount in $"

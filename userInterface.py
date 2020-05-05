@@ -64,8 +64,8 @@ class Startpage(tk.Frame):
                                        command=self.analyze)
         self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues)
         self.textInputBox.focus()
-      
-        self.bind('<Return>', self.analyzeButton)
+
+        self.bind('<Return>', self.textInputBox)
         self.clearButton = Button(self,text="Clear",relief = RIDGE,command=self.clearValues, bg='red')
         #self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
 
@@ -77,7 +77,7 @@ class Startpage(tk.Frame):
         self.profitMarginLabelText = Label(self, text="Profit Margin: ", width=30, anchor="w")
         self.CompanyNameLabelText = Label(self,text="",font=self.my_font)
 
-#making new spots for values returned
+        #making new spots for values returned
         self.earningsPerShareLabelValueText = Label(self, text="", width=30, anchor="w")
         self.peRatioLabelValueText = Label(self, text="", width=30, anchor="w")
         self.returnOnEquityLabelValueText = Label(self, text="", width=30, anchor="w")
@@ -100,6 +100,8 @@ class Startpage(tk.Frame):
         self.debtToEquityRatioLabelValueDefault = ""
         self.profitMarginLabelValueDefault = ""
 
+
+        ## Griding Values and Text
         self.stockSymbolText.grid(row=0, column=3)
         self.textInputBox.grid(row=0, column=4,sticky="nsew")
         self.analyzeButton.grid(row=3, column=3, pady=4,sticky="nsew")
@@ -115,6 +117,14 @@ class Startpage(tk.Frame):
         self.debtToEquityRatioLabelText.grid(row=10, column=4)
         self.profitMarginLabelText.grid(row=11, column=4)
 
+        #Fields for values
+        self.currentStockPriceLabelValueText.grid(row=6, column=5)
+        self.earningsPerShareLabelValueText.grid(row=7, column=5)
+        self.peRatioLabelValueText.grid(row=8, column=5)
+        self.returnOnEquityLabelValueText.grid(row=9, column=5)
+        self.debtToEquityRatioLabelValueText.grid(row=10, column=5)
+        self.profitMarginLabelValueText.grid(row=11, column=5)
+
     def analyze(self):
         self.getCompanyName()
         self.getEPS()
@@ -123,20 +133,12 @@ class Startpage(tk.Frame):
         self.currentStockPrice()
         self.getDebtToEquityRatio()
         self.getProfitMargin()
-#New Fields for values
-        self.currentStockPriceLabelValueText.grid(row=6, column=5)
-        self.earningsPerShareLabelValueText.grid(row=7, column=5)
-        self.peRatioLabelValueText.grid(row=8, column=5)
-        self.returnOnEquityLabelValueText.grid(row=9, column=5)
-        self.debtToEquityRatioLabelValueText.grid(row=10, column=5)
-        self.profitMarginLabelValueText.grid(row=11, column=5)
 
     def getCompanyName(self):
         tickerFromUser = self.getTextInput()
         companyName = anlyze.getStockName(tickerFromUser)
         self.CompanyNameLabelText["text"] = ""
         self.CompanyNameLabelText["text"] = self.CompanyNameLabelText["text"] + str(companyName)
-
 
     def getEPS(self):
         tickerFromUser = self.getTextInput()
