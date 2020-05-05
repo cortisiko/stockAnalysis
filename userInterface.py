@@ -262,7 +262,12 @@ class PlotCashFlowChart(tk.Frame):
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
-        plotCashFlow.plotCashGraph(self, userInput,radioButtonFrequencyOption)
+        if not plotCashFlow.canvas:
+            plotCashFlow.plotCashGraph(self, userInput,radioButtonFrequencyOption)
+        else:
+            plotCashFlow.clearPlotPage()
+            plotCashFlow.plotCashGraph(self, userInput,radioButtonFrequencyOption)
+
 
     def destroyGraph(self):
         plotCashFlow.clearPlotPage()
@@ -328,7 +333,12 @@ class PlotIncomeStatementChart(tk.Frame):
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
-        plotIncome.netIncomeChart(self, userInput,radioButtonFrequencyOption)
+        if not plotIncome.canvas:
+            plotIncome.netIncomeChart(self, userInput,radioButtonFrequencyOption)
+        else:
+            plotIncome.clearPlotPage()
+            plotIncome.netIncomeChart(self, userInput,radioButtonFrequencyOption)
+
 
     def destroyGraph(self):
         plotIncome.clearPlotPage()
@@ -385,13 +395,18 @@ class plotEarningsChart(tk.Frame):
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
-        startPageObject = self.controller.get_page(Startpage)
+        #startPageObject = self.controller.get_page(Startpage)
         #userInputFromStartPage = startPageObject.getTextInput()
         #print(userInputFromStartPage)
 
         #radioButtonFrequencyOption = self.RadioText.set(self.yearlyTextString)
         radioButtonFrequencyOption = self.RadioText.get()
-        plotEarnings.plotEarnings(self, userInput,radioButtonFrequencyOption)
+        if not plotEarnings.canvas:
+            plotEarnings.plotEarnings(self, userInput,radioButtonFrequencyOption)
+        else:
+            plotEarnings.clearPlotPage()
+            plotEarnings.plotEarnings(self, userInput,radioButtonFrequencyOption)
+
 
     def destroyGraph(self):
         plotEarnings.clearPlotPage()
