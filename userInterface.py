@@ -209,7 +209,6 @@ class Startpage(tk.Frame):
         self.profitMarginLabelValueText["text"] = self.profitMarginLabelValueDefault
 
 
-
 #   *****   PAGES   *****
 class PlotCashFlowChart(tk.Frame):
     def __init__(self, parent, controller):
@@ -221,31 +220,25 @@ class PlotCashFlowChart(tk.Frame):
         self.quarterlyTextString = 'q'
         self.yearlyTextString = 'a'
 
-        self.textInputBox = tk.Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
+        self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
         self.textInputBox.focus()
-        self.frequencyText = tk.Label(self, text="Frequency")
+        self.frequencyText = Label(self, text="Frequency")
         self.quarterlyRadioButton = Radiobutton(self, text="Quarterly",variable=self.RadioText, value=self.quarterlyTextString, command=self.selectedRadioButtonOption)
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString, command=self.selectedRadioButtonOption)
 
-        self.plotGraphButton = tk.Button(self, text='plot cash Flow Graph', command=self.plotCashFlowGraph)
+        self.plotGraphButton =Button(self, text='plot cash Flow Graph', command=self.plotCashFlowGraph)
 
-        self.clearButton = tk.Button(self, text='Clear', command=self.clear, bg='red')
+        self.clearButton = Button(self, text='Clear',bg='red',command=self.clear)
         self.pageTitle.pack()
         self.textInputBox.pack()
-        self.quarterlyRadioButton.pack(side="top",anchor = 'center')
-        self.yearlyRadioButton.pack()
         self.clearButton.pack()
-
-        self.pageTitle.pack()
-        self.textInputBox.pack()
         self.quarterlyRadioButton.pack(side='left', padx=50)
         self.yearlyRadioButton.pack(side='right', padx=50)
-        self.clearButton.pack(side='bottom')
+
         #self.plotGraphButton.pack()
-        button1 = tk.Button(self, text="Back to Home",
+        button1 = Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
         #button1.pack()
-
 
     def getTextInput(self):
 
@@ -300,26 +293,24 @@ class PlotIncomeStatementChart(tk.Frame):
         self.quarterlyTextString = 'q'
         self.yearlyTextString = 'a'
 
-        self.textInputBox = tk.Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
+        self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
         self.textInputBox.focus()
-        self.frequencyText = tk.Label(self, text="Frequency")
+        self.frequencyText = Label(self, text="Frequency")
         self.quarterlyRadioButton = Radiobutton(self, text="Quarterly",variable=self.RadioText, value=self.quarterlyTextString,command=self.selectedRadioButtonOption)
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,command=self.selectedRadioButtonOption)
 
         #self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
 
-        self.clearButton = tk.Button(self, text='Clear', command=self.clear, bg='red')
+        self.clearButton = Button(self, text='Clear', command=self.clear, bg='red')
 
         self.pageTitle.pack()
         self.textInputBox.pack()
         self.quarterlyRadioButton.pack(side='left', padx=50)
         self.yearlyRadioButton.pack(side='right', padx=50)
-        self.clearButton.pack(side='bottom')
+        self.clearButton.pack()
 
-        button1 = tk.Button(self, text="Back to Home",
+        button1 = Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
-        #button1.pack()
-
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")
         result = result.rstrip()
@@ -376,12 +367,10 @@ class plotEarningsChart(tk.Frame):
         self.textInputBox.pack()
         self.quarterlyRadioButton.pack(side='left', padx=50)
         self.yearlyRadioButton.pack(side='right', padx=50)
-        self.clearButton.pack(side='bottom')
-        button1 = tk.Button(self, text="Back to Home",
+        self.clearButton.pack()
+        button1 = Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(Startpage))
         #button1.pack()
-
-
 
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")
