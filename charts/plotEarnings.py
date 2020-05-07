@@ -1,5 +1,6 @@
 import matplotlib
 matplotlib.use("TkAgg")
+import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from Financials import price as priceData
@@ -18,20 +19,16 @@ class PlotGraph:
         EarningsTitle = 'Earnings'
 
         data = self.getFreqency(earningsData, Frequency, tickerSymbol)
-
-        dates, revs, earns = [], [], []
-
-        for a in data:
-            dates.append(a['date'])
-            revs.append(a['revenue'])
-            earns.append(a['earnings'])
-
+        earningsDataFrame = pd.DataFrame(data)
+        dates = earningsDataFrame['date'].astype(str)
+        revs = earningsDataFrame['revenue']
+        earns = earningsDataFrame['earnings']
 
         ax = self.fig.add_subplot(111)
         yLabelText = "Amount in $"
         graphTitle = companyName + " " + EarningsTitle
         ax.set_title(graphTitle)
-        ax.set_xlabel('Years')
+        ax.set_xlabel('Period')
         ax.set_ylabel(yLabelText)
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
@@ -44,7 +41,6 @@ class PlotGraph:
             self.canvas = FigureCanvasTkAgg(self.fig, container)
             self.canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
         self.canvas.draw_idle()
-
 
     def getFreqency(self,earningsData,Frequency,tickerSymbol):
         if Frequency=='yearly':

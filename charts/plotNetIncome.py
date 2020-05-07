@@ -13,17 +13,17 @@ class PlotGraph:
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)
 
-    def incomeStatementChart(self, container,tickerSymbol,Frequency):
+    def netIncomeChart(self, container,tickerSymbol,Frequency):
         tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
         incomeStatementsDataFrame = income.getIncomeStatements(tickerObject, Frequency)
         incomeStatement = income.getNetIncome(incomeStatementsDataFrame)
         companyName = priceData.getCompanyName(tickerObject, tickerSymbol)
         dates = date.getDates(incomeStatementsDataFrame)
-        incomeStatementGraphTitle = 'Income Statement'
+        incomeStatementGraphTitle = 'Net income'
 
         ax = self.fig.add_subplot(111)
 
-        yLabelText = "Income Statement in $"
+        yLabelText = "Net Income in $"
         graphTitle = companyName + " " + incomeStatementGraphTitle
         ax.set_title(graphTitle)
         ax.set_xlabel('Years')
