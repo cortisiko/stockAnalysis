@@ -235,7 +235,7 @@ class PlotCashFlowChart(tk.Frame):
         self.clearButton = Button(self, text='Clear', bg='red', command=self.clear)
         self.pageTitle.pack()
         self.textInputBox.pack()
-        # self.clearButton.pack()
+        self.clearButton.pack()
         self.quarterlyRadioButton.pack(side='left', padx=50)
         self.yearlyRadioButton.pack(side='right', padx=50)
 
@@ -312,7 +312,7 @@ class PlotIncomeStatementChart(tk.Frame):
         self.textInputBox.pack()
         self.quarterlyRadioButton.pack(side='left', padx=50)
         self.yearlyRadioButton.pack(side='right', padx=50)
-        # self.clearButton.pack()
+        self.clearButton.pack()
 
         button1 = Button(self, text="Back to Home",
                          command=lambda: controller.show_frame(Startpage))
@@ -372,7 +372,7 @@ class plotEarningsChart(tk.Frame):
         self.textInputBox.pack()
         self.quarterlyRadioButton.pack(side='left', padx=50)
         self.yearlyRadioButton.pack(side='right', padx=50)
-        # self.clearButton.pack()
+        self.clearButton.pack()
         button1 = Button(self, text="Back to Home",
                          command=lambda: controller.show_frame(Startpage))
         # button1.pack()
