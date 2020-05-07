@@ -152,6 +152,8 @@ class Startpage(tk.Frame):
         self.peRatioLabelValueText["text"] = self.peRatioLabelValueDefault
         self.peRatioLabelValueText["text"] = self.peRatioLabelValueText["text"] + str(peRatio)
 
+
+
     def getReturnOnEquity(self):
         tickerFromUser = self.getTextInput()
         returnOnEquity = anlyze.getReturnOnEquity(tickerFromUser)
