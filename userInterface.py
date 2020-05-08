@@ -57,6 +57,7 @@ class Startpage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self.parent = parent
         self.my_font = tkinter.font.Font(self, family="Comic Sans MS", size=20)
         self.stockSymbolText = Label(self, text="Enter Stock Symbol: ")
         self.textInputBox = Text(self, relief=RIDGE, height=1, width=10, borderwidth=4)
@@ -65,8 +66,8 @@ class Startpage(tk.Frame):
                                     command=self.analyze)
         self.clearButton = Button(self, text="Clear", relief=RIDGE, command=self.clearValues)
         self.textInputBox.focus()
+        self.parent.bind('<Return>', self.analyze)
 
-        self.bind('<Return>', self.textInputBox)
         self.clearButton = Button(self, text="Clear", relief=RIDGE, command=self.clearValues, bg='red')
         # self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
 
@@ -104,6 +105,7 @@ class Startpage(tk.Frame):
         ## Griding Values and Text
         self.stockSymbolText.grid(row=0, column=3)
         self.textInputBox.grid(row=0, column=4, sticky="nsew")
+        self.textInputBox.bind('<Return>', self.analyze)
         self.analyzeButton.grid(row=3, column=3, pady=4, sticky="nsew")
         self.clearButton.grid(row=3, column=4, ipadx=10)
         # self.graphCashFlowButton.grid(row=3, column=5, ipadx=10)
@@ -125,7 +127,7 @@ class Startpage(tk.Frame):
         self.debtToEquityRatioLabelValueText.grid(row=10, column=5)
         self.profitMarginLabelValueText.grid(row=11, column=5)
 
-    def analyze(self):
+    def analyze(self,event=None):
         self.getCompanyName()
         self.getEPS()
         self.getPERatio()
@@ -133,6 +135,7 @@ class Startpage(tk.Frame):
         self.currentStockPrice()
         self.getDebtToEquityRatio()
         self.getProfitMargin()
+        self.clearUserInputBox()
 
     def getCompanyName(self):
         tickerFromUser = self.getTextInput()
@@ -144,7 +147,7 @@ class Startpage(tk.Frame):
         tickerFromUser = self.getTextInput()
         eps = anlyze.getEPS(tickerFromUser)
         self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueDefault
-        self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueText["text"] + str(eps)
+        self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueText["text"]+ '$' + str(eps)
 
     def getPERatio(self):
         tickerFromUser = self.getTextInput()
@@ -152,11 +155,13 @@ class Startpage(tk.Frame):
         self.peRatioLabelValueText["text"] = self.peRatioLabelValueDefault
         self.peRatioLabelValueText["text"] = self.peRatioLabelValueText["text"] + str(peRatio)
 
+
+
     def getReturnOnEquity(self):
         tickerFromUser = self.getTextInput()
         returnOnEquity = anlyze.getReturnOnEquity(tickerFromUser)
         self.returnOnEquityLabelValueText["text"] = self.returnOnEquityLabelValueDefault
-        self.returnOnEquityLabelValueText["text"] = self.returnOnEquityLabelValueText["text"] + str(returnOnEquity)
+        self.returnOnEquityLabelValueText["text"] = self.returnOnEquityLabelValueText["text"] + str(returnOnEquity)+ '%'
 
     def currentStockPrice(self):
         tickerFromUser = self.getTextInput()
@@ -184,6 +189,7 @@ class Startpage(tk.Frame):
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")
         result = result.rstrip()
+
         if len(result) > 0:
             results = result.upper()
             results = str(results)
@@ -191,6 +197,9 @@ class Startpage(tk.Frame):
 
         else:
             messagebox.showErrorMessage(self)
+
+    def clearUserInputBox(self):
+        result = self.textInputBox.delete("1.0", "end")
 
     def clearValues(self):
         self.CompanyNameLabelText["text"] = ""
@@ -201,7 +210,7 @@ class Startpage(tk.Frame):
         self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioLabelDefault
         self.profitMarginLabelText["text"] = self.profitMarginLabelDefault
 
-        self.textInputBox.delete("1.0", "end")
+        self.clearUserInputBox()
         # new method
         self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueDefault
         self.peRatioLabelValueText["text"] = self.peRatioLabelValueDefault
