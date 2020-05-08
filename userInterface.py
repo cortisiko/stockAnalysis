@@ -80,13 +80,13 @@ class Startpage(tk.Frame):
         self.parent.bind('<Return>', self.analyze)
 
         # making new spots for values returned
-        self.earningsPerShareLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.companySectorLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.peRatioLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.returnOnEquityLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.currentStockPriceLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.debtToEquityRatioLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.profitMarginLabelValueText = Label(self, text="", width=30, anchor="w")
+        self.earningsPerShareValue = Label(self, text="", width=30, anchor="w")
+        self.companySectorValue = Label(self, text="", width=30, anchor="w")
+        self.peRatioValue = Label(self, text="", width=30, anchor="w")
+        self.returnOnEquityValue = Label(self, text="", width=30, anchor="w")
+        self.currentStockPriceValue = Label(self, text="", width=30, anchor="w")
+        self.debtToEquityRatioValue = Label(self, text="", width=30, anchor="w")
+        self.profitMarginValue = Label(self, text="", width=30, anchor="w")
 
         self.earningsPerShareLabelDefault = "Earnings Per Share: "
         self.companyNameLabelDefault = ""
@@ -124,13 +124,13 @@ class Startpage(tk.Frame):
         self.profitMarginLabelText.grid(row=12, column=4)
 
         # Fields for values
-        self.companySectorLabelValueText.grid(row=6, column=5)
-        self.currentStockPriceLabelValueText.grid(row=7, column=5)
-        self.earningsPerShareLabelValueText.grid(row=8, column=5)
-        self.peRatioLabelValueText.grid(row=9, column=5)
-        self.returnOnEquityLabelValueText.grid(row=10, column=5)
-        self.debtToEquityRatioLabelValueText.grid(row=11, column=5)
-        self.profitMarginLabelValueText.grid(row=12, column=5)
+        self.companySectorValue.grid(row=6, column=5)
+        self.currentStockPriceValue.grid(row=7, column=5)
+        self.earningsPerShareValue.grid(row=8, column=5)
+        self.peRatioValue.grid(row=9, column=5)
+        self.returnOnEquityValue.grid(row=10, column=5)
+        self.debtToEquityRatioValue.grid(row=11, column=5)
+        self.profitMarginValue.grid(row=12, column=5)
 
     def analyze(self,event=None):
         self.getCompanyName()
@@ -152,51 +152,51 @@ class Startpage(tk.Frame):
     def getCompanySector(self):
         tickerFromUser = self.getTextInput()
         companySector = anlyze.getCompanySector(tickerFromUser)
-        self.companySectorLabelValueText["text"] = self.companySectorLabelValueDefault
-        self.companySectorLabelValueText["text"] = self.companySectorLabelValueText["text"] + str(companySector)
+        self.companySectorValue["text"] = self.companySectorLabelValueDefault
+        self.companySectorValue["text"] = self.companySectorValue["text"] + str(companySector)
 
     def getEPS(self):
         tickerFromUser = self.getTextInput()
         eps = anlyze.getEPS(tickerFromUser)
-        self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueDefault
-        self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueText["text"]+ '$' + str(eps)
+        self.earningsPerShareValue["text"] = self.earningsPerShareLabelValueDefault
+        self.earningsPerShareValue["text"] = self.earningsPerShareValue["text"]+ '$' + str(eps)
 
     def getPERatio(self):
         tickerFromUser = self.getTextInput()
         peRatio = anlyze.getPERatio(tickerFromUser)
-        self.peRatioLabelValueText["text"] = self.peRatioLabelValueDefault
-        self.peRatioLabelValueText["text"] = self.peRatioLabelValueText["text"] + str(peRatio)
+        self.peRatioValue["text"] = self.peRatioLabelValueDefault
+        self.peRatioValue["text"] = self.peRatioValue["text"] + str(peRatio)
 
 
 
     def getReturnOnEquity(self):
         tickerFromUser = self.getTextInput()
         returnOnEquity = anlyze.getReturnOnEquity(tickerFromUser)
-        self.returnOnEquityLabelValueText["text"] = self.returnOnEquityLabelValueDefault
-        self.returnOnEquityLabelValueText["text"] = self.returnOnEquityLabelValueText["text"] + str(returnOnEquity)+ '%'
+        self.returnOnEquityValue["text"] = self.returnOnEquityLabelValueDefault
+        self.returnOnEquityValue["text"] = self.returnOnEquityValue["text"] + str(returnOnEquity)+ '%'
 
     def currentStockPrice(self):
         tickerFromUser = self.getTextInput()
         stockPrice = anlyze.getCurrentStockPrice(tickerFromUser)
         # self.currentStockPriceLabelText["text"] = self.currentStockPriceLabelText["text"] +'$'+ str(stockPrice)
-        self.currentStockPriceLabelValueText["text"] = self.currentStockPriceLabelValueDefault
-        self.currentStockPriceLabelValueText["text"] = self.currentStockPriceLabelValueText["text"] + '$' + str(
+        self.currentStockPriceValue["text"] = self.currentStockPriceLabelValueDefault
+        self.currentStockPriceValue["text"] = self.currentStockPriceValue["text"] + '$' + str(
             stockPrice)
 
     def getDebtToEquityRatio(self):
         tickerFromUser = self.getTextInput()
         debtToEquityRatio = anlyze.getDebtToEquity(tickerFromUser)
         # self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioLabelText["text"] + str(debtToEquityRatio)
-        self.debtToEquityRatioLabelValueText["text"] = self.debtToEquityRatioLabelValueDefault
-        self.debtToEquityRatioLabelValueText["text"] = self.debtToEquityRatioLabelValueText["text"] + str(
+        self.debtToEquityRatioValue["text"] = self.debtToEquityRatioLabelValueDefault
+        self.debtToEquityRatioValue["text"] = self.debtToEquityRatioValue["text"] + str(
             debtToEquityRatio)
 
     def getProfitMargin(self):
         tickerFromUser = self.getTextInput()
         profitMargin = anlyze.getProfitMargin(tickerFromUser)
         # self.profitMarginLabelText["text"] = self.profitMarginLabelText["text"] + str(profitMargin) +'%'
-        self.profitMarginLabelValueText["text"] = self.profitMarginLabelValueDefault
-        self.profitMarginLabelValueText["text"] = self.profitMarginLabelValueText["text"] + str(profitMargin) + '%'
+        self.profitMarginValue["text"] = self.profitMarginLabelValueDefault
+        self.profitMarginValue["text"] = self.profitMarginValue["text"] + str(profitMargin) + '%'
 
     def getTextInput(self):
         result = self.textInputBox.get()
@@ -225,13 +225,13 @@ class Startpage(tk.Frame):
 
         self.clearUserInputBox()
         # new method
-        self.companySectorLabelValueText["text"] = self.companySectorLabelValueDefault
-        self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueDefault
-        self.peRatioLabelValueText["text"] = self.peRatioLabelValueDefault
-        self.returnOnEquityLabelValueText["text"] = self.returnOnEquityLabelValueDefault
-        self.currentStockPriceLabelValueText["text"] = self.currentStockPriceLabelValueDefault
-        self.debtToEquityRatioLabelValueText["text"] = self.debtToEquityRatioLabelValueDefault
-        self.profitMarginLabelValueText["text"] = self.profitMarginLabelValueDefault
+        self.companySectorValue["text"] = self.companySectorLabelValueDefault
+        self.earningsPerShareValue["text"] = self.earningsPerShareLabelValueDefault
+        self.peRatioValue["text"] = self.peRatioLabelValueDefault
+        self.returnOnEquityValue["text"] = self.returnOnEquityLabelValueDefault
+        self.currentStockPriceValue["text"] = self.currentStockPriceLabelValueDefault
+        self.debtToEquityRatioValue["text"] = self.debtToEquityRatioLabelValueDefault
+        self.profitMarginValue["text"] = self.profitMarginLabelValueDefault
 
 
 #   *****   PAGES   *****
