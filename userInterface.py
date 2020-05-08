@@ -8,7 +8,6 @@ from Financials import analyze as anlyze
 from tkinter import *
 from helpers import getMessageBox as messagebox
 
-
 class UserInterFace(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -66,8 +65,6 @@ class Startpage(tk.Frame):
                                     command=self.analyze)
         self.clearButton = Button(self, text="Clear", relief=RIDGE, command=self.clearValues)
         self.textInputBox.focus()
-        self.parent.bind('<Return>', self.analyze)
-
         self.clearButton = Button(self, text="Clear", relief=RIDGE, command=self.clearValues, bg='red')
         # self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
 
@@ -77,10 +74,14 @@ class Startpage(tk.Frame):
         self.currentStockPriceLabelText = Label(self, text="Current Stock Price: ", width=30, anchor="w")
         self.debtToEquityRatioLabelText = Label(self, text="Debt to Equity Ratio: ", width=30, anchor="w")
         self.profitMarginLabelText = Label(self, text="Profit Margin: ", width=30, anchor="w")
-        self.CompanyNameLabelText = Label(self, text="", font=self.my_font)
+        self.companyNameLabelText = Label(self, text="", font=self.my_font)
+        self.companySectorLabelText = Label(self,text="Sector",width=30, anchor="w")
+        ##Binding the Enter key
+        self.parent.bind('<Return>', self.analyze)
 
         # making new spots for values returned
         self.earningsPerShareLabelValueText = Label(self, text="", width=30, anchor="w")
+        self.companySectorLabelValueText = Label(self, text="", width=30, anchor="w")
         self.peRatioLabelValueText = Label(self, text="", width=30, anchor="w")
         self.returnOnEquityLabelValueText = Label(self, text="", width=30, anchor="w")
         self.currentStockPriceLabelValueText = Label(self, text="", width=30, anchor="w")
@@ -89,12 +90,14 @@ class Startpage(tk.Frame):
 
         self.earningsPerShareLabelDefault = "Earnings Per Share: "
         self.companyNameLabelDefault = ""
+        self.companySectorLabelDefault = "Sector:"
         self.peRatioLabelDefault = "PE Ratio: "
         self.returnOnEquityLabelDefault = "Return on Equity Ratio: "
         self.currentStockPriceLabelDefault = "Current Stock Price: "
         self.debtToEquityRatioLabelDefault = "Debt to Equity Ratio: "
         self.profitMarginLabelDefault = "Profit Margin: "
 
+        self.companySectorLabelValueDefault = ""
         self.earningsPerShareLabelValueDefault = ""
         self.peRatioLabelValueDefault = ""
         self.returnOnEquityLabelValueDefault = ""
@@ -111,24 +114,27 @@ class Startpage(tk.Frame):
         # self.graphCashFlowButton.grid(row=3, column=5, ipadx=10)
         # self.bind('<Return>', lambda event: self.analyze)
 
-        self.CompanyNameLabelText.grid(row=5, column=4)
-        self.currentStockPriceLabelText.grid(row=6, column=4)
-        self.earningsPerShareLabelText.grid(row=7, column=4)
-        self.peRatioLabelText.grid(row=8, column=4)
-        self.returnOnEquityLabelText.grid(row=9, column=4)
-        self.debtToEquityRatioLabelText.grid(row=10, column=4)
-        self.profitMarginLabelText.grid(row=11, column=4)
+        self.companyNameLabelText.grid(row=5, column=4)
+        self.companySectorLabelText.grid(row=6, column=4)
+        self.currentStockPriceLabelText.grid(row=7, column=4)
+        self.earningsPerShareLabelText.grid(row=8, column=4)
+        self.peRatioLabelText.grid(row=9, column=4)
+        self.returnOnEquityLabelText.grid(row=10, column=4)
+        self.debtToEquityRatioLabelText.grid(row=11, column=4)
+        self.profitMarginLabelText.grid(row=12, column=4)
 
         # Fields for values
-        self.currentStockPriceLabelValueText.grid(row=6, column=5)
-        self.earningsPerShareLabelValueText.grid(row=7, column=5)
-        self.peRatioLabelValueText.grid(row=8, column=5)
-        self.returnOnEquityLabelValueText.grid(row=9, column=5)
-        self.debtToEquityRatioLabelValueText.grid(row=10, column=5)
-        self.profitMarginLabelValueText.grid(row=11, column=5)
+        self.companySectorLabelValueText.grid(row=6, column=5)
+        self.currentStockPriceLabelValueText.grid(row=7, column=5)
+        self.earningsPerShareLabelValueText.grid(row=8, column=5)
+        self.peRatioLabelValueText.grid(row=9, column=5)
+        self.returnOnEquityLabelValueText.grid(row=10, column=5)
+        self.debtToEquityRatioLabelValueText.grid(row=11, column=5)
+        self.profitMarginLabelValueText.grid(row=12, column=5)
 
     def analyze(self,event=None):
         self.getCompanyName()
+        self.getCompanySector()
         self.getEPS()
         self.getPERatio()
         self.getReturnOnEquity()
@@ -140,8 +146,14 @@ class Startpage(tk.Frame):
     def getCompanyName(self):
         tickerFromUser = self.getTextInput()
         companyName = anlyze.getStockName(tickerFromUser)
-        self.CompanyNameLabelText["text"] = ""
-        self.CompanyNameLabelText["text"] = self.CompanyNameLabelText["text"] + str(companyName)
+        self.companyNameLabelText["text"] = ""
+        self.companyNameLabelText["text"] = self.companyNameLabelText["text"] + str(companyName)
+
+    def getCompanySector(self):
+        tickerFromUser = self.getTextInput()
+        companySector = anlyze.getCompanySector(tickerFromUser)
+        self.companySectorLabelValueText["text"] = self.companySectorLabelValueDefault
+        self.companySectorLabelValueText["text"] = self.companySectorLabelValueText["text"] + str(companySector)
 
     def getEPS(self):
         tickerFromUser = self.getTextInput()
@@ -202,7 +214,8 @@ class Startpage(tk.Frame):
         self.textInputBox.delete(0, END)
 
     def clearValues(self):
-        self.CompanyNameLabelText["text"] = ""
+        self.companyNameLabelText["text"] = ""
+        self.companySectorLabelText["text"] = self.companySectorLabelDefault
         self.earningsPerShareLabelText["text"] = self.earningsPerShareLabelDefault
         self.peRatioLabelText["text"] = self.peRatioLabelDefault
         self.returnOnEquityLabelText["text"] = self.returnOnEquityLabelDefault
@@ -212,6 +225,7 @@ class Startpage(tk.Frame):
 
         self.clearUserInputBox()
         # new method
+        self.companySectorLabelValueText["text"] = self.companySectorLabelValueDefault
         self.earningsPerShareLabelValueText["text"] = self.earningsPerShareLabelValueDefault
         self.peRatioLabelValueText["text"] = self.peRatioLabelValueDefault
         self.returnOnEquityLabelValueText["text"] = self.returnOnEquityLabelValueDefault
@@ -238,9 +252,6 @@ class PlotCashFlowChart(tk.Frame):
                                                 value=self.quarterlyTextString, command=self.selectedRadioButtonOption)
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,
                                              command=self.selectedRadioButtonOption)
-
-        self.plotGraphButton = Button(self, text='plot cash Flow Graph', command=self.plotCashFlowGraph)
-
         self.clearButton = Button(self, text='Clear', bg='red', command=self.clear)
         self.pageTitle.pack()
         self.textInputBox.pack()
@@ -289,12 +300,6 @@ class PlotCashFlowChart(tk.Frame):
         self.quarterlyRadioButton.deselect()
         self.textInputBox.focus()
 
-    ## no need for this puppy. keeping for now
-    def plotCashFlowGraph(self):
-        userInput = self.getTextInput()
-        plotCashFlow.plotCashGraph(self, userInput)
-
-
 class PlotIncomeStatementChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -312,9 +317,6 @@ class PlotIncomeStatementChart(tk.Frame):
                                                 value=self.quarterlyTextString, command=self.selectedRadioButtonOption)
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,
                                              command=self.selectedRadioButtonOption)
-
-        # self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
-
         self.clearButton = Button(self, text='Clear', command=self.clear, bg='red')
 
         self.pageTitle.pack()
@@ -403,7 +405,6 @@ class plotEarningsChart(tk.Frame):
         # startPageObject = self.controller.get_page(Startpage)
         # userInputFromStartPage = startPageObject.getTextInput()
         # print(userInputFromStartPage)
-
         # radioButtonFrequencyOption = self.RadioText.set(self.yearlyTextString)
         radioButtonFrequencyOption = self.RadioText.get()
         if not plotEarnings.canvas:
