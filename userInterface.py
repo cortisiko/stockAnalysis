@@ -88,14 +88,14 @@ class Startpage(tk.Frame):
         self.debtToEquityRatioValue = Label(self, text="", width=30, anchor="w")
         self.profitMarginValue = Label(self, text="", width=30, anchor="w")
 
-        self.earningsPerShareLabelDefault = "Earnings Per Share: "
-        self.companyNameLabelDefault = ""
-        self.companySectorLabelDefault = "Sector:"
-        self.peRatioLabelDefault = "PE Ratio: "
-        self.returnOnEquityLabelDefault = "Return on Equity Ratio: "
-        self.currentStockPriceLabelDefault = "Current Stock Price: "
-        self.debtToEquityRatioLabelDefault = "Debt to Equity Ratio: "
-        self.profitMarginLabelDefault = "Profit Margin: "
+        self.earningsPerShareDefaultText = "Earnings Per Share: "
+        self.companyNameDefaultText = ""
+        self.companySectorDefaultText = "Sector:"
+        self.peRatioDefaultText = "PE Ratio: "
+        self.returnOnEquityDefaultText = "Return on Equity Ratio: "
+        self.currentStockPriceDefaultText = "Current Stock Price: "
+        self.debtToEquityRatioDefaultText = "Debt to Equity Ratio: "
+        self.profitMarginDefaultText = "Profit Margin: "
 
         self.companySectorDefaultValue = ""
         self.earningsPerShareDefaultValue = ""
@@ -215,13 +215,13 @@ class Startpage(tk.Frame):
 
     def clearValues(self):
         self.companyNameLabelText["text"] = ""
-        self.companySectorLabelText["text"] = self.companySectorLabelDefault
-        self.earningsPerShareLabelText["text"] = self.earningsPerShareLabelDefault
+        self.companySectorLabelText["text"] = self.companySectorDefaultText
+        self.earningsPerShareLabelText["text"] = self.earningsPerShareDefaultText
         self.peRatioLabelText["text"] = self.peRatioLabelDefault
-        self.returnOnEquityLabelText["text"] = self.returnOnEquityLabelDefault
-        self.currentStockPriceLabelText["text"] = self.currentStockPriceLabelDefault
-        self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioLabelDefault
-        self.profitMarginLabelText["text"] = self.profitMarginLabelDefault
+        self.returnOnEquityLabelText["text"] = self.returnOnEquityDefaultText
+        self.currentStockPriceLabelText["text"] = self.currentStockPriceDefaultText
+        self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioDefaultText
+        self.profitMarginLabelText["text"] = self.profitMarginDefaultText
 
         self.clearUserInputBox()
         # new method
