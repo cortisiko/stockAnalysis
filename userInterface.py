@@ -60,7 +60,7 @@ class Startpage(tk.Frame):
         self.parent = parent
         self.my_font = tkinter.font.Font(self, family="Comic Sans MS", size=20)
         self.stockSymbolText = Label(self, text="Enter Stock Symbol: ")
-        self.textInputBox = Text(self, relief=RIDGE, height=1, width=10, borderwidth=4)
+        self.textInputBox = Entry(self,relief=RIDGE, width=10, borderwidth=4)
         self.analyzeButton = Button(self,
                                     text='Analyze Stock', relief=RAISED, borderwidth=7, bg='green',
                                     command=self.analyze)
@@ -187,7 +187,7 @@ class Startpage(tk.Frame):
         self.profitMarginLabelValueText["text"] = self.profitMarginLabelValueText["text"] + str(profitMargin) + '%'
 
     def getTextInput(self):
-        result = self.textInputBox.get("1.0", "end")
+        result = self.textInputBox.get()
         result = result.rstrip()
 
         if len(result) > 0:
@@ -199,7 +199,7 @@ class Startpage(tk.Frame):
             messagebox.showErrorMessage(self)
 
     def clearUserInputBox(self):
-        result = self.textInputBox.delete("1.0", "end")
+        self.textInputBox.delete(0, END)
 
     def clearValues(self):
         self.CompanyNameLabelText["text"] = ""
@@ -232,7 +232,7 @@ class PlotCashFlowChart(tk.Frame):
         self.yearlyTextString = 'a'
 
         self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
-        self.textInputBox.focus()
+        #self.textInputBox.focus()
         self.frequencyText = Label(self, text="Frequency")
         self.quarterlyRadioButton = Radiobutton(self, text="Quarterly", variable=self.RadioText,
                                                 value=self.quarterlyTextString, command=self.selectedRadioButtonOption)
