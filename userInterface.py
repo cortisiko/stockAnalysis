@@ -1,3 +1,6 @@
+from PIL import ImageTk, Image as kkImage
+
+
 try:
     import Tkinter as tk
 except:
@@ -8,6 +11,7 @@ from Financials import analyze as anlyze
 from tkinter import *
 from helpers import getMessageBox as messagebox
 
+#from tkinter import  Button , Canvas, Tk as tk
 
 class UserInterFace(tk.Tk):
     def __init__(self):
@@ -19,6 +23,8 @@ class UserInterFace(tk.Tk):
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
+        #photoImg = kkImage.open("SimpsonStock.jpg")
+        #photoImg = kkImage.open("SimpsonStock.jpg")
 
         self.frames = {}
         menu = tk.Menu(container)
@@ -57,6 +63,7 @@ class Startpage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self.configure(background='grey')
         self.my_font = tkinter.font.Font(self, family="Comic Sans MS", size=20)
         self.stockSymbolText = Label(self, text="Enter Stock Symbol: ")
         self.textInputBox = Text(self, relief=RIDGE, height=1, width=10, borderwidth=4)
@@ -76,7 +83,17 @@ class Startpage(tk.Frame):
         self.currentStockPriceLabelText = Label(self, text="Current Stock Price: ", width=30, anchor="w")
         self.debtToEquityRatioLabelText = Label(self, text="Debt to Equity Ratio: ", width=30, anchor="w")
         self.profitMarginLabelText = Label(self, text="Profit Margin: ", width=30, anchor="w")
-        self.CompanyNameLabelText = Label(self, text="", font=self.my_font)
+        self.CompanyNameLabelText = Label(self, text="", font=self.my_font, bg='grey')
+
+#photo addition
+        self.Space = Label(self, text="", bg='grey')
+        self.Space.grid(row=18, column =0)
+        stockphoto = kkImage.open("MainPage.png")
+        stockphoto =stockphoto.resize((225, 229),kkImage.ANTIALIAS)
+        photoimg =ImageTk.PhotoImage(stockphoto)
+        self.imageArea = Label(self, image=photoimg, justify = RIGHT, bg = 'grey')
+        self.imageArea.photo = photoimg
+        self.imageArea.grid(row=19, column=2)
 
         # making new spots for values returned
         self.earningsPerShareLabelValueText = Label(self, text="", width=30, anchor="w")
@@ -218,6 +235,7 @@ class PlotCashFlowChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self['bg'] = '#1B6666'
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Cash Flow Charts", font=self.my_font)
         self.RadioText = StringVar()
@@ -292,6 +310,7 @@ class PlotIncomeStatementChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self['bg'] = '#1B6666'
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Net Income Charts", font=self.my_font)
         self.RadioText = StringVar()
@@ -354,6 +373,8 @@ class plotEarningsChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        #self.configure(background='blue')
+        self['bg'] = '#1B6666'
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Earnings Charts", font=self.my_font)
         self.RadioText = StringVar()
