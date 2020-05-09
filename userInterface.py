@@ -167,8 +167,6 @@ class Startpage(tk.Frame):
         self.peRatioValue["text"] = self.peRatioLabelDefaultValue
         self.peRatioValue["text"] = self.peRatioValue["text"] + str(peRatio)
 
-
-
     def getReturnOnEquity(self):
         tickerFromUser = self.getTextInput()
         returnOnEquity = anlyze.getReturnOnEquity(tickerFromUser)
@@ -259,20 +257,13 @@ class PlotCashFlowChart(tk.Frame):
         self.quarterlyRadioButton.pack(side='left', padx=50)
         self.yearlyRadioButton.pack(side='right', padx=50)
 
-        # self.plotGraphButton.pack()
-        button1 = Button(self, text="Back to Home",
-                         command=lambda: controller.show_frame(Startpage))
-        # button1.pack()
-
     def getTextInput(self):
-
         result = self.textInputBox.get("1.0", "end")
         result = result.rstrip()
         if len(result) > 0:
             results = result.upper()
             results = str(results)
             return results
-
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
@@ -286,12 +277,6 @@ class PlotCashFlowChart(tk.Frame):
         else:
             plotCashFlow.clearPlotPage()
             plotCashFlow.plotCashGraph(self, userInput, radioButtonFrequencyOption)
-
-    def destroyGraph(self):
-        plotCashFlow.clearPlotPage()
-
-    def clearChart(self):  ## redundant
-        plotCashFlow.clearPlotPage()
 
     def clear(self):
         self.textInputBox.delete("1.0", "end")
@@ -348,9 +333,6 @@ class PlotIncomeStatementChart(tk.Frame):
         else:
             plotIncome.clearPlotPage()
             plotIncome.netIncomeChart(self, userInput, radioButtonFrequencyOption)
-
-    def destroyGraph(self):
-        plotIncome.clearPlotPage()
 
     def clear(self):
         self.textInputBox.delete("1.0", "end")
@@ -426,6 +408,5 @@ app = UserInterFace()
 plotCashFlow = pltCashFlow.PlotGraph()
 plotIncome = pltIncome.PlotGraph()
 plotEarnings = pltEarnings.PlotGraph()
-
 app.geometry("1300x600")
 app.mainloop()
