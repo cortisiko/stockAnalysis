@@ -217,7 +217,7 @@ class Startpage(tk.Frame):
         self.companyNameLabelText["text"] = ""
         self.companySectorLabelText["text"] = self.companySectorDefaultText
         self.earningsPerShareLabelText["text"] = self.earningsPerShareDefaultText
-        self.peRatioLabelText["text"] = self.peRatioLabelDefault
+        self.peRatioLabelText["text"] = self.peRatioDefaultText
         self.returnOnEquityLabelText["text"] = self.returnOnEquityDefaultText
         self.currentStockPriceLabelText["text"] = self.currentStockPriceDefaultText
         self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioDefaultText
