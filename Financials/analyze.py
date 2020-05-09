@@ -1,11 +1,13 @@
-from Financials import cashFlowSheet as cashFlowPage
 from Financials import statistics as statisticsTab
 from Financials import summary as summaryPage
 from Financials import price as priceData
-
-from Financials import incomeStatementSheet as income
 from helpers import Ticker as ticker
+from Financials import companyProfile as companyprofile
 
+def getCompanySector(tickerSymbol):
+    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+    companySector = companyprofile.getCompanySector(tickerObject,tickerSymbol)
+    return companySector
 
 def getStockName(tickerSymbol):
     tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
