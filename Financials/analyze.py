@@ -4,16 +4,24 @@ from Financials import price as priceData
 from helpers import Ticker as ticker
 from Financials import companyProfile as companyprofile
 
+errorMessage = "Invalid Stock Symbol"
+
+
 def getCompanySector(tickerSymbol):
-    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
-    companySector = companyprofile.getCompanySector(tickerObject,tickerSymbol)
-    return companySector
+    try:
+        tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+        companySector = companyprofile.getCompanySector(tickerObject,tickerSymbol)
+        return companySector
+    except TypeError:
+            return errorMessage
 
 def getStockName(tickerSymbol):
-    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
-    stockName = priceData.getCompanyName(tickerObject,tickerSymbol)
-
-    return stockName
+    try:
+        tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+        stockName = priceData.getCompanyName(tickerObject,tickerSymbol)
+        return stockName
+    except TypeError:
+            return errorMessage
 
         ## Fundamentals ###
 def getCurrentStockPrice(tickerSymbol):
