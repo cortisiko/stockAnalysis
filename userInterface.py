@@ -73,7 +73,7 @@ class Startpage(tk.Frame):
         self.returnOnEquityLabelText = Label(self, text="Return on Equity Ratio: ", width=30, anchor="w")
         self.currentStockPriceLabelText = Label(self, text="Current Stock Price: ", width=30, anchor="w")
         self.debtToEquityRatioLabelText = Label(self, text="Debt to Equity Ratio: ", width=30, anchor="w")
-        self.profitMarginLabelText = Label(self, text="Profit Margin: ", width=30, anchor="w")
+        self.profitMarginLabelText = Label(self, text="Net Profit Margin: ", width=30, anchor="w")
         self.companyNameLabelText = Label(self, text="", font=self.my_font)
         self.companySectorLabelText = Label(self,text="Sector",width=30, anchor="w")
         ##Binding the Enter key
@@ -95,7 +95,7 @@ class Startpage(tk.Frame):
         self.returnOnEquityDefaultText = "Return on Equity Ratio: "
         self.currentStockPriceDefaultText = "Current Stock Price: "
         self.debtToEquityRatioDefaultText = "Debt to Equity Ratio: "
-        self.profitMarginDefaultText = "Profit Margin: "
+        self.profitMarginDefaultText = "Net Profit Margin: "
 
         self.companySectorDefaultValue = ""
         self.earningsPerShareDefaultValue = ""
