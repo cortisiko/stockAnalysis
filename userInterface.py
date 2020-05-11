@@ -82,8 +82,7 @@ class Startpage(tk.Frame):
         self.returnOnEquityLabelText = Label(self, text="Return on Equity Ratio: ", width=30, anchor="w")
         self.currentStockPriceLabelText = Label(self, text="Current Stock Price: ", width=30, anchor="w")
         self.debtToEquityRatioLabelText = Label(self, text="Debt to Equity Ratio: ", width=30, anchor="w")
-        self.profitMarginLabelText = Label(self, text="Profit Margin: ", width=30, anchor="w")
-        self.CompanyNameLabelText = Label(self, text="", font=self.my_font, bg='grey')
+
 
 #photo addition
         self.Space = Label(self, text="", bg='grey')
@@ -95,28 +94,38 @@ class Startpage(tk.Frame):
         self.imageArea.photo = photoimg
         self.imageArea.grid(row=19, column=2)
 
+    
+        self.profitMarginLabelText = Label(self, text="Net Profit Margin: ", width=30, anchor="w")
+        self.companyNameLabelText = Label(self, text="", font=self.my_font)
+        self.companySectorLabelText = Label(self,text="Sector",width=30, anchor="w")
+        ##Binding the Enter key
+        self.parent.bind('<Return>', self.analyze)
+
         # making new spots for values returned
-        self.earningsPerShareLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.peRatioLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.returnOnEquityLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.currentStockPriceLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.debtToEquityRatioLabelValueText = Label(self, text="", width=30, anchor="w")
-        self.profitMarginLabelValueText = Label(self, text="", width=30, anchor="w")
+        self.earningsPerShareValue = Label(self, text="", width=30, anchor="w")
+        self.companySectorValue = Label(self, text="", width=30, anchor="w")
+        self.peRatioValue = Label(self, text="", width=30, anchor="w")
+        self.returnOnEquityValue = Label(self, text="", width=30, anchor="w")
+        self.currentStockPriceValue = Label(self, text="", width=30, anchor="w")
+        self.debtToEquityRatioValue = Label(self, text="", width=30, anchor="w")
+        self.profitMarginValue = Label(self, text="", width=30, anchor="w")
 
-        self.earningsPerShareLabelDefault = "Earnings Per Share: "
-        self.companyNameLabelDefault = ""
-        self.peRatioLabelDefault = "PE Ratio: "
-        self.returnOnEquityLabelDefault = "Return on Equity Ratio: "
-        self.currentStockPriceLabelDefault = "Current Stock Price: "
-        self.debtToEquityRatioLabelDefault = "Debt to Equity Ratio: "
-        self.profitMarginLabelDefault = "Profit Margin: "
+        self.earningsPerShareDefaultText = "Earnings Per Share: "
+        self.companyNameDefaultText = ""
+        self.companySectorDefaultText = "Sector:"
+        self.peRatioDefaultText = "PE Ratio: "
+        self.returnOnEquityDefaultText = "Return on Equity Ratio: "
+        self.currentStockPriceDefaultText = "Current Stock Price: "
+        self.debtToEquityRatioDefaultText = "Debt to Equity Ratio: "
+        self.profitMarginDefaultText = "Net Profit Margin: "
 
-        self.earningsPerShareLabelValueDefault = ""
-        self.peRatioLabelValueDefault = ""
-        self.returnOnEquityLabelValueDefault = ""
-        self.currentStockPriceLabelValueDefault = ""
-        self.debtToEquityRatioLabelValueDefault = ""
-        self.profitMarginLabelValueDefault = ""
+        self.companySectorDefaultValue = ""
+        self.earningsPerShareDefaultValue = ""
+        self.peRatioLabelDefaultValue = ""
+        self.returnOnEquityDefaultValue = ""
+        self.currentStockPriceDefaultValue = ""
+        self.debtToEquityRatioDefaultValue = ""
+        self.profitMarginDefaultValue = ""
 
         ## Griding Values and Text
         self.stockSymbolText.grid(row=0, column=3)

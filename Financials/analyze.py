@@ -7,11 +7,24 @@ from Financials import incomeStatementSheet as income
 from helpers import Ticker as ticker
 
 
-def getStockName(tickerSymbol):
-    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
-    stockName = priceData.getCompanyName(tickerObject,tickerSymbol)
+errorMessage = "Invalid Stock Symbol"
 
-    return stockName
+
+def getCompanySector(tickerSymbol):
+    try:
+        tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+        companySector = companyprofile.getCompanySector(tickerObject,tickerSymbol)
+        return companySector
+    except TypeError:
+            return errorMessage
+
+def getStockName(tickerSymbol):
+    try:
+        tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+        stockName = priceData.getCompanyName(tickerObject,tickerSymbol)
+        return stockName
+    except TypeError:
+            return errorMessage
 
         ## Fundamentals ###
 def getCurrentStockPrice(tickerSymbol):
