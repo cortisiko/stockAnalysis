@@ -117,6 +117,7 @@ class Startpage(tk.Frame):
         self.imageArea.photo = photoimg
         self.imageArea.grid(row=19, column=2)
 
+
         ## Griding Values and Text
         self.stockSymbolText.grid(row=0, column=3)
         self.textInputBox.grid(row=0, column=4, sticky="nsew")
