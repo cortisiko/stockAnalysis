@@ -5,7 +5,7 @@ from Financials import price as priceData
 
 from Financials import incomeStatementSheet as income
 from helpers import Ticker as ticker
-
+from Financials import companyProfile as companyprofile
 
 errorMessage = "Invalid Stock Symbol"
 
