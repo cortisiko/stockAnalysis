@@ -108,14 +108,6 @@ class Startpage(tk.Frame):
         self.profitMarginDefaultValue = ""
 
         # photo addition
-        self.Space = Label(self, text="", bg='grey')
-        self.Space.grid(row=18, column=0)
-        stockphoto = kkImage.open("MainPage.png")
-        stockphoto = stockphoto.resize((225, 229), kkImage.ANTIALIAS)
-        photoimg = ImageTk.PhotoImage(stockphoto)
-        self.imageArea = Label(self, image=photoimg, justify=RIGHT, bg='grey')
-        self.imageArea.photo = photoimg
-        self.imageArea.grid(row=19, column=2)
 
 
         ## Griding Values and Text
