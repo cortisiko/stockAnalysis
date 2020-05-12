@@ -19,6 +19,7 @@ def getDebtToEquity(tickerObject,tickerSymbol):
     debtToEquity = financialData[tickerSymbol].get('debtToEquity', None)
 
     if debtToEquity is not None:
+        debtToEquity = debtToEquity / 100
         debtToEquity = float(round(debtToEquity, 2))
         return   debtToEquity
     else:
