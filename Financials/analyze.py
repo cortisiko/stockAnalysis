@@ -1,6 +1,9 @@
+from Financials import cashFlowSheet as cashFlowPage
 from Financials import statistics as statisticsTab
 from Financials import summary as summaryPage
 from Financials import price as priceData
+
+from Financials import incomeStatementSheet as income
 from helpers import Ticker as ticker
 from Financials import companyProfile as companyprofile
 

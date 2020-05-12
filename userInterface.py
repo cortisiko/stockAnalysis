@@ -7,6 +7,7 @@ import tkinter.font
 from Financials import analyze as anlyze
 from tkinter import *
 from helpers import getMessageBox as messagebox
+from PIL import ImageTk, Image as kkImage
 
 class UserInterFace(tk.Tk):
     def __init__(self):
@@ -57,6 +58,7 @@ class Startpage(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.parent = parent
+        self.configure(background='grey')
         self.my_font = tkinter.font.Font(self, family="Comic Sans MS", size=20)
         self.stockSymbolText = Label(self, text="Enter Stock Symbol: ")
         self.textInputBox = Entry(self,relief=RIDGE, width=10, borderwidth=4)
@@ -74,7 +76,7 @@ class Startpage(tk.Frame):
         self.currentStockPriceLabelText = Label(self, text="Current Stock Price: ", width=30, anchor="w")
         self.debtToEquityRatioLabelText = Label(self, text="Debt to Equity Ratio: ", width=30, anchor="w")
         self.profitMarginLabelText = Label(self, text="Net Profit Margin: ", width=30, anchor="w")
-        self.companyNameLabelText = Label(self, text="", font=self.my_font)
+        self.companyNameLabelText = Label(self, text="", font=self.my_font, bg='grey')
         self.companySectorLabelText = Label(self,text="Sector",width=30, anchor="w")
         ##Binding the Enter key
         self.parent.bind('<Return>', self.analyze)
@@ -104,6 +106,16 @@ class Startpage(tk.Frame):
         self.currentStockPriceDefaultValue = ""
         self.debtToEquityRatioDefaultValue = ""
         self.profitMarginDefaultValue = ""
+
+        # photo addition
+        self.Space = Label(self, text="", bg='grey')
+        self.Space.grid(row=18, column=0)
+        stockphoto = kkImage.open("MainPage.png")
+        stockphoto = stockphoto.resize((225, 229), kkImage.ANTIALIAS)
+        photoimg = ImageTk.PhotoImage(stockphoto)
+        self.imageArea = Label(self, image=photoimg, justify=RIGHT, bg='grey')
+        self.imageArea.photo = photoimg
+        self.imageArea.grid(row=19, column=2)
 
         ## Griding Values and Text
         self.stockSymbolText.grid(row=0, column=3)
@@ -237,6 +249,7 @@ class PlotCashFlowChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self['bg'] = '#1B6666'
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Cash Flow Charts", font=self.my_font)
         self.RadioText = StringVar()
@@ -288,6 +301,7 @@ class PlotCashFlowChart(tk.Frame):
 class PlotIncomeStatementChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self['bg'] = '#1B6666'
         self.controller = controller
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Net Income Charts", font=self.my_font)
@@ -344,6 +358,7 @@ class PlotIncomeStatementChart(tk.Frame):
 class plotEarningsChart(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self['bg'] = '#1B6666'
         self.controller = controller
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Earnings Charts", font=self.my_font)
