@@ -76,7 +76,7 @@ class Startpage(tk.Frame):
         self.currentStockPriceLabelText = Label(self, text="Current Stock Price: ", width=30, anchor="w")
         self.debtToEquityRatioLabelText = Label(self, text="Debt to Equity Ratio: ", width=30, anchor="w")
         self.profitMarginLabelText = Label(self, text="Net Profit Margin: ", width=30, anchor="w")
-        self.companyNameLabelText = Label(self, text="", font=self.my_font)
+        self.companyNameLabelText = Label(self, text="", font=self.my_font, bg='grey')
         self.companySectorLabelText = Label(self,text="Sector",width=30, anchor="w")
         ##Binding the Enter key
         self.parent.bind('<Return>', self.analyze)
@@ -108,7 +108,14 @@ class Startpage(tk.Frame):
         self.profitMarginDefaultValue = ""
 
         # photo addition
-
+        self.Space = Label(self, text="", bg='grey')
+        self.Space.grid(row=18, column=0)
+        stockphoto = kkImage.open("MainPage.png")
+        stockphoto = stockphoto.resize((225, 229), kkImage.ANTIALIAS)
+        photoimg = ImageTk.PhotoImage(stockphoto)
+        self.imageArea = Label(self, image=photoimg, justify=RIGHT, bg='grey')
+        self.imageArea.photo = photoimg
+        self.imageArea.grid(row=19, column=2)
 
         ## Griding Values and Text
         self.stockSymbolText.grid(row=0, column=3)
