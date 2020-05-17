@@ -21,7 +21,7 @@ class PlotGraph:
         data = self.getFreqency(earningsData, Frequency, tickerSymbol)
         earningsDataFrame = pd.DataFrame(data)
         dates = earningsDataFrame['date'].astype(str)
-        revs = earningsDataFrame['revenue']
+        #revs = earningsDataFrame['revenue'] no real need for revenue right now
         earns = earningsDataFrame['earnings']
 
         ax = self.fig.add_subplot(111)
@@ -33,9 +33,8 @@ class PlotGraph:
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 
-        ax.plot(dates, revs, '-o', label='revenues')
         ax.plot(dates, earns, '-o', label='earnings')
-        ax.legend()
+        #ax.legend()
 
         if not self.canvas:
             self.canvas = FigureCanvasTkAgg(self.fig, container)

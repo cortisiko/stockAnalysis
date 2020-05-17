@@ -284,6 +284,7 @@ class PlotCashFlowChart(tk.Frame):
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
+
         radioButtonFrequencyOption = self.RadioText.get()
         if not plotCashFlow.canvas:
             plotCashFlow.plotCashGraph(self, userInput, radioButtonFrequencyOption)
