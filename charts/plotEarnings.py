@@ -6,6 +6,7 @@ from matplotlib.figure import Figure
 from Financials import price as priceData
 from Financials import earnings as earning
 from helpers import Ticker as ticker
+from matplotlib.lines import Line2D
 
 class PlotGraph:
     def __init__(self):
@@ -23,6 +24,7 @@ class PlotGraph:
         dates = earningsDataFrame['date'].astype(str)
         #revs = earningsDataFrame['revenue'] no real need for revenue right now
         earns = earningsDataFrame['earnings']
+        earns = earns/ 1000 ## This scales the earnings value to Millions or Billions depends on how you want to read the chart
 
         ax = self.fig.add_subplot(111)
         yLabelText = "Amount in $"
@@ -33,7 +35,10 @@ class PlotGraph:
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 
-        ax.plot(dates, earns, '-o', label='earnings')
+        ax.bar(dates, earns, color=['r' if v < 0 else 'g' for v in earns])
+        legend_handles = [Line2D([0], [0], linewidth=0, marker='o', markerfacecolor=color, markersize=12, markeredgecolor='none')
+            for color in ['g', 'r']]
+        ax.legend(legend_handles, ['positive earnings', 'negative earnings'])
         #ax.legend()
 
         if not self.canvas:
