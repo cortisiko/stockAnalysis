@@ -35,7 +35,7 @@ class PlotGraph:
 
         ax.bar(dates, incomeStatement, color=['r' if v < 0 else 'g' for v in incomeStatement])
         for i, v in enumerate(incomeStatement):
-            ax.text(i, v * 0.75, f'{v:,.0f}', fontweight='bold', va='center', ha='center',color ='#0A0A0A')
+            ax.text(i, v * 0.75, f'${v:,.0f}', fontweight='bold', va='center', ha='center',color ='#0A0A0A')
 
         legend_handles = [
             Line2D([0], [0], linewidth=0, marker='o', markerfacecolor=color, markersize=12, markeredgecolor='none')
