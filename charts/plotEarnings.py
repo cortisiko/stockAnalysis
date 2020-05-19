@@ -36,9 +36,13 @@ class PlotGraph:
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 
         ax.bar(dates, earns, color=['r' if v < 0 else 'g' for v in earns])
+        for i, v in enumerate(earns):
+            ax.text(i, v * 0.75,'{:,}'.format(v), fontweight='bold', va='center', ha='center')
+
         legend_handles = [Line2D([0], [0], linewidth=0, marker='o', markerfacecolor=color, markersize=12, markeredgecolor='none')
             for color in ['g', 'r']]
         ax.legend(legend_handles, ['positive earnings', 'negative earnings'])
+
         #ax.legend()
 
         if not self.canvas:
