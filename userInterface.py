@@ -33,6 +33,7 @@ class UserInterFace(tk.Tk):
         menu.add_cascade(menu=Charts, label="Charts")
 
         Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(PlotCashFlowChart))
+        Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(plotDebtGraph))
         Charts.add_command(label="Earnings", command=lambda: self.show_frame(plotEarningsChart))
         Charts.add_command(label="Net Income", command=lambda: self.show_frame(PlotIncomeStatementChart))
         Charts.add_command(label="Revenue", command=lambda: self.show_frame(plotRevenueChart))
@@ -41,7 +42,7 @@ class UserInterFace(tk.Tk):
         menu.add_separator()
         tk.Tk.config(self, menu=menu)
 
-        for F in (Startpage, PlotCashFlowChart, PlotIncomeStatementChart, plotEarningsChart,plotRevenueChart):
+        for F in (Startpage, PlotCashFlowChart,plotDebtGraph, PlotIncomeStatementChart, plotEarningsChart,plotRevenueChart):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -488,13 +489,13 @@ class plotRevenueChart(tk.Frame):
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
 
-class plotRevenueChart(tk.Frame):
+class plotDebtGraph(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self['bg'] = '#1B6666'
         self.controller = controller
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
-        self.pageTitle = Label(self, text="Revenue Charts", font=self.my_font)
+        self.pageTitle = Label(self, text="Long Term Debt Charts", font=self.my_font)
         self.RadioText = StringVar()
         self.quarterlyTextString = 'quarterly'
         self.yearlyTextString = 'yearly'
@@ -538,9 +539,9 @@ class plotRevenueChart(tk.Frame):
         # radioButtonFrequencyOption = self.RadioText.set(self.yearlyTextString)
         radioButtonFrequencyOption = self.RadioText.get()
         if not revenue.canvas:
-            revenue.plotRevenue(self, userInput, radioButtonFrequencyOption)
+            longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
         else:
-            revenue.clearPlotPage()
+            longTermDebt.clearPlotPage()
             longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
 
     def destroyGraph(self):
