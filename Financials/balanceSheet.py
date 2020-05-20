@@ -4,9 +4,13 @@ def getBalanceSheetData(tickerSymbol,Frequency):
 
     return balanceSheetData
 
+errorMessage = "Company Does not have debt"
 
 def getLongTermDebt(longTermDebtData):
-    longTermDebt = longTermDebtData['LongTermDebt']
-    longTermDebt = longTermDebt / 1e3
+    try:
+        longTermDebt = longTermDebtData['LongTermDebt']
+        longTermDebt = longTermDebt / 1e3
 
-    return longTermDebt
+        return longTermDebt
+    except KeyError:
+        print (errorMessage)

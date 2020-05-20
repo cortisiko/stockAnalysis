@@ -10,6 +10,9 @@ from charts import plotCashFlow as pltCashFlow, plotNetIncome as pltIncome, plot
 from Financials import analyze as anlyze
 from helpers import getMessageBox as messagebox
 
+invalidTickerErrorMessage = "Sorry, you need to enter a ticker symbol"
+noDebtErrorMessage = "Sorry Yahoo finance does not show any long term debt for this company"
+
 class UserInterFace(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -349,6 +352,7 @@ class PlotIncomeStatementChart(tk.Frame):
         radioButtonFrequencyOption = self.RadioText.get()
         if not income.canvas:
             income.netIncomeChart(self, userInput, radioButtonFrequencyOption)
+
         else:
             income.clearPlotPage()
             income.netIncomeChart(self, userInput, radioButtonFrequencyOption)
@@ -388,7 +392,6 @@ class plotEarningsChart(tk.Frame):
         self.clearButton.pack()
         button1 = Button(self, text="Back to Home",
                          command=lambda: controller.show_frame(Startpage))
-        # button1.pack()
 
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")
@@ -404,10 +407,6 @@ class plotEarningsChart(tk.Frame):
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
-        # startPageObject = self.controller.get_page(Startpage)
-        # userInputFromStartPage = startPageObject.getTextInput()
-        # print(userInputFromStartPage)
-        # radioButtonFrequencyOption = self.RadioText.set(self.yearlyTextString)
         radioButtonFrequencyOption = self.RadioText.get()
         if not earnings.canvas:
             earnings.plotEarnings(self, userInput, radioButtonFrequencyOption)
@@ -443,8 +442,6 @@ class plotRevenueChart(tk.Frame):
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,
                                              command=self.selectedRadioButtonOption)
 
-        # self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
-
         self.clearButton = Button(self, text='Clear', command=self.clear, bg='red')
         self.pageTitle.pack()
         self.textInputBox.pack()
@@ -453,7 +450,6 @@ class plotRevenueChart(tk.Frame):
         self.clearButton.pack()
         button1 = Button(self, text="Back to Home",
                          command=lambda: controller.show_frame(Startpage))
-        # button1.pack()
 
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")
@@ -469,10 +465,6 @@ class plotRevenueChart(tk.Frame):
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
-        # startPageObject = self.controller.get_page(Startpage)
-        # userInputFromStartPage = startPageObject.getTextInput()
-        # print(userInputFromStartPage)
-        # radioButtonFrequencyOption = self.RadioText.set(self.yearlyTextString)
         radioButtonFrequencyOption = self.RadioText.get()
         if not revenue.canvas:
             revenue.plotRevenue(self, userInput, radioButtonFrequencyOption)
@@ -507,8 +499,6 @@ class plotDebtGraph(tk.Frame):
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,
                                              command=self.selectedRadioButtonOption)
 
-        # self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
-
         self.clearButton = Button(self, text='Clear', command=self.clear, bg='red')
         self.pageTitle.pack()
         self.textInputBox.pack()
@@ -517,8 +507,6 @@ class plotDebtGraph(tk.Frame):
         self.clearButton.pack()
         button1 = Button(self, text="Back to Home",
                          command=lambda: controller.show_frame(Startpage))
-        # button1.pack()
-
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")
         result = result.rstrip()
@@ -529,17 +517,18 @@ class plotDebtGraph(tk.Frame):
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
+
             messagebox.showErrorMessage(self)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
-        # startPageObject = self.controller.get_page(Startpage)
-        # userInputFromStartPage = startPageObject.getTextInput()
-        # print(userInputFromStartPage)
-        # radioButtonFrequencyOption = self.RadioText.set(self.yearlyTextString)
         radioButtonFrequencyOption = self.RadioText.get()
+        if KeyError:
+            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
+
         if not longTermDebt.canvas:
             longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
+
         else:
             longTermDebt.clearPlotPage()
             longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
