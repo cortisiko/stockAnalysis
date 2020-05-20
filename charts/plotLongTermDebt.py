@@ -1,6 +1,5 @@
 import matplotlib
 matplotlib.use("TkAgg")
-from matplotlib.lines import Line2D
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
@@ -36,11 +35,6 @@ class PlotGraph:
         ax.bar(dates, longTermDebt, color=['r' if v < 0 else 'g' for v in longTermDebt])
         for i, v in enumerate(longTermDebt):
             ax.text(i, v * 0.75, f'${v:,.0f}', fontweight='bold', va='center', ha='center')
-
-        legend_handles = [
-            Line2D([0], [0], linewidth=0, marker='o', markerfacecolor=color, markersize=12, markeredgecolor='none')
-            for color in ['g', 'r']]
-        ax.legend(legend_handles, ['positive cash flow', 'negative cash flow'])
 
         if not self.canvas:
             self.canvas = FigureCanvasTkAgg(self.fig, container)

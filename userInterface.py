@@ -497,8 +497,8 @@ class plotDebtGraph(tk.Frame):
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
         self.pageTitle = Label(self, text="Long Term Debt Charts", font=self.my_font)
         self.RadioText = StringVar()
-        self.quarterlyTextString = 'quarterly'
-        self.yearlyTextString = 'yearly'
+        self.quarterlyTextString = 'q'
+        self.yearlyTextString = 'a'
 
         self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
         self.frequencyText = Label(self, text="Frequency")
@@ -538,14 +538,14 @@ class plotDebtGraph(tk.Frame):
         # print(userInputFromStartPage)
         # radioButtonFrequencyOption = self.RadioText.set(self.yearlyTextString)
         radioButtonFrequencyOption = self.RadioText.get()
-        if not revenue.canvas:
+        if not longTermDebt.canvas:
             longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
         else:
             longTermDebt.clearPlotPage()
             longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
 
     def destroyGraph(self):
-        revenue.clearPlotPage()
+        longTermDebt.clearPlotPage()
 
     def clear(self):
         self.textInputBox.delete("1.0", "end")
