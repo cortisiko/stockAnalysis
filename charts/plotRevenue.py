@@ -18,7 +18,7 @@ class PlotGraph:
         tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
         earningsData = earning.getEarningsData(tickerObject)
         companyName = priceData.getCompanyName(tickerObject, tickerSymbol)
-        EarningsTitle = 'Revenue'
+        RevenueText = 'Revenue'
 
         data = self.getFreqency(earningsData, Frequency, tickerSymbol)
         earningsDataFrame = pd.DataFrame(data)
@@ -28,7 +28,7 @@ class PlotGraph:
 
         ax = self.fig.add_subplot(111)
         yLabelText = "Amount in $"
-        graphTitle = companyName + " " + EarningsTitle
+        graphTitle = companyName + " " + RevenueText
         ax.set_title(graphTitle)
         ax.set_xlabel('Period')
         ax.set_ylabel(yLabelText)

@@ -6,7 +6,7 @@ import tkinter.font
 from tkinter import *
 from PIL import ImageTk, Image as kkImage
 
-from charts import plotCashFlow as pltCashFlow, plotNetIncome as pltIncome, plotEarnings as pltEarnings,plotRevenue as pltRevenue
+from charts import plotCashFlow as pltCashFlow, plotNetIncome as pltIncome, plotEarnings as pltEarnings,plotRevenue as pltRevenue,plotLongTermDebt as pltDebt
 from Financials import analyze as anlyze
 from helpers import getMessageBox as messagebox
 
@@ -488,8 +488,73 @@ class plotRevenueChart(tk.Frame):
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
 
+class plotRevenueChart(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self['bg'] = '#1B6666'
+        self.controller = controller
+        self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
+        self.pageTitle = Label(self, text="Revenue Charts", font=self.my_font)
+        self.RadioText = StringVar()
+        self.quarterlyTextString = 'quarterly'
+        self.yearlyTextString = 'yearly'
+
+        self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
+        self.frequencyText = Label(self, text="Frequency")
+        self.quarterlyRadioButton = Radiobutton(self, text="Quarterly", variable=self.RadioText,
+                                                value=self.quarterlyTextString, command=self.selectedRadioButtonOption)
+        self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,
+                                             command=self.selectedRadioButtonOption)
+
+        # self.plotGraphButton = tk.Button(self, text='plot Income Statement', command=self.incomeStatementChart)
+
+        self.clearButton = Button(self, text='Clear', command=self.clear, bg='red')
+        self.pageTitle.pack()
+        self.textInputBox.pack()
+        self.quarterlyRadioButton.pack(side='left', padx=50)
+        self.yearlyRadioButton.pack(side='right', padx=50)
+        self.clearButton.pack()
+        button1 = Button(self, text="Back to Home",
+                         command=lambda: controller.show_frame(Startpage))
+        # button1.pack()
+
+    def getTextInput(self):
+        result = self.textInputBox.get("1.0", "end")
+        result = result.rstrip()
+        if len(result) > 0:
+            results = result.upper()
+            results = str(results)
+            return results
+        else:
+            self.yearlyRadioButton.deselect()
+            self.quarterlyRadioButton.deselect()
+            messagebox.showErrorMessage(self)
+
+    def selectedRadioButtonOption(self):
+        userInput = self.getTextInput()
+        # startPageObject = self.controller.get_page(Startpage)
+        # userInputFromStartPage = startPageObject.getTextInput()
+        # print(userInputFromStartPage)
+        # radioButtonFrequencyOption = self.RadioText.set(self.yearlyTextString)
+        radioButtonFrequencyOption = self.RadioText.get()
+        if not revenue.canvas:
+            revenue.plotRevenue(self, userInput, radioButtonFrequencyOption)
+        else:
+            revenue.clearPlotPage()
+            longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
+
+    def destroyGraph(self):
+        revenue.clearPlotPage()
+
+    def clear(self):
+        self.textInputBox.delete("1.0", "end")
+        longTermDebt.clearPlotPage()
+        self.yearlyRadioButton.deselect()
+        self.quarterlyRadioButton.deselect()
+
 app = UserInterFace()
 cashFlow = pltCashFlow.PlotGraph()
+longTermDebt = pltDebt.PlotGraph()
 income = pltIncome.PlotGraph()
 earnings = pltEarnings.PlotGraph()
 revenue = pltRevenue.PlotGraph()
