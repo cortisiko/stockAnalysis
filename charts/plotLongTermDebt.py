@@ -32,7 +32,7 @@ class PlotGraph:
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 
-        ax.bar(dates, longTermDebt)
+        ax.bar(dates, longTermDebt,color='r')
         for i, v in enumerate(longTermDebt):
             ax.text(i, v * 0.75, f'${v:,.0f}', fontweight='bold', va='center', ha='center')
 

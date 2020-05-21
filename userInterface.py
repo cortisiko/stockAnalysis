@@ -36,8 +36,8 @@ class UserInterFace(tk.Tk):
         menu.add_cascade(menu=Charts, label="Charts")
 
         Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(PlotCashFlowChart))
-        Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(plotDebtGraph))
         Charts.add_command(label="Earnings", command=lambda: self.show_frame(plotEarningsChart))
+        Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(plotDebtGraph))
         Charts.add_command(label="Net Income", command=lambda: self.show_frame(PlotIncomeStatementChart))
         Charts.add_command(label="Revenue", command=lambda: self.show_frame(plotRevenueChart))
 
