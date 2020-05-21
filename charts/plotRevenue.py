@@ -3,6 +3,7 @@ matplotlib.use("TkAgg")
 import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
+
 from Financials import price as priceData
 from Financials import earnings as earning
 from helpers import Ticker as ticker
@@ -13,35 +14,34 @@ class PlotGraph:
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)
 
-    def plotEarnings(self, container,tickerSymbol,Frequency):
+    def plotRevenue(self, container,tickerSymbol,Frequency):
         tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
         earningsData = earning.getEarningsData(tickerObject)
         companyName = priceData.getCompanyName(tickerObject, tickerSymbol)
-        EarningsTitle = 'Earnings'
+        RevenueText = 'Revenue'
 
         data = self.getFreqency(earningsData, Frequency, tickerSymbol)
         earningsDataFrame = pd.DataFrame(data)
         dates = earningsDataFrame['date'].astype(str)
-        #revs = earningsDataFrame['revenue'] no real need for revenue right now
-        earns = earningsDataFrame['earnings']
-        earns = earns/ 1000 ## This scales the earnings value to Millions or Billions depends on how you want to read the chart
+        revs = earningsDataFrame['revenue']
+        revs = revs/ 100 ## This scales the earnings value to Millions or Billions depends on how you want to read the chart
 
         ax = self.fig.add_subplot(111)
         yLabelText = "Amount in $"
-        graphTitle = companyName + " " + EarningsTitle
+        graphTitle = companyName + " " + RevenueText
         ax.set_title(graphTitle)
         ax.set_xlabel('Period')
         ax.set_ylabel(yLabelText)
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 
-        ax.bar(dates, earns, color=['r' if v < 0 else 'g' for v in earns])
-        for i, v in enumerate(earns):
-            ax.text(i, v * 0.75,f'${v:,.0f}', fontweight='bold', va='center', ha='center')
+        ax.bar(dates, revs, color=['r' if v < 0 else 'g' for v in revs]) ## adding color to bar graphs
+        for i, v in enumerate(revs):
+            ax.text(i, v * 0.75,f'${v:,.0f}', fontweight='bold', va='center', ha='center') ## printing values into the bar graphs
 
         legend_handles = [Line2D([0], [0], linewidth=0, marker='o', markerfacecolor=color, markersize=12, markeredgecolor='none')
             for color in ['g', 'r']]
-        ax.legend(legend_handles, ['positive earnings', 'negative earnings'])
+        ax.legend(legend_handles, ['positive revenue', 'negative revenue'])
 
         #ax.legend()
 
