@@ -36,7 +36,7 @@ class UserInterFace(tk.Tk):
         menu.add_cascade(menu=Charts, label="Charts")
 
         Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(PlotCashFlowChart))
-        Charts.add_command(label="Earnings", command=lambda: self.show_frame(plotEarningsChart))
+        #Charts.add_command(label="Earnings", command=lambda: self.show_frame(plotEarningsChart))
         Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(plotDebtGraph))
         Charts.add_command(label="Net Income", command=lambda: self.show_frame(PlotIncomeStatementChart))
         Charts.add_command(label="Revenue", command=lambda: self.show_frame(plotRevenueChart))
@@ -45,7 +45,7 @@ class UserInterFace(tk.Tk):
         menu.add_separator()
         tk.Tk.config(self, menu=menu)
 
-        for F in (Startpage, PlotCashFlowChart,plotDebtGraph, PlotIncomeStatementChart, plotEarningsChart,plotRevenueChart):
+        for F in (Startpage, PlotCashFlowChart,plotDebtGraph, PlotIncomeStatementChart,plotRevenueChart):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
