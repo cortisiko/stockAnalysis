@@ -225,7 +225,7 @@ class Startpage(tk.Frame):
             return results
 
         else:
-            messagebox.showErrorMessage(self)
+            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
 
     def clearUserInputBox(self):
         self.textInputBox.delete(0, END)
@@ -287,7 +287,7 @@ class PlotCashFlowChart(tk.Frame):
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messagebox.showErrorMessage(self)
+            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
@@ -345,7 +345,7 @@ class PlotIncomeStatementChart(tk.Frame):
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messagebox.showErrorMessage(self)
+            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
@@ -403,7 +403,7 @@ class plotEarningsChart(tk.Frame):
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messagebox.showErrorMessage(self)
+            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
@@ -461,7 +461,7 @@ class plotRevenueChart(tk.Frame):
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messagebox.showErrorMessage(self)
+            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
@@ -518,14 +518,15 @@ class plotDebtGraph(tk.Frame):
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
 
-            messagebox.showErrorMessage(self)
+            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
-        if KeyError:
-            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
-
+        #if TypeError:
+          #      messagebox.showErrorMessage(self, invalidTickerErrorMessage)
+        #if KeyError:
+         #   messagebox.showErrorMessage(self,noDebtErrorMessage)
         if not longTermDebt.canvas:
             longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
 
