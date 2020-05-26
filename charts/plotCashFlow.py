@@ -28,7 +28,7 @@ class PlotGraph:
         yLabelText = "Free Cash Flow in $"
         graphTitle = companyName + " " + cashFlowGraphTitle
         ax.set_title(graphTitle)
-        ax.set_xlabel('Years')
+        ax.set_xlabel('Period')
         ax.set_ylabel(yLabelText)
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
