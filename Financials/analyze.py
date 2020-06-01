@@ -80,4 +80,7 @@ def getCashBurnNumber(tickerSymbol):
 
     cashBurn = cashFlowPage.calculateCashBurn(CashAndCashEquivalents,mostRecentCashFlow)
 
-    print(cashBurn)
+    if cashBurn < 0:
+        print(f'{tickerSymbol} is already running out of money. their cash burn is: {cashBurn:,.1f} months')
+    else:
+        print(f'It will take {cashBurn:,.1f} months before {tickerSymbol} runs out of money')

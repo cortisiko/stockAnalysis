@@ -172,6 +172,7 @@ class Startpage(tk.Frame):
     def getCompanyName(self):
         tickerFromUser = self.getTextInput()
         companyName = anlyze.getStockName(tickerFromUser)
+        burn = anlyze.getCashBurnNumber(tickerFromUser)
         self.companyNameLabelText["text"] = ""
         self.companyNameLabelText["text"] = self.companyNameLabelText["text"] + str(companyName)
 
