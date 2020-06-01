@@ -14,3 +14,16 @@ def getLongTermDebt(longTermDebtData):
         return longTermDebt
     except KeyError:
         print (errorMessage)
+
+def getCashAndExpenses(balanceSheetData):
+    CashAndCashEquivalents = balanceSheetData['CashAndCashEquivalents'].iloc[-1] ## getting the data for the most recent year
+    CashAndCashEquivalents = CashAndCashEquivalents / 1e3
+
+    return CashAndCashEquivalents
+
+
+def calculateCashBurn(CashAndCashEquivalents,freeCashFlow):
+    cashBurn = CashAndCashEquivalents / freeCashFlow
+    cashBurn = cashBurn * 12
+
+    return cashBurn

@@ -8,4 +8,9 @@ def getCompanySector(tickerObject,stockTicker):
 
     return companySector
 
+def getCompanySummaryDetails(tickerObject,stockTicker):
+    companyProfileObject = getCompanyProfile(tickerObject)
+    summaryDetails = companyProfileObject[stockTicker]['longBusinessSummary']
+
+    return summaryDetails
 

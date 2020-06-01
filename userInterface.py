@@ -85,12 +85,15 @@ class Startpage(tk.Frame):
         self.profitMarginLabelText = Label(self, text="Net Profit Margin: ", width=30, anchor="w")
         self.companyNameLabelText = Label(self, text="", font=self.my_font, bg='grey')
         self.companySectorLabelText = Label(self,text="Sector",width=30, anchor="w")
+        self.companyDetailsLabelText = Label(self,text="",width=30, anchor="w")
+
         ##Binding the Enter key
         self.parent.bind('<Return>', self.analyze)
 
         # making new spots for values returned
         self.earningsPerShareValue = Label(self, text="", width=30, anchor="w")
         self.companySectorValue = Label(self, text="", width=30, anchor="w")
+        #self.companyDetailsValue = Label(self, text="",wraplength=700,justify=CENTER)
         self.peRatioValue = Label(self, text="", width=30, anchor="w")
         self.returnOnEquityValue = Label(self, text="", width=30, anchor="w")
         self.currentStockPriceValue = Label(self, text="", width=30, anchor="w")
@@ -100,6 +103,7 @@ class Startpage(tk.Frame):
         self.earningsPerShareDefaultText = "Earnings Per Share: "
         self.companyNameDefaultText = ""
         self.companySectorDefaultText = "Sector:"
+        self.companyDetailsDefaultText = ""
         self.peRatioDefaultText = "PE Ratio: "
         self.returnOnEquityDefaultText = "Return on Equity Ratio: "
         self.currentStockPriceDefaultText = "Current Stock Price: "
@@ -107,6 +111,7 @@ class Startpage(tk.Frame):
         self.profitMarginDefaultText = "Net Profit Margin: "
 
         self.companySectorDefaultValue = ""
+        self.companyDetailsDefaultValue = ""
         self.earningsPerShareDefaultValue = ""
         self.peRatioLabelDefaultValue = ""
         self.returnOnEquityDefaultValue = ""
@@ -141,6 +146,7 @@ class Startpage(tk.Frame):
         self.returnOnEquityLabelText.grid(row=10, column=4)
         self.debtToEquityRatioLabelText.grid(row=11, column=4)
         self.profitMarginLabelText.grid(row=12, column=4)
+        #self.companyDetailsLabelText.grid(row=22,column =5)
 
         # Fields for values
         self.companySectorValue.grid(row=6, column=5)
@@ -150,7 +156,7 @@ class Startpage(tk.Frame):
         self.returnOnEquityValue.grid(row=10, column=5)
         self.debtToEquityRatioValue.grid(row=11, column=5)
         self.profitMarginValue.grid(row=12, column=5)
-
+        #self.companyDetailsValue.grid(row=22,column=5)
     def analyze(self,event=None):
         self.getCompanyName()
         self.getCompanySector()
@@ -160,6 +166,7 @@ class Startpage(tk.Frame):
         self.currentStockPrice()
         self.getDebtToEquityRatio()
         self.getProfitMargin()
+        #self.getCompanyDetails()
         self.clearUserInputBox()
 
     def getCompanyName(self):
@@ -173,6 +180,12 @@ class Startpage(tk.Frame):
         companySector = anlyze.getCompanySector(tickerFromUser)
         self.companySectorValue["text"] = self.companySectorDefaultValue
         self.companySectorValue["text"] = self.companySectorValue["text"] + str(companySector)
+
+    def getCompanyDetails(self):
+        tickerFromUser = self.getTextInput()
+        companyDetails = anlyze.getCompanyDetails(tickerFromUser)
+        self.companyDetailsLabelText["text"] = ""
+        self.companyDetailsValue["text"] = self.companyDetailsValue["text"] + str(companyDetails)
 
     def getEPS(self):
         tickerFromUser = self.getTextInput()
@@ -239,6 +252,7 @@ class Startpage(tk.Frame):
         self.currentStockPriceLabelText["text"] = self.currentStockPriceDefaultText
         self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioDefaultText
         self.profitMarginLabelText["text"] = self.profitMarginDefaultText
+        self.companyDetailsValue["text"] = self.companyDetailsValue
 
         self.clearUserInputBox()
         # new method
@@ -249,6 +263,7 @@ class Startpage(tk.Frame):
         self.currentStockPriceValue["text"] = self.currentStockPriceDefaultValue
         self.debtToEquityRatioValue["text"] = self.debtToEquityRatioDefaultValue
         self.profitMarginValue["text"] = self.profitMarginDefaultValue
+        self.companyDetailsValue["text"] = self.companyDetailsDefaultValue
 
 
 #   *****   PAGES   *****

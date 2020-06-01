@@ -17,6 +17,13 @@ def getCompanySector(tickerSymbol):
         return companySector
     except TypeError:
             return errorMessage
+def getCompanyDetails(tickerSymbol):
+    try:
+        tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+        companyDetails = companyprofile.getCompanySummaryDetails(tickerObject,tickerSymbol)
+        return companyDetails
+    except TypeError:
+            return errorMessage
 
 def getStockName(tickerSymbol):
     try:
