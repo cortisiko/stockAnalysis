@@ -3,7 +3,7 @@ from Financials import statistics as statisticsTab
 from Financials import summary as summaryPage
 from Financials import price as priceData
 
-from Financials import incomeStatementSheet as income
+from Financials import balanceSheet as balancesheet
 from helpers import Ticker as ticker
 from Financials import companyProfile as companyprofile
 
@@ -69,3 +69,15 @@ def getProfitMargin(tickerSymbol):
     profitMargin = statisticsTab.getProfitMargins(tickerObject,tickerSymbol)
 
     return profitMargin
+
+def getCashBurnNumber(tickerSymbol):
+    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+    balanceSheetDataFrame = balancesheet.getBalanceSheetData(tickerObject, Frequency='a')
+    cashFlowDataFrame = cashFlowPage.getCashFlowData(tickerObject, Frequency='a')
+
+    mostRecentCashFlow = cashFlowPage.getMostRecentCashFlowTotal(cashFlowDataFrame)
+    CashAndCashEquivalents = balancesheet.getCashAndExpenses(balanceSheetDataFrame)
+
+    cashBurn = cashFlowPage.calculateCashBurn(CashAndCashEquivalents,mostRecentCashFlow)
+
+    print(cashBurn)

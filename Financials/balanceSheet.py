@@ -20,10 +20,3 @@ def getCashAndExpenses(balanceSheetData):
     CashAndCashEquivalents = CashAndCashEquivalents / 1e3
 
     return CashAndCashEquivalents
-
-
-def calculateCashBurn(CashAndCashEquivalents,freeCashFlow):
-    cashBurn = CashAndCashEquivalents / freeCashFlow
-    cashBurn = cashBurn * 12
-
-    return cashBurn
