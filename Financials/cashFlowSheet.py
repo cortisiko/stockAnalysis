@@ -11,6 +11,12 @@ def getFreeCashFlow(cashFlowData):
 
      return freeCashFlow
 
+def getOperatingCashFlow(cashFlowData):
+        operatingCashFlow  = cashFlowData['OperatingCashFlow']
+        operatingCashFlow = operatingCashFlow / 1e3
+
+        return operatingCashFlow
+
 def getMostRecentCashFlowTotal(cashFlowData):
     mostRecentCashFlow = cashFlowData['FreeCashFlow'].iloc[-1] ## takes the most recent cashflow
     mostRecentCashFlow = mostRecentCashFlow / 1e3
