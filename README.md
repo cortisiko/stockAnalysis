@@ -5,7 +5,7 @@ This app was done in python using the yahooquery package to fetch stock data. Th
 
 DEMO
 ---------------
-When you search a stock symbol a few [finanical ratios](https://www.investopedia.com/financial-ratios-4689817) 
+When a user enters a stock symbol a few [finanical ratios](https://www.investopedia.com/financial-ratios-4689817) 
 about the stock is displayed: 
 ![StockAnalysisHomePage](http://g.recordit.co/Ms9TtEM4I9.gif)
 
