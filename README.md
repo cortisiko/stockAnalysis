@@ -12,7 +12,7 @@ appears:
 ![StockAnalysisHomePage](http://g.recordit.co/Ms9TtEM4I9.gif)
 
 
-Furthermore, the data from a couple line items on the [finanical statements](https://www.investopedia.com/terms/f/financial-statements.asp) were turned into bar graphs so one can see the changes over time. The line items in particular are: 
+Furthermore, the data from a few line items on the [finanical statements](https://www.investopedia.com/terms/f/financial-statements.asp) were turned into bar graphs so one can see the changes over time. The line items are: 
 
 * Free Cash Flow (From the Cash Flow statement)
 
