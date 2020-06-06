@@ -172,7 +172,7 @@ class Startpage(tk.Frame):
     def getCompanyName(self):
         tickerFromUser = self.getTextInput()
         companyName = anlyze.getStockName(tickerFromUser)
-        burn = anlyze.getCashBurnNumber(tickerFromUser)
+        burn = anlyze.getCashBurnNumber(tickerFromUser) ## can remove whenever. Proof of concept for cash burn
         self.companyNameLabelText["text"] = ""
         self.companyNameLabelText["text"] = self.companyNameLabelText["text"] + str(companyName)
 
@@ -253,7 +253,7 @@ class Startpage(tk.Frame):
         self.currentStockPriceLabelText["text"] = self.currentStockPriceDefaultText
         self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioDefaultText
         self.profitMarginLabelText["text"] = self.profitMarginDefaultText
-        self.companyDetailsValue["text"] = self.companyDetailsValue
+        #self.companyDetailsValue["text"] = self.companyDetailsValue
 
         self.clearUserInputBox()
         # new method
@@ -264,7 +264,7 @@ class Startpage(tk.Frame):
         self.currentStockPriceValue["text"] = self.currentStockPriceDefaultValue
         self.debtToEquityRatioValue["text"] = self.debtToEquityRatioDefaultValue
         self.profitMarginValue["text"] = self.profitMarginDefaultValue
-        self.companyDetailsValue["text"] = self.companyDetailsDefaultValue
+        #self.companyDetailsValue["text"] = self.companyDetailsDefaultValue
 
 
 #   *****   PAGES   *****
