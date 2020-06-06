@@ -3,7 +3,7 @@ The stock analysis app was written in python using the yahooquery package to fet
 The goal of this application is to perform ratio analysis as well as give a visual representation (in the form of bar charts) of a few line items on the financial statements.
 
 
-### This content is not a recommendation or endorsement of any particular investment or investment strategy. 
+### This application is not a recommendation or endorsement of any particular investment or investment strategy. 
 
 DEMO
 ---------------
