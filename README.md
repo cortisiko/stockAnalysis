@@ -7,12 +7,12 @@ The goal of this application is to perform ratio analysis as well as give a visu
 
 DEMO
 ---------------
-When a user enters a stock symbol, a few of the [finanical ratios](https://www.investopedia.com/financial-ratios-4689817) 
+When a user enters a stock symbol, multiple [finanical ratios](https://www.investopedia.com/financial-ratios-4689817) 
 appears: 
 ![StockAnalysisHomePage](http://g.recordit.co/Ms9TtEM4I9.gif)
 
 
-Furthermore, the data from a few line items on the [finanical statements](https://www.investopedia.com/terms/f/financial-statements.asp) were turned into bar graphs. The line items are: 
+Furthermore, the data from a few line items on the [finanical statements](https://www.investopedia.com/terms/f/financial-statements.asp) are plotted onto bar graphs. The line items are: 
 
 * Free Cash Flow (From the Cash Flow statement)
 
