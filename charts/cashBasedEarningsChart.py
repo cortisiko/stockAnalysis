@@ -25,20 +25,21 @@ class PlotGraph:
         companyName = priceData.getCompanyName(tickerObject, tickerSymbol)
         dates = date.getDates(incomeStatementsDataFrame)
 
-        EarningsTitle = 'Earnings'
+        title = 'Cash Based Earnings'
 
 
         ax = self.fig.add_subplot(111)
         yLabelText = "Amount in $"
-        graphTitle = companyName + " " + EarningsTitle
+        graphTitle = companyName + " " + title
         ax.set_title(graphTitle)
         ax.set_xlabel('Period')
         ax.set_ylabel(yLabelText)
 
         ax.get_yaxis().set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 
-        ax.plot(dates, netIncome, '-o', label='Net Income')
         ax.plot(dates, operatingCashFlow, '-o', label='Cash From Operations')
+        ax.plot(dates, netIncome, '-o', label='Net Income')
+
         ax.legend()
 
         if not self.canvas:
@@ -46,13 +47,6 @@ class PlotGraph:
             self.canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
         self.canvas.draw_idle()
 
-    def getFreqency(self,earningsData,Frequency,tickerSymbol):
-        if Frequency=='yearly':
-            yearlyFinaincalEarnings = earningsData[tickerSymbol]['financialsChart'][Frequency]
-            return yearlyFinaincalEarnings
-        else:
-            quarterlyfinaincalEarnings = earningsData[tickerSymbol]['financialsChart'][Frequency]
-            return quarterlyfinaincalEarnings
 
     def clearPlotPage(self):
         self.fig.clear()  # clear your figure
