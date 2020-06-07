@@ -28,11 +28,12 @@ On each of the graphs, you can choose either a quarterly or yearly view.
 
 
 
-To install:
+To run:
 
-* [download python3 or later](https://www.python.org/downloads/)
+* [Install pipenv](https://pypi.org/project/pipenv/)
 
-* install these packages: [requests](https://pypi.org/project/requests/), [yahooquery](https://pypi.org/project/yahooquery/),
-[mathplotlib](https://pypi.org/project/matplotlib/)
+* use pipenv sync or pipenv sync --dev to install the packages in the pipfile.
 
-* Run the code via terminal: python userInterface.py 
+* Finally, run the code via terminal: python userInterface.py 
+
+__In the off chance that tkinter isn’t install:__ `sudo apt-get install python3-tk`
