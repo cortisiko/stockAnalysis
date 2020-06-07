@@ -34,6 +34,6 @@ To run:
 
 * use pipenv sync or pipenv sync --dev to install the packages in the pipfile.
 
-* Finally, run the code via terminal: python userInterface.py 
+* Finally, run the code via terminal: `python userInterface.py` 
 
 __In the off chance that tkinter isn’t install:__ `sudo apt-get install python3-tk`
