@@ -22,7 +22,7 @@ Furthermore, the data from a few line items on the [finanical statements](https:
 
 * There's also a bar graph for a company's Total Revenue. 
 
-On each of the graphs, you can choose either a quarterly or yearly view.
+On each graph, you can choose either a quarterly or yearly view.
 ![Charts](http://g.recordit.co/eu6GjJB1yV.gif)
 
 
