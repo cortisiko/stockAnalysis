@@ -8,7 +8,7 @@ The goal of this application is to perform ratio analysis as well as give a visu
 DEMO
 ---------------
 When a user enters a stock symbol, multiple [finanical ratios](https://www.investopedia.com/financial-ratios-4689817) 
-appears: 
+appear: 
 ![StockAnalysisHomePage](http://g.recordit.co/Ms9TtEM4I9.gif)
 
 
