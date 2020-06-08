@@ -23,7 +23,7 @@ The data plotted into the bar graphs comes from:
 * There's a bar graph for a company's Total Revenue. 
 
 
-There is a trend graph comparing the different between Cash from operations and earnings. Basically performing [cash based earnings quality analysis](https://www.investopedia.com/terms/q/qualityofearnings.asp) of a stock    
+There is a trend graph comparing the difference between Cash from Operations and Net Income. Basically performing [cash based earnings quality analysis](https://www.investopedia.com/terms/q/qualityofearnings.asp) on a stock    
 
 On each graph, you can choose either a quarterly or yearly view.
 ![Charts](http://g.recordit.co/eu6GjJB1yV.gif)
