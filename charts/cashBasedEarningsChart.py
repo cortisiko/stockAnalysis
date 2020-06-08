@@ -1,14 +1,15 @@
 import matplotlib
 matplotlib.use("TkAgg")
-import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
+
 from Financials import price as priceData
-from Financials import earnings as earning
-from helpers import Ticker as ticker
 from Financials import incomeStatementSheet as income
 from Financials import cashFlowSheet as cashFlowPage
+
 from helpers import getDate as date
+from helpers import Ticker as ticker
+
 
 class PlotGraph:
     def __init__(self):
