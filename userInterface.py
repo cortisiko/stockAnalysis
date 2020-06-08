@@ -5,10 +5,12 @@ except:
 import tkinter.font
 from tkinter import *
 from PIL import ImageTk, Image as kkImage
+from pages import cashFlow
 
 from charts import plotCashFlow as pltCashFlow, plotNetIncome as pltIncome, plotEarnings as pltEarnings,plotRevenue as pltRevenue,plotLongTermDebt as pltDebt, cashBasedEarningsChart as cashToEarnings
 from Financials import analyze as anlyze
 from helpers import getMessageBox as messagebox
+
 
 invalidTickerErrorMessage = "Sorry, you need to enter a ticker symbol"
 noDebtErrorMessage = "Sorry Yahoo finance does not show any long term debt for this company"
@@ -35,7 +37,7 @@ class UserInterFace(tk.Tk):
         Charts = tk.Menu(menu, tearoff=0)
         menu.add_cascade(menu=Charts, label="Charts")
 
-        Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(PlotCashFlowChart))
+        Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(cashFlow.cashflow))
         Charts.add_command(label="Cash to Earnings", command=lambda: self.show_frame(plotCashToEarnings))
         Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(plotDebtGraph))
         Charts.add_command(label="Net Income", command=lambda: self.show_frame(PlotIncomeStatementChart))
@@ -45,7 +47,7 @@ class UserInterFace(tk.Tk):
         menu.add_separator()
         tk.Tk.config(self, menu=menu)
 
-        for F in (Startpage, PlotCashFlowChart,plotDebtGraph, PlotIncomeStatementChart,plotRevenueChart,plotCashToEarnings):
+        for F in (Startpage, cashFlow.cashflow,plotDebtGraph, PlotIncomeStatementChart,plotRevenueChart,plotCashToEarnings):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -268,59 +270,6 @@ class Startpage(tk.Frame):
 
 
 #   *****   PAGES   *****
-class PlotCashFlowChart(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-        self['bg'] = '#1B6666'
-        self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
-        self.pageTitle = Label(self, text="Cash Flow Charts", font=self.my_font)
-        self.RadioText = StringVar()
-        self.quarterlyTextString = 'q'
-        self.yearlyTextString = 'a'
-
-        self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
-        #self.textInputBox.focus()
-        self.frequencyText = Label(self, text="Frequency")
-        self.quarterlyRadioButton = Radiobutton(self, text="Quarterly", variable=self.RadioText,
-                                                value=self.quarterlyTextString, command=self.selectedRadioButtonOption)
-        self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,
-                                             command=self.selectedRadioButtonOption)
-        self.clearButton = Button(self, text='Clear', bg='red', command=self.clear)
-        self.pageTitle.pack()
-        self.textInputBox.pack()
-        self.clearButton.pack()
-        self.quarterlyRadioButton.pack(side='left', padx=50)
-        self.yearlyRadioButton.pack(side='right', padx=50)
-
-    def getTextInput(self):
-        result = self.textInputBox.get("1.0", "end")
-        result = result.rstrip()
-        if len(result) > 0:
-            results = result.upper()
-            results = str(results)
-            return results
-        else:
-            self.yearlyRadioButton.deselect()
-            self.quarterlyRadioButton.deselect()
-            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
-
-    def selectedRadioButtonOption(self):
-        userInput = self.getTextInput()
-
-        radioButtonFrequencyOption = self.RadioText.get()
-        if not cashFlow.canvas:
-            cashFlow.plotCashGraph(self, userInput, radioButtonFrequencyOption)
-        else:
-            cashFlow.clearPlotPage()
-            cashFlow.plotCashGraph(self, userInput, radioButtonFrequencyOption)
-
-    def clear(self):
-        self.textInputBox.delete("1.0", "end")
-        cashFlow.clearPlotPage()
-        self.yearlyRadioButton.deselect()
-        self.quarterlyRadioButton.deselect()
-        self.textInputBox.focus()
 
 class PlotIncomeStatementChart(tk.Frame):
     def __init__(self, parent, controller):
@@ -621,7 +570,6 @@ class plotCashToEarnings(tk.Frame):
 
 
 app = UserInterFace()
-cashFlow = pltCashFlow.PlotGraph()
 cashtoEarnings = cashToEarnings.PlotGraph()
 longTermDebt = pltDebt.PlotGraph()
 income = pltIncome.PlotGraph()
