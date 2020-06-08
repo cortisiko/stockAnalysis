@@ -34,7 +34,7 @@ To run:
 
 * [Install pipenv](https://pypi.org/project/pipenv/)
 
-* use pipenv sync or pipenv sync --dev to install the packages in the pipfile.
+* use `pipenv sync` or `pipenv sync --dev` to install the packages in the pipfile.
 
 * Finally, run the code via terminal: `python userInterface.py` 
 
