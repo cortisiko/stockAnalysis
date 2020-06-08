@@ -12,7 +12,7 @@ appear:
 ![StockAnalysisHomePage](http://g.recordit.co/Ms9TtEM4I9.gif)
 
 
-Furthermore, the data from a few line items on the [finanical statements](https://www.investopedia.com/terms/f/financial-statements.asp) are plotted into bar graphs. The line items are: 
+The data plotted into the bar graphs come from: 
 
 * Free Cash Flow (From the Cash Flow statement)
 
@@ -20,7 +20,9 @@ Furthermore, the data from a few line items on the [finanical statements](https:
 
 * Net income     (From the Income statement)
 
-* There's also a bar graph for a company's Total Revenue. 
+* There's a bar graph for a company's Total Revenue. 
+
+* There is a trend graph comparing the different between Cash from operations and earnings. Basically performing [cash based earnings quality analysis](https://www.investopedia.com/terms/q/qualityofearnings.asp) of a stock    
 
 On each graph, you can choose either a quarterly or yearly view.
 ![Charts](http://g.recordit.co/eu6GjJB1yV.gif)
@@ -28,11 +30,12 @@ On each graph, you can choose either a quarterly or yearly view.
 
 
 
-To install:
+To run:
 
-* [download python3 or later](https://www.python.org/downloads/)
+* [Install pipenv](https://pypi.org/project/pipenv/)
 
-* install these packages: [requests](https://pypi.org/project/requests/), [yahooquery](https://pypi.org/project/yahooquery/),
-[mathplotlib](https://pypi.org/project/matplotlib/)
+* use `pipenv sync` or `pipenv sync --dev` to install the packages in the pipfile.
 
-* Run the code via terminal: python userInterface.py 
+* Finally, run the code via terminal: `python userInterface.py` 
+
+__In the off chance that tkinter isn’t install:__ `sudo apt-get install python3-tk`

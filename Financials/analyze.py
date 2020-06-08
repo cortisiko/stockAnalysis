@@ -3,7 +3,7 @@ from Financials import statistics as statisticsTab
 from Financials import summary as summaryPage
 from Financials import price as priceData
 
-from Financials import incomeStatementSheet as income
+from Financials import balanceSheet as balancesheet
 from helpers import Ticker as ticker
 from Financials import companyProfile as companyprofile
 
@@ -15,6 +15,13 @@ def getCompanySector(tickerSymbol):
         tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
         companySector = companyprofile.getCompanySector(tickerObject,tickerSymbol)
         return companySector
+    except TypeError:
+            return errorMessage
+def getCompanyDetails(tickerSymbol):
+    try:
+        tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+        companyDetails = companyprofile.getCompanySummaryDetails(tickerObject,tickerSymbol)
+        return companyDetails
     except TypeError:
             return errorMessage
 
@@ -62,3 +69,18 @@ def getProfitMargin(tickerSymbol):
     profitMargin = statisticsTab.getProfitMargins(tickerObject,tickerSymbol)
 
     return profitMargin
+
+def getCashBurnNumber(tickerSymbol):
+    tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
+    balanceSheetDataFrame = balancesheet.getBalanceSheetData(tickerObject, Frequency='a')
+    cashFlowDataFrame = cashFlowPage.getCashFlowData(tickerObject, Frequency='a')
+
+    mostRecentCashFlow = cashFlowPage.getMostRecentCashFlowTotal(cashFlowDataFrame)
+    CashAndCashEquivalents = balancesheet.getCashAndExpenses(balanceSheetDataFrame)
+
+    cashBurn = cashFlowPage.calculateCashBurn(CashAndCashEquivalents,mostRecentCashFlow)
+    tickerName = getStockName(tickerSymbol)
+    if cashBurn < 0:
+        print(f'{tickerName} is already running out of money. their cash burn is: {cashBurn:,.1f} months')
+    else:
+        print(f'It will take {cashBurn:,.1f} months before {tickerName} runs out of money')
