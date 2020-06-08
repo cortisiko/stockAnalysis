@@ -23,7 +23,12 @@ class PlotGraph:
         operatingCashFlow = cashFlowPage.getOperatingCashFlow(cashFlowDataFrame)
 
         companyName = priceData.getCompanyName(tickerObject, tickerSymbol)
-        dates = date.getDates(incomeStatementsDataFrame)
+        dates = date.getDates(cashFlowDataFrame)
+
+        if operatingCashFlow.iloc[-1] > netIncome.iloc[-1]:
+            print(f'{companyName} has high quality earnings')
+        else:
+            print(f'{companyName} has low quality earnings')
 
         title = 'Cash Based Earnings'
 

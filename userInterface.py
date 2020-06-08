@@ -571,7 +571,7 @@ class plotCashToEarnings(tk.Frame):
         self.quarterlyTextString = 'q'
         self.yearlyTextString = 'a'
 
-        self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
+        self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=8, borderwidth=2)
         self.textInputBox.focus()
         self.frequencyText = Label(self, text="Frequency")
         self.quarterlyRadioButton = Radiobutton(self, text="Quarterly", variable=self.RadioText,
