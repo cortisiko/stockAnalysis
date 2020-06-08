@@ -12,7 +12,7 @@ appear:
 ![StockAnalysisHomePage](http://g.recordit.co/Ms9TtEM4I9.gif)
 
 
-The data plotted into the bar graphs come from: 
+The data plotted into the bar graphs comes from: 
 
 * Free Cash Flow (From the Cash Flow statement)
 
