@@ -26,17 +26,18 @@ class UserInterFace(tk.Tk):
         Charts = tk.Menu(menu, tearoff=0)
         menu.add_cascade(menu=Charts, label="Charts")
 
-        Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(cashFlowPage.cashflow))
-        Charts.add_command(label="Cash to Earnings", command=lambda: self.show_frame(cashToEarningsPage.plotCashToEarnings))
-        Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(debtPage.plotDebtGraph))
-        Charts.add_command(label="Net Income", command=lambda: self.show_frame(netIncomePage.IncomeStatement))
-        Charts.add_command(label="Revenue", command=lambda: self.show_frame(revenuePage.plotRevenueChart))
+        Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(cashFlowPage.CashFlow))
+        Charts.add_command(label="Cash to Earnings", command=lambda: self.show_frame(cashToEarningsPage.CashToEarnings))
+        Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(debtPage.Debt))
+        Charts.add_command(label="Net Income", command=lambda: self.show_frame(netIncomePage.NetIncome))
+        Charts.add_command(label="Revenue", command=lambda: self.show_frame(revenuePage.Revenue))
 
 
         menu.add_separator()
         tk.Tk.config(self, menu=menu)
 
-        for F in (homePage.Startpage, cashFlowPage.cashflow, debtPage.plotDebtGraph, netIncomePage.IncomeStatement, revenuePage.plotRevenueChart, cashToEarningsPage.plotCashToEarnings):
+        for F in (homePage.Startpage, cashFlowPage.CashFlow, debtPage.Debt, netIncomePage.NetIncome, revenuePage.Revenue,
+                  cashToEarningsPage.CashToEarnings):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")

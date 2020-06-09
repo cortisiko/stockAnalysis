@@ -9,7 +9,7 @@ from charts import plotLongTermDebt as pltDebt
 from helpers import getMessageBox as messagebox
 from pages import homePage
 
-class plotDebtGraph(tk.Frame):
+class Debt(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self['bg'] = '#1B6666'

@@ -6,11 +6,11 @@ import tkinter.font
 from tkinter import *
 
 from pages import homePage
-from charts import plotEarnings as pltEarnings,plotRevenue as pltRevenue
+from charts import plotRevenue as pltRevenue
 from helpers import getMessageBox as messagebox
 
 
-class plotRevenueChart(tk.Frame):
+class Revenue(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self['bg'] = '#1B6666'

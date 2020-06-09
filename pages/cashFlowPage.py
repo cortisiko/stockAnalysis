@@ -8,7 +8,7 @@ from tkinter import *
 from charts import plotCashFlow as pltCashFlow
 from helpers import getMessageBox as messagebox
 
-class cashflow(tk.Frame):
+class CashFlow(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)

@@ -9,7 +9,7 @@ from pages import homePage
 from charts import plotNetIncome as pltIncome
 from helpers import getMessageBox as messagebox
 
-class IncomeStatement(tk.Frame):
+class NetIncome(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self['bg'] = '#1B6666'

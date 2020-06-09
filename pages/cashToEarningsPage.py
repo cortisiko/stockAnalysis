@@ -9,7 +9,7 @@ from pages import homePage
 from helpers import getMessageBox as messagebox
 from charts import cashBasedEarningsChart as cashToEarnings
 
-class plotCashToEarnings(tk.Frame):
+class CashToEarnings(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self['bg'] = '#1B6666'
