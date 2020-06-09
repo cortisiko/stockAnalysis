@@ -4,7 +4,7 @@ except:
     import tkinter as tk
 import tkinter.font
 from tkinter import *
-from pages import cashFlowPage,homePage,incomeStatementPage
+from pages import cashFlowPage,homePage,incomeStatementPage,cashToEarningsPage
 
 from charts import plotCashFlow as pltCashFlow, plotNetIncome as pltIncome, plotEarnings as pltEarnings,plotRevenue as pltRevenue,plotLongTermDebt as pltDebt, cashBasedEarningsChart as cashToEarnings
 from helpers import getMessageBox as messagebox
@@ -36,7 +36,7 @@ class UserInterFace(tk.Tk):
         menu.add_cascade(menu=Charts, label="Charts")
 
         Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(cashFlowPage.cashflow))
-        Charts.add_command(label="Cash to Earnings", command=lambda: self.show_frame(plotCashToEarnings))
+        Charts.add_command(label="Cash to Earnings", command=lambda: self.show_frame(cashToEarningsPage.plotCashToEarnings))
         Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(plotDebtGraph))
         Charts.add_command(label="Net Income", command=lambda: self.show_frame(incomeStatementPage.IncomeStatement))
         Charts.add_command(label="Revenue", command=lambda: self.show_frame(plotRevenueChart))
@@ -45,7 +45,7 @@ class UserInterFace(tk.Tk):
         menu.add_separator()
         tk.Tk.config(self, menu=menu)
 
-        for F in (homePage.Startpage, cashFlowPage.cashflow, plotDebtGraph, incomeStatementPage.IncomeStatement, plotRevenueChart, plotCashToEarnings):
+        for F in (homePage.Startpage, cashFlowPage.cashflow, plotDebtGraph, incomeStatementPage.IncomeStatement, plotRevenueChart, cashToEarningsPage.plotCashToEarnings):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -243,68 +243,10 @@ class plotDebtGraph(tk.Frame):
         self.quarterlyRadioButton.deselect()
 
 
-class plotCashToEarnings(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self['bg'] = '#1B6666'
-        self.controller = controller
-        self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
-        self.pageTitle = Label(self, text="Cash to Earnings Charts", font=self.my_font)
-        self.RadioText = StringVar()
-        self.quarterlyTextString = 'q'
-        self.yearlyTextString = 'a'
-
-        self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=8, borderwidth=2)
-        self.textInputBox.focus()
-        self.frequencyText = Label(self, text="Frequency")
-        self.quarterlyRadioButton = Radiobutton(self, text="Quarterly", variable=self.RadioText,
-                                                value=self.quarterlyTextString, command=self.selectedRadioButtonOption)
-        self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,
-                                             command=self.selectedRadioButtonOption)
-        self.clearButton = Button(self, text='Clear', command=self.clear, bg='red')
-
-        self.pageTitle.pack()
-        self.textInputBox.pack()
-        self.quarterlyRadioButton.pack(side='left', padx=50)
-        self.yearlyRadioButton.pack(side='right', padx=50)
-        self.clearButton.pack()
-
-        button1 = Button(self, text="Back to Home",
-                         command=lambda: controller.show_frame(homePage.Startpage))
-
-    def getTextInput(self):
-        result = self.textInputBox.get("1.0", "end")
-        result = result.rstrip()
-        if len(result) > 0:
-            results = result.upper()
-            results = str(results)
-            return results
-        else:
-            self.yearlyRadioButton.deselect()
-            self.quarterlyRadioButton.deselect()
-            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
-
-    def selectedRadioButtonOption(self):
-        userInput = self.getTextInput()
-        radioButtonFrequencyOption = self.RadioText.get()
-        if not cashtoEarnings.canvas:
-            cashtoEarnings.plotCashToEarnings(self, userInput, radioButtonFrequencyOption)
-
-        else:
-            cashtoEarnings.clearPlotPage()
-            cashtoEarnings.plotCashToEarnings(self, userInput, radioButtonFrequencyOption)
-
-    def clear(self):
-        self.textInputBox.delete("1.0", "end")
-        cashtoEarnings.clearPlotPage()
-        self.yearlyRadioButton.deselect()
-        self.quarterlyRadioButton.deselect()
-
 
 
 
 app = UserInterFace()
-cashtoEarnings = cashToEarnings.PlotGraph()
 longTermDebt = pltDebt.PlotGraph()
 income = pltIncome.PlotGraph()
 earnings = pltEarnings.PlotGraph()
