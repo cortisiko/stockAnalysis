@@ -9,8 +9,6 @@ from pages import homePage
 from charts import plotNetIncome as pltIncome
 from helpers import getMessageBox as messagebox
 
-invalidTickerErrorMessage = "Sorry, you need to enter a ticker symbol"
-
 class IncomeStatement(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -50,7 +48,7 @@ class IncomeStatement(tk.Frame):
         else:
             self.yearlyRadioButton.deselect()
             self.quarterlyRadioButton.deselect()
-            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
+            messagebox.showErrorMessage(self)
 
     def selectedRadioButtonOption(self):
         userInput = self.getTextInput()

@@ -9,8 +9,6 @@ from PIL import ImageTk, Image as kkImage
 from Financials import analyze as anlyze
 from helpers import getMessageBox as messagebox
 
-invalidTickerErrorMessage = "Sorry, you need to enter a ticker symbol"
-
 class Startpage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -191,7 +189,7 @@ class Startpage(tk.Frame):
             return results
 
         else:
-            messagebox.showErrorMessage(self,invalidTickerErrorMessage)
+            messagebox.showErrorMessage(self)
 
     def clearUserInputBox(self):
         self.textInputBox.delete(0, END)
