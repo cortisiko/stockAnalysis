@@ -71,14 +71,20 @@ def getProfitMargin(tickerSymbol):
     return profitMargin
 
 def getCashBurnNumber(tickerSymbol):
+    global mostRecentCashFlow
     tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
     balanceSheetDataFrame = balancesheet.getBalanceSheetData(tickerObject, Frequency='a')
     cashFlowDataFrame = cashFlowPage.getCashFlowData(tickerObject, Frequency='a')
 
-    mostRecentCashFlow = cashFlowPage.getMostRecentCashFlowTotal(cashFlowDataFrame)
     CashAndCashEquivalents = balancesheet.getCashAndExpenses(balanceSheetDataFrame)
 
-    cashBurn = cashFlowPage.calculateCashBurn(CashAndCashEquivalents,mostRecentCashFlow)
+    ## because balance sheet does not have a TTM.## if the size of the cash flow data frame > balance sheet select
+    ## the most recent year(not TTM)
+    if cashFlowDataFrame.shape[0] > balanceSheetDataFrame.shape[0]:
+        mostRecentCashFlow = cashFlowPage.getMostRecentCashFlowTotal(cashFlowDataFrame,-2)
+
+    cashBurn = cashFlowPage.calculateCashBurn(CashAndCashEquivalents, mostRecentCashFlow)
+
     tickerName = getStockName(tickerSymbol)
     if cashBurn < 0:
         print(f'{tickerName} is already running out of money. their cash burn is: {cashBurn:,.1f} months')

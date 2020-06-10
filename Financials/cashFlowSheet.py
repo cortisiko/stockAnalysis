@@ -17,8 +17,8 @@ def getOperatingCashFlow(cashFlowData):
 
         return operatingCashFlow
 
-def getMostRecentCashFlowTotal(cashFlowData):
-    mostRecentCashFlow = cashFlowData['FreeCashFlow'].iloc[-1] ## takes the most recent cashflow
+def getMostRecentCashFlowTotal(cashFlowData,position):
+    mostRecentCashFlow = cashFlowData['FreeCashFlow'].iloc[position] ## takes the most recent cashflow
     mostRecentCashFlow = mostRecentCashFlow / 1e3
 
     return mostRecentCashFlow
