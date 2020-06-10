@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dc8b97f7a18c41de2569dc5ef93591cc7900fda24e21e8910cb84aff5fcadad0"
+            "sha256": "92b2455eff408b6f238c1d2e40a3a059fd1649040283d978769983e8aa1dd4b6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -249,6 +249,13 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.15.0"
+        },
+        "ttkthemes": {
+            "hashes": [
+                "sha256:178dec94b4e3342b0a6f4b2adfaf40de8016ba553b6fac0845cb55f4ad443a69"
+            ],
+            "index": "pypi",
+            "version": "==3.0.0"
         },
         "urllib3": {
             "hashes": [
