@@ -7,7 +7,7 @@ from tkinter import *
 
 from pages import homePage
 from charts import plotRevenue as pltRevenue
-from helpers import getMessageBox as messagebox
+from helpers import messagebox as messagebox
 
 
 class Revenue(tk.Frame):

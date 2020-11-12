@@ -5,10 +5,10 @@ from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
 
 from Financials import price as priceData
-from Financials import incomeStatementSheet as income
+from Financials import incomestatementsheet as income
 
-from helpers import ticker as ticker
-from helpers import getDate as date
+from helpers import tickers as ticker
+from helpers import datecleanup as date
 
 class PlotGraph:
     def __init__(self):

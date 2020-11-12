@@ -6,7 +6,7 @@ import tkinter.font
 from tkinter import *
 
 from charts import plotCashFlow as pltCashFlow
-from helpers import getMessageBox as messagebox
+from helpers import messagebox as messagebox
 
 class CashFlow(tk.Frame):
 

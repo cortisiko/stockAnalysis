@@ -7,7 +7,7 @@ from tkinter import *
 
 from pages import homePage
 from charts import plotNetIncome as pltIncome
-from helpers import getMessageBox as messagebox
+from helpers import messagebox as messagebox
 
 class NetIncome(tk.Frame):
     def __init__(self, parent, controller):

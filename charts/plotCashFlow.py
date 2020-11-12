@@ -7,20 +7,20 @@ from matplotlib.figure import Figure
 from Financials import cashflowsheet as cashFlowPage
 from Financials import price as priceData
 
-from helpers import ticker as ticker
-from helpers import getDate as date
+from helpers import tickers as ticker
+from helpers import datecleanup as date
 
 class PlotGraph:
     def __init__(self):
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)
 
-    def plotCashGraph(self, container,tickerSymbol,Frequency):
-        tickerObject = ticker.getTicker(tickerSymbol)  ## Gets the ticker object so you can access the various objects
-        cashFlowDataFrame = cashFlowPage.getCashFlowData(tickerObject, Frequency)
-        freeCashFlow = cashFlowPage.getFreeCashFlow(cashFlowDataFrame)
-        companyName = priceData.getCompanyName(tickerObject, tickerSymbol)
-        dates = date.getDates(cashFlowDataFrame)
+    def plotCashGraph(self, container,ticker_symbol,frequency):
+        ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+        cashFlowDataFrame = cashFlowPage.get_cash_flow_data(ticker_object, frequency)
+        freeCashFlow = cashFlowPage.get_free_cash_flow(cashFlowDataFrame)
+        companyName = priceData.get_company_name(ticker_object, ticker_symbol)
+        dates = date.get_dates(cashFlowDataFrame)
         cashFlowGraphTitle = 'Free Cash Flow'
 
         ax = self.fig.add_subplot(111)

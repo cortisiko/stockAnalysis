@@ -6,7 +6,7 @@ import tkinter.font
 from tkinter import *
 
 from pages import homePage
-from helpers import getMessageBox as messagebox
+from helpers import messagebox as messagebox
 from charts import cashBasedEarningsChart as cashToEarnings
 
 class CashToEarnings(tk.Frame):

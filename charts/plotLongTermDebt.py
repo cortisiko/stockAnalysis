@@ -6,8 +6,8 @@ from matplotlib.figure import Figure
 from Financials import balancesheet as balancesheet
 from Financials import price as priceData
 
-from helpers import ticker as ticker
-from helpers import getDate as date
+from helpers import tickers as ticker
+from helpers import datecleanup as date
 
 class PlotGraph:
     def __init__(self):

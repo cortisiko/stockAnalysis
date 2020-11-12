@@ -6,7 +6,7 @@ import tkinter.font
 from tkinter import *
 
 from charts import plotLongTermDebt as pltDebt
-from helpers import getMessageBox as messagebox
+from helpers import messagebox as messagebox
 from pages import homePage
 
 class Debt(tk.Frame):

@@ -4,7 +4,7 @@ from Financials import summary as summary_page
 from Financials import price as price_data
 
 from Financials import balancesheet as balance_sheet
-from helpers import ticker as ticker
+from helpers import tickers as ticker
 from Financials import companyprofile as company_profile
 
 error_message = "Invalid Stock Symbol"
