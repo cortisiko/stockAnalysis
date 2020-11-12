@@ -87,6 +87,6 @@ def getCashBurnNumber(tickerSymbol):
 
     tickerName = getStockName(tickerSymbol)
     if cashBurn < 0:
-        print(f'{tickerName} is already running out of money. their cash burn is: {cashBurn:,.1f} months')
+        print(f'{tickerName} is already running out of money. Their cash burn is:{cashBurn:,.1f} months')
     else:
         print(f'It will take {cashBurn:,.1f} months before {tickerName} runs out of money')
