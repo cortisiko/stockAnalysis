@@ -2,7 +2,7 @@ def getCompanyProfile(tickerObject):
     companyProfile = tickerObject.summary_profile
     return companyProfile
 
-def getCompanySector(tickerObject,stockTicker):
+def get_company_sector(tickerObject,stockTicker):
     companyProfileObject = getCompanyProfile(tickerObject)
     companySector = companyProfileObject[stockTicker]['sector']
 

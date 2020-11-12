@@ -128,7 +128,7 @@ class Startpage(tk.Frame):
 
     def getCompanySector(self):
         tickerFromUser = self.getTextInput()
-        companySector = anlyze.getCompanySector(tickerFromUser)
+        companySector = anlyze.get_company_sector(tickerFromUser)
         self.companySectorValue["text"] = self.companySectorDefaultValue
         self.companySectorValue["text"] = self.companySectorValue["text"] + str(companySector)
 
