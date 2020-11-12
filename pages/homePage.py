@@ -134,7 +134,7 @@ class Startpage(tk.Frame):
 
     def getCompanyDetails(self):
         tickerFromUser = self.getTextInput()
-        companyDetails = anlyze.getCompanyDetails(tickerFromUser)
+        companyDetails = anlyze.get_company_details(tickerFromUser)
         self.companyDetailsLabelText["text"] = ""
         self.companyDetailsValue["text"] = self.companyDetailsValue["text"] + str(companyDetails)
 

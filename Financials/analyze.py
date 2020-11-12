@@ -12,17 +12,17 @@ errorMessage = "Invalid Stock Symbol"
 
 def get_company_sector(ticker_symbol):
     try:
-        ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+        ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
         companySector = companyprofile.get_company_sector(ticker_object, ticker_symbol)
         return companySector
     except TypeError:
         return errorMessage
 
 
-def getCompanyDetails(ticker_symbol):
+def get_company_details(ticker_symbol):
     try:
-        ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-        companyDetails = companyprofile.getCompanySummaryDetails(ticker_object, ticker_symbol)
+        ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+        companyDetails = companyprofile.get_company_summary_details(ticker_object, ticker_symbol)
         return companyDetails
     except TypeError:
         return errorMessage
@@ -30,7 +30,7 @@ def getCompanyDetails(ticker_symbol):
 
 def getStockName(ticker_symbol):
     try:
-        ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+        ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
         stockName = priceData.getCompanyName(ticker_object, ticker_symbol)
         return stockName
     except TypeError:
@@ -40,41 +40,41 @@ def getStockName(ticker_symbol):
 
 
 def getCurrentStockPrice(ticker_symbol):
-    ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+    ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     currentStockPrice = priceData.getCurrentStockPrice(ticker_object, ticker_symbol)
 
     return currentStockPrice
 
 
 def getEPS(ticker_symbol):
-    ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+    ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     eps = summaryPage.getEarningsPerShare(ticker_object, ticker_symbol)
     return eps
 
 
 def getPERatio(ticker_symbol):
-    ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+    ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     peRatio = summaryPage.getPERatio(ticker_object, ticker_symbol)
 
     return peRatio
 
 
 def getDebtToEquity(ticker_symbol):
-    ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+    ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     debtToEquityRatio = statisticsTab.getDebtToEquity(ticker_object, ticker_symbol)
 
     return debtToEquityRatio
 
 
 def getReturnOnEquity(ticker_symbol):
-    ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+    ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     returnOnEquity = statisticsTab.getReturnOnEquity(ticker_object, ticker_symbol)
 
     return returnOnEquity
 
 
 def getProfitMargin(ticker_symbol):
-    ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+    ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     profitMargin = statisticsTab.getProfitMargins(ticker_object, ticker_symbol)
 
     return profitMargin
@@ -82,7 +82,7 @@ def getProfitMargin(ticker_symbol):
 
 def getCashBurnNumber(ticker_symbol):
     global mostRecentCashFlow
-    ticker_object = ticker.getTicker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
+    ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     balanceSheetDataFrame = balancesheet.getBalanceSheetData(ticker_object, Frequency='a')
     cashFlowDataFrame = cashFlowPage.getCashFlowData(ticker_object, Frequency='a')
 
