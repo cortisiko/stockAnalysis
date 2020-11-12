@@ -39,48 +39,48 @@ def get_stock_name(ticker_symbol):
     ## Fundamentals ###
 
 
-def getCurrentStockPrice(ticker_symbol):
+def get_current_stock_price(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     current_stock_price = priceData.getCurrentStockPrice(ticker_object, ticker_symbol)
 
     return current_stock_price
 
 
-def getEPS(ticker_symbol):
+def get_eps(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     eps = summaryPage.getEarningsPerShare(ticker_object, ticker_symbol)
     return eps
 
 
-def getPERatio(ticker_symbol):
+def get_pe_ratio(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-    pe_ratio = summaryPage.getPERatio(ticker_object, ticker_symbol)
+    pe_ratio = summaryPage.get_pe_ratio(ticker_object, ticker_symbol)
 
     return pe_ratio
 
 
-def getDebtToEquity(ticker_symbol):
+def get_debt_to_equity(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     debt_to_equity_ratio = statisticsTab.getDebtToEquity(ticker_object, ticker_symbol)
 
     return debt_to_equity_ratio
 
 
-def getReturnOnEquity(ticker_symbol):
+def get_return_on_equity(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     return_on_equity = statisticsTab.getReturnOnEquity(ticker_object, ticker_symbol)
 
     return return_on_equity
 
 
-def getProfitMargin(ticker_symbol):
+def get_profit_margin(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     profit_margin = statisticsTab.getProfitMargins(ticker_object, ticker_symbol)
 
     return profit_margin
 
 
-def getCashBurnNumber(ticker_symbol):
+def get_cash_burn_number(ticker_symbol):
     global most_recent_cash_flow
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
     balance_sheet_data_frame = balancesheet.getBalanceSheetData(ticker_object, Frequency='a')

@@ -1,32 +1,32 @@
 ## This is the summary tab
 
-def getKeyStatsData(tickerObject):
-    keyStats = tickerObject.key_stats
+def getKeyStatsData(ticker_object):
+    keyStats = ticker_object.key_stats
     return keyStats
 
-def getSummaryDetailsData(tickerObject):
-    summaryData = tickerObject.summary_detail
+def summary_details_data(ticker_object):
+    summaryData = ticker_object.summary_detail
     return summaryData
 
-def getEarningsPerShare(tickerObject,tickerSymbol):
-    keyStats = getKeyStatsData(tickerObject)
+def getEarningsPerShare (ticker_object, ticker_symbol):
+    keyStats = getKeyStatsData(ticker_object)
 
-    trailingEarningPerShare = keyStats[tickerSymbol].get('trailingEps', None)
+    trailingEarningPerShare = keyStats[ticker_symbol].get('trailingEps', None)
 
     if trailingEarningPerShare is not None:
         trailingEarningPerShare = float(round(trailingEarningPerShare, 2))
         return trailingEarningPerShare
     else:
-        return print("There is no EPS Ratio for", tickerSymbol)
+        return print("There is no EPS Ratio for", ticker_symbol)
 
 
-def getPERatio(tickerObject,tickerSymbol):
-    summaryData = getSummaryDetailsData(tickerObject)
+def get_pe_ratio (ticker_object, ticker_symbol):
+    summary_data = summary_details_data(ticker_object)
 
-    peRatio = summaryData[tickerSymbol].get('trailingPE', None)
+    pe_ratio = summary_data[ticker_symbol].get('trailingPE', None)
 
-    if peRatio is not None:
-        peRatio = float(round(peRatio, 2))
-        return peRatio
+    if pe_ratio is not None:
+        pe_ratio = float(round(pe_ratio, 2))
+        return pe_ratio
     else:
-        return print("There is no PE Ratio for", tickerSymbol)
+        return print("There is no PE Ratio for", ticker_symbol)

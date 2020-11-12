@@ -121,8 +121,8 @@ class Startpage(tk.Frame):
 
     def getCompanyName(self):
         tickerFromUser = self.getTextInput()
-        companyName = anlyze.getStockName(tickerFromUser)
-        burn = anlyze.getCashBurnNumber(tickerFromUser) ## can remove whenever. Proof of concept for cash burn
+        companyName = anlyze.get_stock_name(tickerFromUser)
+        burn = anlyze.get_cash_burn_number(tickerFromUser) ## can remove whenever. Proof of concept for cash burn
         self.companyNameLabelText["text"] = ""
         self.companyNameLabelText["text"] = self.companyNameLabelText["text"] + str(companyName)
 
@@ -140,25 +140,25 @@ class Startpage(tk.Frame):
 
     def getEPS(self):
         tickerFromUser = self.getTextInput()
-        eps = anlyze.getEPS(tickerFromUser)
+        eps = anlyze.get_eps(tickerFromUser)
         self.earningsPerShareValue["text"] = self.earningsPerShareDefaultValue
         self.earningsPerShareValue["text"] = self.earningsPerShareValue["text"]+ '$' + str(eps)
 
     def getPERatio(self):
         tickerFromUser = self.getTextInput()
-        peRatio = anlyze.getPERatio(tickerFromUser)
+        peRatio = anlyze.get_pe_ratio(tickerFromUser)
         self.peRatioValue["text"] = self.peRatioLabelDefaultValue
         self.peRatioValue["text"] = self.peRatioValue["text"] + str(peRatio)
 
     def getReturnOnEquity(self):
         tickerFromUser = self.getTextInput()
-        returnOnEquity = anlyze.getReturnOnEquity(tickerFromUser)
+        returnOnEquity = anlyze.get_return_on_equity(tickerFromUser)
         self.returnOnEquityValue["text"] = self.returnOnEquityDefaultValue
         self.returnOnEquityValue["text"] = self.returnOnEquityValue["text"] + str(returnOnEquity)+ '%'
 
     def currentStockPrice(self):
         tickerFromUser = self.getTextInput()
-        stockPrice = anlyze.getCurrentStockPrice(tickerFromUser)
+        stockPrice = anlyze.get_current_stock_price(tickerFromUser)
         # self.currentStockPriceLabelText["text"] = self.currentStockPriceLabelText["text"] +'$'+ str(stockPrice)
         self.currentStockPriceValue["text"] = self.currentStockPriceDefaultValue
         self.currentStockPriceValue["text"] = self.currentStockPriceValue["text"] + '$' + str(
@@ -166,7 +166,7 @@ class Startpage(tk.Frame):
 
     def getDebtToEquityRatio(self):
         tickerFromUser = self.getTextInput()
-        debtToEquityRatio = anlyze.getDebtToEquity(tickerFromUser)
+        debtToEquityRatio = anlyze.get_debt_to_equity(tickerFromUser)
         # self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioLabelText["text"] + str(debtToEquityRatio)
         self.debtToEquityRatioValue["text"] = self.debtToEquityRatioDefaultValue
         self.debtToEquityRatioValue["text"] = self.debtToEquityRatioValue["text"] + str(
@@ -174,7 +174,7 @@ class Startpage(tk.Frame):
 
     def getProfitMargin(self):
         tickerFromUser = self.getTextInput()
-        profitMargin = anlyze.getProfitMargin(tickerFromUser)
+        profitMargin = anlyze.get_profit_margin(tickerFromUser)
         # self.profitMarginLabelText["text"] = self.profitMarginLabelText["text"] + str(profitMargin) +'%'
         self.profitMarginValue["text"] = self.profitMarginDefaultValue
         self.profitMarginValue["text"] = self.profitMarginValue["text"] + str(profitMargin) + '%'
