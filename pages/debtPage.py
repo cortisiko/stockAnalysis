@@ -5,7 +5,7 @@ except:
 import tkinter.font
 from tkinter import *
 
-from charts import plotLongTermDebt as pltDebt
+from charts import plotlongtermdebt as pltDebt
 from helpers import messagebox as messagebox
 from pages import homePage
 

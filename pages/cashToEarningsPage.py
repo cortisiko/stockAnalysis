@@ -7,7 +7,7 @@ from tkinter import *
 
 from pages import homePage
 from helpers import messagebox as messagebox
-from charts import cashBasedEarningsChart as cashToEarnings
+from charts import plotcashbasedearnings as cashToEarnings
 
 class CashToEarnings(tk.Frame):
     def __init__(self, parent, controller):

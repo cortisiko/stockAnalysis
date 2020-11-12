@@ -5,7 +5,7 @@ except:
 import tkinter.font
 from tkinter import *
 
-from charts import plotCashFlow as pltCashFlow
+from charts import plotcashflow as pltCashFlow
 from helpers import messagebox as messagebox
 
 class CashFlow(tk.Frame):

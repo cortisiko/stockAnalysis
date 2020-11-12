@@ -6,8 +6,9 @@ import tkinter.font
 from tkinter import *
 from pages import homePage
 
-from charts import plotEarnings as pltEarnings
+from charts import plotearnings as pltEarnings
 from helpers import messagebox as messagebox
+
 
 class plotEarningsChart(tk.Frame):
     def __init__(self, parent, controller):
@@ -54,10 +55,10 @@ class plotEarningsChart(tk.Frame):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
         if not earnings.canvas:
-            earnings.plotEarnings(self, userInput, radioButtonFrequencyOption)
+            earnings.plot_earnings(self, userInput, radioButtonFrequencyOption)
         else:
-            earnings.clearPlotPage()
-            earnings.plotEarnings(self, userInput, radioButtonFrequencyOption)
+            earnings.clear_plot()
+            earnings.plot_earnings(self, userInput, radioButtonFrequencyOption)
 
     def destroyGraph(self):
         earnings.clearPlotPage()
@@ -67,5 +68,6 @@ class plotEarningsChart(tk.Frame):
         earnings.clearPlotPage()
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
+
 
 earnings = pltEarnings.PlotGraph()
