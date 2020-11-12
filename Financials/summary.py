@@ -1,26 +1,28 @@
 ## This is the summary tab
 
-def getKeyStatsData(ticker_object):
-    keyStats = ticker_object.key_stats
-    return keyStats
+def key_stats_data(ticker_object):
+    key_stats = ticker_object.key_stats
+    return key_stats
+
 
 def summary_details_data(ticker_object):
-    summaryData = ticker_object.summary_detail
-    return summaryData
+    summary_data = ticker_object.summary_detail
+    return summary_data
 
-def getEarningsPerShare (ticker_object, ticker_symbol):
-    keyStats = getKeyStatsData(ticker_object)
 
-    trailingEarningPerShare = keyStats[ticker_symbol].get('trailingEps', None)
+def earnings_per_share(ticker_object, ticker_symbol):
+    key_stats = key_stats_data(ticker_object)
 
-    if trailingEarningPerShare is not None:
-        trailingEarningPerShare = float(round(trailingEarningPerShare, 2))
-        return trailingEarningPerShare
+    trailing_earning_per_share = key_stats[ticker_symbol].get('trailingEps', None)
+
+    if trailing_earning_per_share is not None:
+        trailing_earning_per_share = float(round(trailing_earning_per_share, 2))
+        return trailing_earning_per_share
     else:
         return print("There is no EPS Ratio for", ticker_symbol)
 
 
-def get_pe_ratio (ticker_object, ticker_symbol):
+def get_pe_ratio(ticker_object, ticker_symbol):
     summary_data = summary_details_data(ticker_object)
 
     pe_ratio = summary_data[ticker_symbol].get('trailingPE', None)

@@ -2,47 +2,47 @@
 
 import pandas as pd
 
-def getStatistics(tickerObject):
-    allFinancialData = tickerObject.financial_data
-    return allFinancialData
+def get_statistics(ticker_object):
+    all_financial_data = ticker_object.financial_data
+    return all_financial_data
 
-def getCurrentStockPrice(tickerObject,tickerSymbol):
-    summaryData = getStatistics(tickerObject)
-    currentStockPrice = summaryData[tickerSymbol]['currentPrice']
-    currentStockPrice = float(round(currentStockPrice, 2))
+def getCurrentStockPrice(ticker_object,ticker_symbol):
+    summaryData = get_statistics(ticker_object)
+    current_stock_price = summaryData[ticker_symbol]['currentPrice']
+    current_stock_price = float(round(current_stock_price, 2))
 
-    return currentStockPrice
+    return current_stock_price
 
 
-def getDebtToEquity(tickerObject,tickerSymbol):
-    financialData = getStatistics(tickerObject)
-    debtToEquity = financialData[tickerSymbol].get('debtToEquity', None)
+def getDebtToEquity(ticker_object,ticker_symbol):
+    financial_data = get_statistics(ticker_object)
+    debt_to_equity = financial_data[ticker_symbol].get('debtToEquity', None)
 
-    if debtToEquity is not None:
-        debtToEquity = debtToEquity / 100
-        debtToEquity = float(round(debtToEquity, 2))
-        return   debtToEquity
+    if debt_to_equity is not None:
+        debt_to_equity = debt_to_equity / 100
+        debt_to_equity = float(round(debt_to_equity, 2))
+        return   debt_to_equity
     else:
-        return   print("There is no Debt to Equity Ratio for",tickerSymbol)
+        return   print("There is no Debt to Equity Ratio for",ticker_symbol)
 
 
-def getReturnOnEquity(tickerObject,tickerSymbol):
-    financialData = getStatistics(tickerObject)
-    returnOnEquity = financialData[tickerSymbol].get('returnOnEquity', None)
+def getReturnOnEquity(ticker_object,ticker_symbol):
+    financial_data = get_statistics(ticker_object)
+    return_on_equity = financial_data[ticker_symbol].get('returnOnEquity', None)
 
-    if returnOnEquity is not None:
-        returnOnEquity = float(round(returnOnEquity*100, 2))
-        return returnOnEquity
+    if return_on_equity is not None:
+        return_on_equity = float(round(return_on_equity*100, 2))
+        return return_on_equity
     else:
-        return print("There is no return on equity ratio for",tickerSymbol)
+        return print("There is no return on equity ratio for",ticker_symbol)
 
 
-def getProfitMargins(tickerObject,tickerSymbol):
-    financialData = getStatistics(tickerObject)
-    profitMargins = financialData[tickerSymbol].get('profitMargins', None)
+def getProfitMargins(ticker_object,ticker_symbol):
+    financialData = get_statistics(ticker_object)
+    profit_margins = financialData[ticker_symbol].get('profitMargins', None)
 
-    if profitMargins is not None:
-        profitMargins = float(round(profitMargins * 100, 2))
-        return profitMargins
+    if profit_margins is not None:
+        profit_margins = float(round(profit_margins * 100, 2))
+        return profit_margins
     else:
-        return print("There is no net profit margin for",tickerSymbol)
+        return print("There is no net profit margin for",ticker_symbol)
