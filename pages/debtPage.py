@@ -56,11 +56,11 @@ class Debt(tk.Frame):
         #if KeyError:
          #   messagebox.showErrorMessage(self,noDebtErrorMessage)
         if not longTermDebt.canvas:
-            longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
+            longTermDebt.plot_debt_graph(self, userInput, radioButtonFrequencyOption)
 
         else:
             longTermDebt.clearPlotPage()
-            longTermDebt.plotDebtGraph(self, userInput, radioButtonFrequencyOption)
+            longTermDebt.plot_debt_graph(self, userInput, radioButtonFrequencyOption)
 
     def destroyGraph(self):
         longTermDebt.clearPlotPage()
@@ -73,4 +73,4 @@ class Debt(tk.Frame):
 
 
 
-longTermDebt = pltDebt.PlotGraph()
+longTermDebt = pltDebt.DebtGraph()

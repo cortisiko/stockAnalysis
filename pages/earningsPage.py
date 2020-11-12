@@ -70,4 +70,4 @@ class plotEarningsChart(tk.Frame):
         self.quarterlyRadioButton.deselect()
 
 
-earnings = pltEarnings.PlotGraph()
+earnings = pltEarnings.EarningsGraph()

@@ -64,4 +64,4 @@ class CashFlow(tk.Frame):
         self.textInputBox.focus()
 
 
-cashFlow = pltCashFlow.PlotGraph()
+cashFlow = pltCashFlow.CashFlowGraph()

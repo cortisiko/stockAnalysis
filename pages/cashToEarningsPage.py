@@ -66,4 +66,4 @@ class CashToEarnings(tk.Frame):
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
 
-cashtoEarnings = cashToEarnings.PlotGraph()
+cashtoEarnings = cashToEarnings.CashBasedEarningGraph()

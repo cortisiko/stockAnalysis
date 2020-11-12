@@ -10,18 +10,18 @@ from matplotlib.lines import Line2D
 matplotlib.use("TkAgg")
 
 
-class PlotGraph:
+class EarningsGraph:
     def __init__(self):
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)
 
-    def plot_earnings(self, container, ticker_symbol, Frequency):
+    def plot_earnings(self, container, ticker_symbol, frequency):
         ticker_object = ticker.get_ticker(ticker_symbol)  # Gets the ticker object so you can access the various objects
         earnings_data = earning.get_earnings_data(ticker_object)
         company_name = price_data.get_company_name(ticker_object, ticker_symbol)
         earnings_title = 'Earnings'
 
-        data = self.get_freqency(earnings_data, Frequency, ticker_symbol)
+        data = self.get_freqency(earnings_data, frequency, ticker_symbol)
         earnings_data_frame = pd.DataFrame(data)
         dates = earnings_data_frame['date'].astype(str)
         # revs = earningsDataFrame['revenue'] no real need for revenue right now

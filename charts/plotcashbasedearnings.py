@@ -12,7 +12,7 @@ from helpers import datecleanup as dates
 from helpers import tickers as ticker
 
 
-class PlotGraph:
+class CashBasedEarningGraph:
     def __init__(self):
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)

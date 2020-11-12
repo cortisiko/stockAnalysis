@@ -13,7 +13,7 @@ from helpers import datecleanup as date
 matplotlib.use("TkAgg")
 
 
-class PlotGraph:
+class CashFlowGraph:
     def __init__(self):
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)
