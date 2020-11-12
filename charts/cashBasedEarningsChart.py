@@ -5,10 +5,10 @@ from matplotlib.figure import Figure
 
 from Financials import price as priceData
 from Financials import incomeStatementSheet as income
-from Financials import cashFlowSheet as cashFlowPage
+from Financials import cashflowsheet as cashFlowPage
 
 from helpers import getDate as date
-from helpers import Ticker as ticker
+from helpers import ticker as ticker
 
 
 class PlotGraph:

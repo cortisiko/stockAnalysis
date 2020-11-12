@@ -7,7 +7,7 @@ from matplotlib.lines import Line2D
 from Financials import price as priceData
 from Financials import incomeStatementSheet as income
 
-from helpers import Ticker as ticker
+from helpers import ticker as ticker
 from helpers import getDate as date
 
 class PlotGraph:

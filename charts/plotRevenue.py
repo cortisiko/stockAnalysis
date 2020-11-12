@@ -9,7 +9,7 @@ from matplotlib.lines import Line2D
 from Financials import price as priceData
 from Financials import earnings as earning
 
-from helpers import Ticker as ticker
+from helpers import ticker as ticker
 
 class PlotGraph:
     def __init__(self):

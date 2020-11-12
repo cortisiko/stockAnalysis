@@ -5,7 +5,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from Financials import price as priceData
 from Financials import earnings as earning
-from helpers import Ticker as ticker
+from helpers import ticker as ticker
 from matplotlib.lines import Line2D
 
 class PlotGraph:

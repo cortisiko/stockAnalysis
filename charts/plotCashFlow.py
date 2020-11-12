@@ -4,10 +4,10 @@ from matplotlib.lines import Line2D
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-from Financials import cashFlowSheet as cashFlowPage
+from Financials import cashflowsheet as cashFlowPage
 from Financials import price as priceData
 
-from helpers import Ticker as ticker
+from helpers import ticker as ticker
 from helpers import getDate as date
 
 class PlotGraph:
