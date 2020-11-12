@@ -1,31 +1,33 @@
-## This is the cashflow tab on the financials page in yahoo finance
+# This is the cashflow tab on the financials page in yahoo finance
 
-def getCashFlowData(tickerObject,Frequency):
-    cashFlowData = tickerObject.cash_flow(frequency=Frequency)
-    return cashFlowData
-
-
-def getFreeCashFlow(cashFlowData):
-     freeCashFlow = cashFlowData['FreeCashFlow']
-     freeCashFlow = freeCashFlow / 1e3
-
-     return freeCashFlow
-
-def getOperatingCashFlow(cashFlowData):
-        operatingCashFlow  = cashFlowData['OperatingCashFlow']
-        operatingCashFlow = operatingCashFlow / 1e3
-
-        return operatingCashFlow
-
-def get_most_recent_cash_flow_total(cashFlowData,position):
-    mostRecentCashFlow = cashFlowData['FreeCashFlow'].iloc[position] ## takes the most recent cashflow
-    mostRecentCashFlow = mostRecentCashFlow / 1e3
-
-    return mostRecentCashFlow
+def get_cash_flow_data(ticker_object, frequency):
+    cash_flow_data = ticker_object.cash_flow(frequency=frequency)
+    return cash_flow_data
 
 
-def calculate_cash_burn(CashAndCashEquivalents,freeCashFlow):
-    cashBurn = CashAndCashEquivalents / freeCashFlow
-    cashBurn = cashBurn * 12
+def get_free_cash_flow(cash_flow_data):
+    free_cash_flow = cash_flow_data['FreeCashFlow']
+    free_cash_flow = free_cash_flow / 1e3
 
-    return cashBurn
+    return free_cash_flow
+
+
+def get_operating_cash_flow(cash_flow_data):
+    operating_cash_flow = cash_flow_data['OperatingCashFlow']
+    operating_cash_flow = operating_cash_flow / 1e3
+
+    return operating_cash_flow
+
+
+def get_most_recent_cash_flow_total(cash_flow_data, position):
+    most_recent_cash_flow = cash_flow_data['FreeCashFlow'].iloc[position]  ## takes the most recent cashflow
+    most_recent_cash_flow = most_recent_cash_flow / 1e3
+
+    return most_recent_cash_flow
+
+
+def calculate_cash_burn(cash_and_cash_equivalents, free_cash_flow):
+    cash_burn = cash_and_cash_equivalents / free_cash_flow
+    cash_burn = cash_burn * 12
+
+    return cash_burn

@@ -87,7 +87,7 @@ def get_cash_burn_number(ticker_symbol):
     global most_recent_cash_flow
     ticker_symbol_object = ticker.get_ticker(ticker_symbol)  # Gets the ticker_symbol object so you can access the various objects
     balance_sheet_data_frame = balance_sheet.get_balance_sheet_data(ticker_symbol_object,'a')
-    cash_flow_data_frame = cash_flow_page.getCashFlowData(ticker_symbol_object, Frequency='a')
+    cash_flow_data_frame = cash_flow_page.get_cash_flow_data(ticker_symbol_object,'a')
 
     cash_and_cash_equivalents = balance_sheet.getCashAndExpenses(balance_sheet_data_frame)
 
