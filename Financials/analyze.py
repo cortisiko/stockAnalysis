@@ -7,43 +7,43 @@ from Financials import balanceSheet as balancesheet
 from helpers import Ticker as ticker
 from Financials import companyProfile as companyprofile
 
-errorMessage = "Invalid Stock Symbol"
+error_message = "Invalid Stock Symbol"
 
 
 def get_company_sector(ticker_symbol):
     try:
         ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-        companySector = companyprofile.get_company_sector(ticker_object, ticker_symbol)
-        return companySector
+        company_sector = companyprofile.get_company_sector(ticker_object, ticker_symbol)
+        return company_sector
     except TypeError:
-        return errorMessage
+        return error_message
 
 
 def get_company_details(ticker_symbol):
     try:
         ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-        companyDetails = companyprofile.get_company_summary_details(ticker_object, ticker_symbol)
-        return companyDetails
+        company_details = companyprofile.get_company_summary_details(ticker_object, ticker_symbol)
+        return company_details
     except TypeError:
-        return errorMessage
+        return error_message
 
 
-def getStockName(ticker_symbol):
+def get_stock_name(ticker_symbol):
     try:
         ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-        stockName = priceData.getCompanyName(ticker_object, ticker_symbol)
-        return stockName
+        stock_name = priceData.getCompanyName(ticker_object, ticker_symbol)
+        return stock_name
     except TypeError:
-        return errorMessage
+        return error_message
 
     ## Fundamentals ###
 
 
 def getCurrentStockPrice(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-    currentStockPrice = priceData.getCurrentStockPrice(ticker_object, ticker_symbol)
+    current_stock_price = priceData.getCurrentStockPrice(ticker_object, ticker_symbol)
 
-    return currentStockPrice
+    return current_stock_price
 
 
 def getEPS(ticker_symbol):
@@ -54,49 +54,49 @@ def getEPS(ticker_symbol):
 
 def getPERatio(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-    peRatio = summaryPage.getPERatio(ticker_object, ticker_symbol)
+    pe_ratio = summaryPage.getPERatio(ticker_object, ticker_symbol)
 
-    return peRatio
+    return pe_ratio
 
 
 def getDebtToEquity(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-    debtToEquityRatio = statisticsTab.getDebtToEquity(ticker_object, ticker_symbol)
+    debt_to_equity_ratio = statisticsTab.getDebtToEquity(ticker_object, ticker_symbol)
 
-    return debtToEquityRatio
+    return debt_to_equity_ratio
 
 
 def getReturnOnEquity(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-    returnOnEquity = statisticsTab.getReturnOnEquity(ticker_object, ticker_symbol)
+    return_on_equity = statisticsTab.getReturnOnEquity(ticker_object, ticker_symbol)
 
-    return returnOnEquity
+    return return_on_equity
 
 
 def getProfitMargin(ticker_symbol):
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-    profitMargin = statisticsTab.getProfitMargins(ticker_object, ticker_symbol)
+    profit_margin = statisticsTab.getProfitMargins(ticker_object, ticker_symbol)
 
-    return profitMargin
+    return profit_margin
 
 
 def getCashBurnNumber(ticker_symbol):
-    global mostRecentCashFlow
+    global most_recent_cash_flow
     ticker_object = ticker.get_ticker(ticker_symbol)  ## Gets the ticker object so you can access the various objects
-    balanceSheetDataFrame = balancesheet.getBalanceSheetData(ticker_object, Frequency='a')
-    cashFlowDataFrame = cashFlowPage.getCashFlowData(ticker_object, Frequency='a')
+    balance_sheet_data_frame = balancesheet.getBalanceSheetData(ticker_object, Frequency='a')
+    cash_flow_data_frame = cashFlowPage.getCashFlowData(ticker_object, Frequency='a')
 
-    CashAndCashEquivalents = balancesheet.getCashAndExpenses(balanceSheetDataFrame)
+    cash_and_cash_equivalents = balancesheet.getCashAndExpenses(balance_sheet_data_frame)
 
     ## because balance sheet does not have a TTM.## if the size of the cash flow data frame > balance sheet select
     ## the most recent year(not TTM)
-    if cashFlowDataFrame.shape[0] > balanceSheetDataFrame.shape[0]:
-        mostRecentCashFlow = cashFlowPage.getMostRecentCashFlowTotal(cashFlowDataFrame, -2)
+    if cash_flow_data_frame.shape[0] > balance_sheet_data_frame.shape[0]:
+        most_recent_cash_flow = cashFlowPage.get_most_recent_cash_flow_total(cash_flow_data_frame, -2)
 
-    cashBurn = cashFlowPage.calculateCashBurn(CashAndCashEquivalents, mostRecentCashFlow)
+    cash_burn = cashFlowPage.calculate_cash_burn(cash_and_cash_equivalents, most_recent_cash_flow)
 
-    tickerName = getStockName(ticker_symbol)
-    if cashBurn < 0:
-        print(f'{tickerName} is already running out of money. Their cash burn is:{cashBurn:,.1f} months')
+    ticker_name = get_stock_name(ticker_symbol)
+    if cash_burn < 0:
+        print(f'{ticker_name} is already running out of money. Their cash burn is:{cash_burn:,.1f} months')
     else:
-        print(f'It will take {cashBurn:,.1f} months before {tickerName} runs out of money')
+        print(f'It will take {cash_burn:,.1f} months before {ticker_name} runs out of money')

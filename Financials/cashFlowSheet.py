@@ -17,14 +17,14 @@ def getOperatingCashFlow(cashFlowData):
 
         return operatingCashFlow
 
-def getMostRecentCashFlowTotal(cashFlowData,position):
+def get_most_recent_cash_flow_total(cashFlowData,position):
     mostRecentCashFlow = cashFlowData['FreeCashFlow'].iloc[position] ## takes the most recent cashflow
     mostRecentCashFlow = mostRecentCashFlow / 1e3
 
     return mostRecentCashFlow
 
 
-def calculateCashBurn(CashAndCashEquivalents,freeCashFlow):
+def calculate_cash_burn(CashAndCashEquivalents,freeCashFlow):
     cashBurn = CashAndCashEquivalents / freeCashFlow
     cashBurn = cashBurn * 12
 
