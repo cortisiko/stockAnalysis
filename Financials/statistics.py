@@ -1,4 +1,4 @@
-## This is the statistics page in yahoo finance
+# This is the statistics page in yahoo finance
 
 import pandas as pd
 
@@ -8,7 +8,7 @@ def get_statistics(ticker_object):
     return all_financial_data
 
 
-def getCurrentStockPrice(ticker_object, ticker_symbol):
+def get_current_stock_price(ticker_object, ticker_symbol):
     summaryData = get_statistics(ticker_object)
     current_stock_price = summaryData[ticker_symbol]['currentPrice']
     current_stock_price = float(round(current_stock_price, 2))
@@ -16,7 +16,7 @@ def getCurrentStockPrice(ticker_object, ticker_symbol):
     return current_stock_price
 
 
-def getDebtToEquity(ticker_object, ticker_symbol):
+def get_debt_to_equity(ticker_object, ticker_symbol):
     financial_data = get_statistics(ticker_object)
     debt_to_equity = financial_data[ticker_symbol].get('debtToEquity', None)
 
@@ -28,7 +28,7 @@ def getDebtToEquity(ticker_object, ticker_symbol):
         return print("There is no Debt to Equity Ratio for", ticker_symbol)
 
 
-def getReturnOnEquity(ticker_object, ticker_symbol):
+def get_return_on_equity(ticker_object, ticker_symbol):
     financial_data = get_statistics(ticker_object)
     return_on_equity = financial_data[ticker_symbol].get('returnOnEquity', None)
 
@@ -39,7 +39,7 @@ def getReturnOnEquity(ticker_object, ticker_symbol):
         return print("There is no return on equity ratio for", ticker_symbol)
 
 
-def getProfitMargins(ticker_object, ticker_symbol):
+def get_profit_margins(ticker_object, ticker_symbol):
     financialData = get_statistics(ticker_object)
     profit_margins = financialData[ticker_symbol].get('profitMargins', None)
 

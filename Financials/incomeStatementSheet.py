@@ -1,28 +1,26 @@
-## This is the income statement tab on the financials page in yahoo finance
+# This is the income statement tab on the financials page in yahoo finance
 
-def getIncomeStatements(tickerObject,Frequency):
-    incomeStatements = tickerObject.income_statement(frequency=Frequency)
+def get_income_statement(ticker_object, frequency):
+    income_statements = ticker_object.income_statement(frequency)
 
-    return incomeStatements
+    return income_statements
 
 
-def getNetIncome(incomeStatementData):
-    netIncome = incomeStatementData['NetIncome']
+def get_net_income(income_statement_data):
+    net_income = income_statement_data['NetIncome']
 
-    if netIncome is not None:
-         netIncome = netIncome / 1e3
-         return netIncome
+    if net_income is not None:
+        net_income = net_income / 1e3
+        return net_income
     else:
-         print("There is no net income for", netIncome)
+        print("There is no net income for", net_income)
 
 
-## Basic EPS no need for this. YET
-def getEarningsPerShare(incomeStatements):
-    basicEPS = incomeStatements["BasicEPS"]
+# Basic EPS no need for this. YET
+def get_earnings_per_share(income_statement_data):
+    basic_eps = income_statement_data["BasicEPS"]
 
-    if basicEPS is not None:
-        return basicEPS
+    if basic_eps is not None:
+        return basic_eps
     else:
-         print("There is no basic EPS for", basicEPS)
-
-
+        print("There is no basic EPS for", basic_eps)

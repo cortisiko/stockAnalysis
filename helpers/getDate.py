@@ -1,19 +1,17 @@
-
-def getDates(dataframe):
-
-    asOfDate = dataframe['asOfDate'].astype(str)
-    checkForDuplicates(asOfDate)
-    #print(dataframe.columns)
-    return asOfDate
+def get_dates(data_frame):
+    as_of_date = data_frame['asOfDate'].astype(str)
+    check_for_duplicates(as_of_date)
+    # print(dataframe.columns)
+    return as_of_date
 
 
-def checkForDuplicates(asOfDate):
-    renameDuplicateDateToTrailingTwelveMonths = asOfDate.loc[asOfDate.duplicated()] = 'TTM'
+def check_for_duplicates(as_of_date):
+    rename_duplicate_date_to_trailing_twelve_months = as_of_date.loc[as_of_date.duplicated()] = 'TTM'
 
-    return renameDuplicateDateToTrailingTwelveMonths
+    return rename_duplicate_date_to_trailing_twelve_months
 
 
-def renamingDuplicates(dates):
+def renaming_duplicates(dates):
     dups = {}
 
     for i, val in enumerate(dates):

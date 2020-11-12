@@ -1,17 +1,17 @@
-def getCompanyProfile(tickerObject):
-    companyProfile = tickerObject.summary_profile
-    return companyProfile
+def get_company_profile(ticker_object):
+    company_profile = ticker_object.summary_profile
+    return company_profile
 
 
-def get_company_sector(tickerObject, stockTicker):
-    companyProfileObject = getCompanyProfile(tickerObject)
-    companySector = companyProfileObject[stockTicker]['sector']
+def get_company_sector(ticker_object, ticker_symbol):
+    company_profile_object = get_company_profile(ticker_object)
+    company_sector = company_profile_object[ticker_symbol]['sector']
 
-    return companySector
+    return company_sector
 
 
-def get_company_summary_details(tickerObject, stockTicker):
-    companyProfileObject = getCompanyProfile(tickerObject)
-    summaryDetails = companyProfileObject[stockTicker]['longBusinessSummary']
+def get_company_summary_details(ticker_object, ticker_symbol):
+    company_profile_object = get_company_profile(ticker_object)
+    summary_details = company_profile_object[ticker_symbol]['longBusinessSummary']
 
-    return summaryDetails
+    return summary_details

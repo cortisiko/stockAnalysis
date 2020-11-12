@@ -1,4 +1,4 @@
-## This is the summary tab
+#This is the summary tab
 
 def key_stats_data(ticker_object):
     key_stats = ticker_object.key_stats
