@@ -26,10 +26,10 @@ class CashToEarnings(tk.Frame):
         self.frequency_text = Label(self, text="Frequency")
         self.quarterly_radio_button = Radiobutton(self, text="Quarterly", variable=self.radio_text,
                                                   value=self.quarterly_text_string,
-                                                  command=self.selectedRadioButtonOption)
+                                                  command=self.selected_radio_button_option)
         self.yearly_radio_button = Radiobutton(self, text="Annual", variable=self.radio_text,
                                                value=self.yearly_text_string,
-                                               command=self.selectedRadioButtonOption)
+                                               command=self.selected_radio_button_option)
         self.clear_button = Button(self, text='Clear', command=self.clear, bg='red')
 
         self.page_title.pack()
@@ -41,7 +41,7 @@ class CashToEarnings(tk.Frame):
         button1 = Button(self, text="Back to Home",
                          command=lambda: controller.show_frame(homePage.Startpage))
 
-    def getTextInput(self):
+    def get_text_input(self):
         result = self.text_input_box.get("1.0", "end")
         result = result.rstrip()
         if len(result) > 0:
@@ -53,8 +53,8 @@ class CashToEarnings(tk.Frame):
             self.quarterly_radio_button.deselect()
             messagebox.showErrorMessage(self)
 
-    def selectedRadioButtonOption(self):
-        user_input = self.getTextInput()
+    def selected_radio_button_option(self):
+        user_input = self.get_text_input()
         radio_button_frequency_option = self.radio_text.get()
         if not cash_to_earnings.canvas:
             cash_to_earnings.plotCashToEarnings(self, user_input, radio_button_frequency_option)

@@ -8,6 +8,7 @@ from tkinter import *
 from charts import plotcashflow as pltCashFlow
 from helpers import messagebox as messagebox
 
+
 class CashFlow(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -21,12 +22,14 @@ class CashFlow(tk.Frame):
         self.yearly_text_string = 'a'
 
         self.text_input_box = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
-        #self.text_input_box.focus()
+        # self.text_input_box.focus()
         self.frequency_text = Label(self, text="Frequency")
         self.quarterly_radio_button = Radiobutton(self, text="Quarterly", variable=self.radio_text,
-                                                value=self.quarterly_text_string, command=self.selected_radio_button_option)
-        self.yearly_radio_button = Radiobutton(self, text="Annual", variable=self.radio_text, value=self.yearly_text_string,
-                                             command=self.selected_radio_button_option)
+                                                  value=self.quarterly_text_string,
+                                                  command=self.selected_radio_button_option)
+        self.yearly_radio_button = Radiobutton(self, text="Annual", variable=self.radio_text,
+                                               value=self.yearly_text_string,
+                                               command=self.selected_radio_button_option)
         self.clear_button = Button(self, text='Clear', bg='red', command=self.clear)
         self.page_title.pack()
         self.text_input_box.pack()

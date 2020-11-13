@@ -24,9 +24,9 @@ class NetIncome(tk.Frame):
         self.textInputBox.focus()
         self.frequencyText = Label(self, text="Frequency")
         self.quarterlyRadioButton = Radiobutton(self, text="Quarterly", variable=self.RadioText,
-                                                value=self.quarterlyTextString, command=self.selectedRadioButtonOption)
+                                                value=self.quarterlyTextString, command=self.selected_radio_button_option)
         self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,
-                                             command=self.selectedRadioButtonOption)
+                                             command=self.selected_radio_button_option)
         self.clearButton = Button(self, text='Clear', command=self.clear, bg='red')
 
         self.pageTitle.pack()
@@ -50,7 +50,7 @@ class NetIncome(tk.Frame):
             self.quarterlyRadioButton.deselect()
             messagebox.showErrorMessage(self)
 
-    def selectedRadioButtonOption(self):
+    def selected_radio_button_option(self):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
         if not income.canvas:
