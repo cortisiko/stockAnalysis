@@ -8,7 +8,7 @@ from tkinter import *
 
 from charts import plotlongtermdebt as plt_debt
 from helpers import messagebox as messagebox
-from pages import homePage
+from pages import homepage
 
 
 class Debt(tk.Frame):

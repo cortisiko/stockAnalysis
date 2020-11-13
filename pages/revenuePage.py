@@ -5,7 +5,7 @@ except:
 import tkinter.font
 from tkinter import *
 
-from pages import homePage
+from pages import homepage
 from charts import plotrevenue as pltRevenue
 from helpers import messagebox as messagebox
 
@@ -35,7 +35,7 @@ class Revenue(tk.Frame):
         self.yearlyRadioButton.pack(side='right', padx=50)
         self.clearButton.pack()
         button1 = Button(self, text="Back to Home",
-                         command=lambda: controller.show_frame(homePage.Startpage))
+                         command=lambda: controller.show_frame(homepage.Startpage))
 
     def getTextInput(self):
         result = self.textInputBox.get("1.0", "end")

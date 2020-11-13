@@ -5,7 +5,7 @@ except:
 import tkinter.font
 from tkinter import *
 
-from pages import homePage
+from pages import homepage
 from helpers import messagebox as messagebox
 from charts import plotcashbasedearnings as _cash_to_earnings
 
@@ -39,7 +39,7 @@ class CashToEarnings(tk.Frame):
         self.clear_button.pack()
 
         button1 = Button(self, text="Back to Home",
-                         command=lambda: controller.show_frame(homePage.Startpage))
+                         command=lambda: controller.show_frame(homepage.Startpage))
 
     def get_text_input(self):
         result = self.text_input_box.get("1.0", "end")
