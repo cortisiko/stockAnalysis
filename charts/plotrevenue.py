@@ -58,7 +58,6 @@ class RevenueGraph:
         self.canvas.draw_idle()
 
     def get_freqency(self, earnings_data,ticker_symbol,frequency):
-        print(frequency)
         if frequency == 'yearly':
             yearly_finaincal_earnings = earnings_data[ticker_symbol]['financialsChart'][frequency]
             return yearly_finaincal_earnings
