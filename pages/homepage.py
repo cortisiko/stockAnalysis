@@ -10,7 +10,7 @@ from Financials import analyze as anlyze
 from helpers import messagebox as messagebox
 
 
-class Startpage(tk.Frame):
+class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -110,76 +110,76 @@ class Startpage(tk.Frame):
         # self.companyDetailsValue.grid(row=22,column=5)
 
     def analyze(self, event=None):
-        self.getCompanyName()
-        self.getCompanySector()
-        self.getEPS()
-        self.getPERatio()
-        self.getReturnOnEquity()
-        self.currentStockPrice()
-        self.getDebtToEquityRatio()
-        self.getProfitMargin()
+        self.get_company_name()
+        self.get_company_sector()
+        self.get_eps()
+        self.get_pe_ratio()
+        self.get_return_on_equity()
+        self.current_stock_price()
+        self.get_debt_to_equity_ratio()
+        self.get_profit_margin()
         # self.getCompanyDetails()
         self.clear_user_input_box()
 
-    def getCompanyName(self):
-        tickerFromUser = self.get_text_input()
-        companyName = anlyze.get_stock_name(tickerFromUser)
-        burn = anlyze.get_cash_burn_number(tickerFromUser)  ## can remove whenever. Proof of concept for cash burn
+    def get_company_name(self):
+        ticker_from_user = self.get_text_input()
+        company_name = anlyze.get_stock_name(ticker_from_user)
+        burn = anlyze.get_cash_burn_number(ticker_from_user)  ## can remove whenever. Proof of concept for cash burn
         self.company_name_label_text["text"] = ""
-        self.company_name_label_text["text"] = self.company_name_label_text["text"] + str(companyName)
+        self.company_name_label_text["text"] = self.company_name_label_text["text"] + str(company_name)
 
-    def getCompanySector(self):
-        tickerFromUser = self.get_text_input()
-        companySector = anlyze.get_company_sector(tickerFromUser)
+    def get_company_sector(self):
+        ticker_from_user = self.get_text_input()
+        company_sector = anlyze.get_company_sector(ticker_from_user)
         self.company_sector_value["text"] = self.company_sector_default_value
-        self.company_sector_value["text"] = self.company_sector_value["text"] + str(companySector)
+        self.company_sector_value["text"] = self.company_sector_value["text"] + str(company_sector)
 
-    def getCompanyDetails(self):
-        tickerFromUser = self.get_text_input()
-        companyDetails = anlyze.get_company_details(tickerFromUser)
+    def get_company_details(self):
+        ticker_from_user = self.get_text_input()
+        company_details = anlyze.get_company_details(ticker_from_user)
         self.company_details_label_text["text"] = ""
-        self.companyDetailsValue["text"] = self.companyDetailsValue["text"] + str(companyDetails)
+        self.companyDetailsValue["text"] = self.companyDetailsValue["text"] + str(company_details)
 
-    def getEPS(self):
-        tickerFromUser = self.get_text_input()
-        eps = anlyze.get_eps(tickerFromUser)
+    def get_eps(self):
+        ticker_from_user = self.get_text_input()
+        eps = anlyze.get_eps(ticker_from_user)
         self.earnings_per_share_value["text"] = self.earnings_per_share_default_value
         self.earnings_per_share_value["text"] = self.earnings_per_share_value["text"] + '$' + str(eps)
 
-    def getPERatio(self):
-        tickerFromUser = self.get_text_input()
-        peRatio = anlyze.get_pe_ratio(tickerFromUser)
+    def get_pe_ratio(self):
+        ticker_from_user = self.get_text_input()
+        pe_ratio = anlyze.get_pe_ratio(ticker_from_user)
         self.pe_ratio_value["text"] = self.pe_ratio_label_default_value
-        self.pe_ratio_value["text"] = self.pe_ratio_value["text"] + str(peRatio)
+        self.pe_ratio_value["text"] = self.pe_ratio_value["text"] + str(pe_ratio)
 
-    def getReturnOnEquity(self):
-        tickerFromUser = self.get_text_input()
-        returnOnEquity = anlyze.get_return_on_equity(tickerFromUser)
+    def get_return_on_equity(self):
+        ticker_from_user = self.get_text_input()
+        return_on_equity = anlyze.get_return_on_equity(ticker_from_user)
         self.return_on_equity_value["text"] = self.return_on_equity_default_value
-        self.return_on_equity_value["text"] = self.return_on_equity_value["text"] + str(returnOnEquity) + '%'
+        self.return_on_equity_value["text"] = self.return_on_equity_value["text"] + str(return_on_equity) + '%'
 
-    def currentStockPrice(self):
-        tickerFromUser = self.get_text_input()
-        stockPrice = anlyze.get_current_stock_price(tickerFromUser)
+    def current_stock_price(self):
+        ticker_from_user = self.get_text_input()
+        stock_price = anlyze.get_current_stock_price(ticker_from_user)
         # self.current_stock_price_label_text["text"] = self.current_stock_price_label_text["text"] +'$'+ str(stockPrice)
         self.current_stock_price_value["text"] = self.current_stock_price_default_value
         self.current_stock_price_value["text"] = self.current_stock_price_value["text"] + '$' + str(
-            stockPrice)
+            stock_price)
 
-    def getDebtToEquityRatio(self):
-        tickerFromUser = self.get_text_input()
-        debtToEquityRatio = anlyze.get_debt_to_equity(tickerFromUser)
+    def get_debt_to_equity_ratio(self):
+        ticker_from_user = self.get_text_input()
+        debt_to_equity_ratio = anlyze.get_debt_to_equity(ticker_from_user)
         # self.debt_to_equity_ratio_label_text["text"] = self.debt_to_equity_ratio_label_text["text"] + str(debtToEquityRatio)
         self.debt_to_equity_ratio_value["text"] = self.debt_to_equity_ratio_default_value
         self.debt_to_equity_ratio_value["text"] = self.debt_to_equity_ratio_value["text"] + str(
-            debtToEquityRatio)
+            debt_to_equity_ratio)
 
-    def getProfitMargin(self):
-        tickerFromUser = self.get_text_input()
-        profitMargin = anlyze.get_profit_margin(tickerFromUser)
+    def get_profit_margin(self):
+        ticker_from_user = self.get_text_input()
+        profit_margin = anlyze.get_profit_margin(ticker_from_user)
         # self.profit_margin_label_text["text"] = self.profit_margin_label_text["text"] + str(profitMargin) +'%'
         self.profit_margin_value["text"] = self.profit_margin_default_alue
-        self.profit_margin_value["text"] = self.profit_margin_value["text"] + str(profitMargin) + '%'
+        self.profit_margin_value["text"] = self.profit_margin_value["text"] + str(profit_margin) + '%'
 
     def get_text_input(self):
         result = self.text_input_box.get()
