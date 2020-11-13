@@ -54,11 +54,11 @@ class NetIncome(tk.Frame):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
         if not income.canvas:
-            income.netIncomeChart(self, userInput, radioButtonFrequencyOption)
+            income.plot_net_income(self, userInput, radioButtonFrequencyOption)
 
         else:
             income.clearPlotPage()
-            income.netIncomeChart(self, userInput, radioButtonFrequencyOption)
+            income.plot_net_income(self, userInput, radioButtonFrequencyOption)
 
     def clear(self):
         self.textInputBox.delete("1.0", "end")
@@ -66,4 +66,4 @@ class NetIncome(tk.Frame):
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
 
-income = pltIncome.PlotGraph()
+income = pltIncome.NetIncomeGraph()

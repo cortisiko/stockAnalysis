@@ -53,10 +53,10 @@ class Revenue(tk.Frame):
         userInput = self.getTextInput()
         radioButtonFrequencyOption = self.RadioText.get()
         if not revenue.canvas:
-            revenue.plotRevenue(self, userInput, radioButtonFrequencyOption)
+            revenue.plot_revenue(self, userInput, radioButtonFrequencyOption)
         else:
             revenue.clearPlotPage()
-            revenue.plotRevenue(self, userInput, radioButtonFrequencyOption)
+            revenue.plot_revenue(self, userInput, radioButtonFrequencyOption)
 
     def destroyGraph(self):
         revenue.clearPlotPage()
@@ -67,4 +67,4 @@ class Revenue(tk.Frame):
         self.yearlyRadioButton.deselect()
         self.quarterlyRadioButton.deselect()
 
-revenue = pltRevenue.PlotGraph()
+revenue = pltRevenue.RevenueGraph()
