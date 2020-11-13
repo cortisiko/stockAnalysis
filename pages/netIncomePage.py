@@ -6,8 +6,9 @@ import tkinter.font
 from tkinter import *
 
 from pages import homePage
-from charts import plotnetincome as pltIncome
+from charts import plotnetincome as pltincome
 from helpers import messagebox as messagebox
+
 
 class NetIncome(tk.Frame):
     def __init__(self, parent, controller):
@@ -15,55 +16,57 @@ class NetIncome(tk.Frame):
         self['bg'] = '#1B6666'
         self.controller = controller
         self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
-        self.pageTitle = Label(self, text="Net Income Charts", font=self.my_font)
-        self.RadioText = StringVar()
-        self.quarterlyTextString = 'q'
-        self.yearlyTextString = 'a'
+        self.page_title = Label(self, text="Net Income Charts", font=self.my_font)
+        self.radio_text = StringVar()
+        self.quarterly_text_string = 'q'
+        self.yearly_text_string = 'a'
 
-        self.textInputBox = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
-        self.textInputBox.focus()
-        self.frequencyText = Label(self, text="Frequency")
-        self.quarterlyRadioButton = Radiobutton(self, text="Quarterly", variable=self.RadioText,
-                                                value=self.quarterlyTextString, command=self.selected_radio_button_option)
-        self.yearlyRadioButton = Radiobutton(self, text="Annual", variable=self.RadioText, value=self.yearlyTextString,
-                                             command=self.selected_radio_button_option)
+        self.text_input_box = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
+        self.text_input_box.focus()
+        self.frequency_text = Label(self, text="Frequency")
+        self.quarterly_radio_button = Radiobutton(self, text="Quarterly", variable=self.radio_text,
+                                                  value=self.quarterly_text_string,
+                                                  command=self.selected_radio_button_option)
+        self.yearly_radio_button = Radiobutton(self, text="Annual", variable=self.radio_text,
+                                               value=self.yearly_text_string,
+                                               command=self.selected_radio_button_option)
         self.clearButton = Button(self, text='Clear', command=self.clear, bg='red')
 
-        self.pageTitle.pack()
-        self.textInputBox.pack()
-        self.quarterlyRadioButton.pack(side='left', padx=50)
-        self.yearlyRadioButton.pack(side='right', padx=50)
+        self.page_title.pack()
+        self.text_input_box.pack()
+        self.quarterly_radio_button.pack(side='left', padx=50)
+        self.yearly_radio_button.pack(side='right', padx=50)
         self.clearButton.pack()
 
-        button1 = Button(self, text="Back to Home",
-                         command=lambda: controller.show_frame(homePage.Startpage))
+        # button1 = Button(self, text="Back to Home",command=lambda: controller.show_frame(homePage.Startpage))
 
-    def getTextInput(self):
-        result = self.textInputBox.get("1.0", "end")
+    def get_text_input(self):
+        result = self.text_input_box.get("1.0", "end")
         result = result.rstrip()
         if len(result) > 0:
             results = result.upper()
             results = str(results)
             return results
         else:
-            self.yearlyRadioButton.deselect()
-            self.quarterlyRadioButton.deselect()
+            self.yearly_radio_button.deselect()
+            self.quarterly_radio_button.deselect()
             messagebox.showErrorMessage(self)
 
     def selected_radio_button_option(self):
-        userInput = self.getTextInput()
-        radioButtonFrequencyOption = self.RadioText.get()
+        user_input = self.get_text_input()
+        radioButtonFrequencyOption = self.radio_text.get()
         if not income.canvas:
-            income.plot_net_income(self, userInput, radioButtonFrequencyOption)
+            income.plot_net_income(self, user_input, radioButtonFrequencyOption)
 
         else:
             income.clearPlotPage()
-            income.plot_net_income(self, userInput, radioButtonFrequencyOption)
+            income.plot_net_income(self, user_input, radioButtonFrequencyOption)
 
     def clear(self):
-        self.textInputBox.delete("1.0", "end")
+        self.text_input_box.delete("1.0", "end")
         income.clearPlotPage()
-        self.yearlyRadioButton.deselect()
-        self.quarterlyRadioButton.deselect()
+        self.yearly_radio_button.deselect()
+        self.quarterly_radio_button.deselect()
 
-income = pltIncome.NetIncomeGraph()
+
+income = pltincome.NetIncomeGraph()
