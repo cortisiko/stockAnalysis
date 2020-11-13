@@ -61,14 +61,14 @@ class Startpage(tk.Frame):
         self.debt_to_equity_ratio_default_text = "Debt to Equity Ratio: "
         self.profit_margin_default_text = "Net Profit Margin: "
 
-        self.companySectorDefaultValue = ""
-        self.companyDetailsDefaultValue = ""
-        self.earningsPerShareDefaultValue = ""
-        self.peRatioLabelDefaultValue = ""
-        self.returnOnEquityDefaultValue = ""
-        self.currentStockPriceDefaultValue = ""
-        self.debtToEquityRatioDefaultValue = ""
-        self.profitMarginDefaultValue = ""
+        self.company_sector_default_value = ""
+        self.company_details_default_value = ""
+        self.earnings_per_share_default_value = ""
+        self.pe_ratio_label_default_value = ""
+        self.return_on_equity_default_value = ""
+        self.current_stock_price_default_value = ""
+        self.debt_to_equity_ratio_default_value = ""
+        self.profit_margin_default_alue = ""
 
         # photo addition
         self.Space = Label(self, text="", bg='grey')
@@ -131,7 +131,7 @@ class Startpage(tk.Frame):
     def getCompanySector(self):
         tickerFromUser = self.getTextInput()
         companySector = anlyze.get_company_sector(tickerFromUser)
-        self.company_sector_value["text"] = self.companySectorDefaultValue
+        self.company_sector_value["text"] = self.company_sector_default_value
         self.company_sector_value["text"] = self.company_sector_value["text"] + str(companySector)
 
     def getCompanyDetails(self):
@@ -143,26 +143,26 @@ class Startpage(tk.Frame):
     def getEPS(self):
         tickerFromUser = self.getTextInput()
         eps = anlyze.get_eps(tickerFromUser)
-        self.earnings_per_share_value["text"] = self.earningsPerShareDefaultValue
+        self.earnings_per_share_value["text"] = self.earnings_per_share_default_value
         self.earnings_per_share_value["text"] = self.earnings_per_share_value["text"] + '$' + str(eps)
 
     def getPERatio(self):
         tickerFromUser = self.getTextInput()
         peRatio = anlyze.get_pe_ratio(tickerFromUser)
-        self.pe_ratio_value["text"] = self.peRatioLabelDefaultValue
+        self.pe_ratio_value["text"] = self.pe_ratio_label_default_value
         self.pe_ratio_value["text"] = self.pe_ratio_value["text"] + str(peRatio)
 
     def getReturnOnEquity(self):
         tickerFromUser = self.getTextInput()
         returnOnEquity = anlyze.get_return_on_equity(tickerFromUser)
-        self.return_on_equity_value["text"] = self.returnOnEquityDefaultValue
+        self.return_on_equity_value["text"] = self.return_on_equity_default_value
         self.return_on_equity_value["text"] = self.return_on_equity_value["text"] + str(returnOnEquity) + '%'
 
     def currentStockPrice(self):
         tickerFromUser = self.getTextInput()
         stockPrice = anlyze.get_current_stock_price(tickerFromUser)
         # self.current_stock_price_label_text["text"] = self.current_stock_price_label_text["text"] +'$'+ str(stockPrice)
-        self.current_stock_price_value["text"] = self.currentStockPriceDefaultValue
+        self.current_stock_price_value["text"] = self.current_stock_price_default_value
         self.current_stock_price_value["text"] = self.current_stock_price_value["text"] + '$' + str(
             stockPrice)
 
@@ -170,7 +170,7 @@ class Startpage(tk.Frame):
         tickerFromUser = self.getTextInput()
         debtToEquityRatio = anlyze.get_debt_to_equity(tickerFromUser)
         # self.debt_to_equity_ratio_label_text["text"] = self.debt_to_equity_ratio_label_text["text"] + str(debtToEquityRatio)
-        self.debt_to_equity_ratio_value["text"] = self.debtToEquityRatioDefaultValue
+        self.debt_to_equity_ratio_value["text"] = self.debt_to_equity_ratio_default_value
         self.debt_to_equity_ratio_value["text"] = self.debt_to_equity_ratio_value["text"] + str(
             debtToEquityRatio)
 
@@ -178,7 +178,7 @@ class Startpage(tk.Frame):
         tickerFromUser = self.getTextInput()
         profitMargin = anlyze.get_profit_margin(tickerFromUser)
         # self.profit_margin_label_text["text"] = self.profit_margin_label_text["text"] + str(profitMargin) +'%'
-        self.profit_margin_value["text"] = self.profitMarginDefaultValue
+        self.profit_margin_value["text"] = self.profit_margin_default_alue
         self.profit_margin_value["text"] = self.profit_margin_value["text"] + str(profitMargin) + '%'
 
     def getTextInput(self):
@@ -209,11 +209,11 @@ class Startpage(tk.Frame):
 
         self.clearUserInputBox()
         # new method
-        self.company_sector_value["text"] = self.companySectorDefaultValue
-        self.earnings_per_share_value["text"] = self.earningsPerShareDefaultValue
-        self.pe_ratio_value["text"] = self.peRatioLabelDefaultValue
-        self.return_on_equity_value["text"] = self.returnOnEquityDefaultValue
-        self.current_stock_price_value["text"] = self.currentStockPriceDefaultValue
-        self.debt_to_equity_ratio_value["text"] = self.debtToEquityRatioDefaultValue
-        self.profit_margin_value["text"] = self.profitMarginDefaultValue
-        # self.companyDetailsValue["text"] = self.companyDetailsDefaultValue
+        self.company_sector_value["text"] = self.company_sector_default_value
+        self.earnings_per_share_value["text"] = self.earnings_per_share_default_value
+        self.pe_ratio_value["text"] = self.pe_ratio_label_default_value
+        self.return_on_equity_value["text"] = self.return_on_equity_default_value
+        self.current_stock_price_value["text"] = self.current_stock_price_default_value
+        self.debt_to_equity_ratio_value["text"] = self.debt_to_equity_ratio_default_value
+        self.profit_margin_value["text"] = self.profit_margin_default_alue
+        # self.companyDetailsValue["text"] = self.company_details_default_value
