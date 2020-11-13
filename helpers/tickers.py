@@ -1,9 +1,9 @@
 from yahooquery import Ticker
 
 
-def getTicker(ticker):
+def get_ticker(ticker):
         if ticker is not None:
-                stockTicker = Ticker(ticker)
-                return stockTicker
+                stock_ticker = Ticker(ticker)
+                return stock_ticker
         else:
          print("User did not enter a valid ticker")

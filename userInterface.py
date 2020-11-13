@@ -2,7 +2,8 @@ try:
     import Tkinter as tk
 except:
     import tkinter as tk
-from pages import cashFlowPage,homePage,netIncomePage,cashToEarningsPage,debtPage,earningsPage,revenuePage
+from pages import cashflowpage, homepage, netincomepage, cashtoearningspage, debtpage, earningspage, revenuePage
+
 
 class UserInterFace(tk.Tk):
     def __init__(self):
@@ -20,28 +21,28 @@ class UserInterFace(tk.Tk):
         Home = tk.Menu(menu, tearoff=0)
         menu.add_cascade(menu=Home, label="Main")
         Home.add_command(label="Home",
-                         command=lambda: self.show_frame(homePage.Startpage))
+                         command=lambda: self.show_frame(homepage.StartPage))
         menu.add_separator()
 
         Charts = tk.Menu(menu, tearoff=0)
         menu.add_cascade(menu=Charts, label="Charts")
 
-        Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(cashFlowPage.CashFlow))
-        Charts.add_command(label="Cash to Earnings", command=lambda: self.show_frame(cashToEarningsPage.CashToEarnings))
-        Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(debtPage.Debt))
-        Charts.add_command(label="Net Income", command=lambda: self.show_frame(netIncomePage.NetIncome))
+        Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(cashflowpage.CashFlow))
+        Charts.add_command(label="Cash to Earnings", command=lambda: self.show_frame(cashtoearningspage.CashToEarnings))
+        Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(debtpage.Debt))
+        Charts.add_command(label="Net Income", command=lambda: self.show_frame(netincomepage.NetIncome))
         Charts.add_command(label="Revenue", command=lambda: self.show_frame(revenuePage.Revenue))
-
 
         menu.add_separator()
         tk.Tk.config(self, menu=menu)
 
-        for F in (homePage.Startpage, cashFlowPage.CashFlow, debtPage.Debt, netIncomePage.NetIncome, revenuePage.Revenue,
-                  cashToEarningsPage.CashToEarnings):
+        for F in (
+        homepage.StartPage, cashflowpage.CashFlow, debtpage.Debt, netincomepage.NetIncome, revenuePage.Revenue,
+        cashtoearningspage.CashToEarnings):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
-        self.show_frame(homePage.Startpage)
+        self.show_frame(homepage.StartPage)
 
     def show_frame(self, cont):
         frame = self.frames[cont]
