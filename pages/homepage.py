@@ -28,14 +28,14 @@ class Startpage(tk.Frame):
         # self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
 
         self.earnings_per_share_label_text = Label(self, text="Earnings Per Share: ", width=30, anchor="w")
-        self.peRatioLabelText = Label(self, text="PE Ratio: ", width=30, anchor="w")
-        self.returnOnEquityLabelText = Label(self, text="Return on Equity Ratio: ", width=30, anchor="w")
-        self.currentStockPriceLabelText = Label(self, text="Current Stock Price: ", width=30, anchor="w")
-        self.debtToEquityRatioLabelText = Label(self, text="Debt to Equity Ratio: ", width=30, anchor="w")
-        self.profitMarginLabelText = Label(self, text="Net Profit Margin: ", width=30, anchor="w")
-        self.companyNameLabelText = Label(self, text="", font=self.my_font, bg='grey')
-        self.companySectorLabelText = Label(self,text="Sector",width=30, anchor="w")
-        self.companyDetailsLabelText = Label(self,text="",width=30, anchor="w")
+        self.pe_ratio_label_text = Label(self, text="PE Ratio: ", width=30, anchor="w")
+        self.return_on_equity_label_text = Label(self, text="Return on Equity Ratio: ", width=30, anchor="w")
+        self.current_stock_price_label_text = Label(self, text="Current Stock Price: ", width=30, anchor="w")
+        self.debt_to_equity_ratio_label_text = Label(self, text="Debt to Equity Ratio: ", width=30, anchor="w")
+        self.profit_margin_label_text = Label(self, text="Net Profit Margin: ", width=30, anchor="w")
+        self.company_name_label_text = Label(self, text="", font=self.my_font, bg='grey')
+        self.company_sector_label_text = Label(self,text="Sector",width=30, anchor="w")
+        self.company_details_label_text = Label(self,text="",width=30, anchor="w")
 
         ##Binding the Enter key
         self.parent.bind('<Return>', self.analyze)
@@ -88,15 +88,15 @@ class Startpage(tk.Frame):
         # self.graphCashFlowButton.grid(row=3, column=5, ipadx=10)
         # self.bind('<Return>', lambda event: self.analyze)
 
-        self.companyNameLabelText.grid(row=5, column=4)
-        self.companySectorLabelText.grid(row=6, column=4)
-        self.currentStockPriceLabelText.grid(row=7, column=4)
+        self.company_name_label_text.grid(row=5, column=4)
+        self.company_sector_label_text.grid(row=6, column=4)
+        self.current_stock_price_label_text.grid(row=7, column=4)
         self.earnings_per_share_label_text.grid(row=8, column=4)
-        self.peRatioLabelText.grid(row=9, column=4)
-        self.returnOnEquityLabelText.grid(row=10, column=4)
-        self.debtToEquityRatioLabelText.grid(row=11, column=4)
-        self.profitMarginLabelText.grid(row=12, column=4)
-        #self.companyDetailsLabelText.grid(row=22,column =5)
+        self.pe_ratio_label_text.grid(row=9, column=4)
+        self.return_on_equity_label_text.grid(row=10, column=4)
+        self.debt_to_equity_ratio_label_text.grid(row=11, column=4)
+        self.profit_margin_label_text.grid(row=12, column=4)
+        #self.company_details_label_text.grid(row=22,column =5)
 
         # Fields for values
         self.companySectorValue.grid(row=6, column=5)
@@ -123,8 +123,8 @@ class Startpage(tk.Frame):
         tickerFromUser = self.getTextInput()
         companyName = anlyze.get_stock_name(tickerFromUser)
         burn = anlyze.get_cash_burn_number(tickerFromUser) ## can remove whenever. Proof of concept for cash burn
-        self.companyNameLabelText["text"] = ""
-        self.companyNameLabelText["text"] = self.companyNameLabelText["text"] + str(companyName)
+        self.company_name_label_text["text"] = ""
+        self.company_name_label_text["text"] = self.company_name_label_text["text"] + str(companyName)
 
     def getCompanySector(self):
         tickerFromUser = self.getTextInput()
@@ -135,7 +135,7 @@ class Startpage(tk.Frame):
     def getCompanyDetails(self):
         tickerFromUser = self.getTextInput()
         companyDetails = anlyze.get_company_details(tickerFromUser)
-        self.companyDetailsLabelText["text"] = ""
+        self.company_details_label_text["text"] = ""
         self.companyDetailsValue["text"] = self.companyDetailsValue["text"] + str(companyDetails)
 
     def getEPS(self):
@@ -159,7 +159,7 @@ class Startpage(tk.Frame):
     def currentStockPrice(self):
         tickerFromUser = self.getTextInput()
         stockPrice = anlyze.get_current_stock_price(tickerFromUser)
-        # self.currentStockPriceLabelText["text"] = self.currentStockPriceLabelText["text"] +'$'+ str(stockPrice)
+        # self.current_stock_price_label_text["text"] = self.current_stock_price_label_text["text"] +'$'+ str(stockPrice)
         self.currentStockPriceValue["text"] = self.currentStockPriceDefaultValue
         self.currentStockPriceValue["text"] = self.currentStockPriceValue["text"] + '$' + str(
             stockPrice)
@@ -167,7 +167,7 @@ class Startpage(tk.Frame):
     def getDebtToEquityRatio(self):
         tickerFromUser = self.getTextInput()
         debtToEquityRatio = anlyze.get_debt_to_equity(tickerFromUser)
-        # self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioLabelText["text"] + str(debtToEquityRatio)
+        # self.debt_to_equity_ratio_label_text["text"] = self.debt_to_equity_ratio_label_text["text"] + str(debtToEquityRatio)
         self.debtToEquityRatioValue["text"] = self.debtToEquityRatioDefaultValue
         self.debtToEquityRatioValue["text"] = self.debtToEquityRatioValue["text"] + str(
             debtToEquityRatio)
@@ -175,7 +175,7 @@ class Startpage(tk.Frame):
     def getProfitMargin(self):
         tickerFromUser = self.getTextInput()
         profitMargin = anlyze.get_profit_margin(tickerFromUser)
-        # self.profitMarginLabelText["text"] = self.profitMarginLabelText["text"] + str(profitMargin) +'%'
+        # self.profit_margin_label_text["text"] = self.profit_margin_label_text["text"] + str(profitMargin) +'%'
         self.profitMarginValue["text"] = self.profitMarginDefaultValue
         self.profitMarginValue["text"] = self.profitMarginValue["text"] + str(profitMargin) + '%'
 
@@ -195,14 +195,14 @@ class Startpage(tk.Frame):
         self.text_input_box.delete(0, END)
 
     def clearValues(self):
-        self.companyNameLabelText["text"] = ""
-        self.companySectorLabelText["text"] = self.companySectorDefaultText
+        self.company_name_label_text["text"] = ""
+        self.company_sector_label_text["text"] = self.companySectorDefaultText
         self.earnings_per_share_label_text["text"] = self.earningsPerShareDefaultText
-        self.peRatioLabelText["text"] = self.peRatioDefaultText
-        self.returnOnEquityLabelText["text"] = self.returnOnEquityDefaultText
-        self.currentStockPriceLabelText["text"] = self.currentStockPriceDefaultText
-        self.debtToEquityRatioLabelText["text"] = self.debtToEquityRatioDefaultText
-        self.profitMarginLabelText["text"] = self.profitMarginDefaultText
+        self.pe_ratio_label_text["text"] = self.peRatioDefaultText
+        self.return_on_equity_label_text["text"] = self.returnOnEquityDefaultText
+        self.current_stock_price_label_text["text"] = self.currentStockPriceDefaultText
+        self.debt_to_equity_ratio_label_text["text"] = self.debtToEquityRatioDefaultText
+        self.profit_margin_label_text["text"] = self.profitMarginDefaultText
         #self.companyDetailsValue["text"] = self.companyDetailsValue
 
         self.clearUserInputBox()
