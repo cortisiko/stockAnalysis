@@ -37,8 +37,8 @@ class UserInterFace(tk.Tk):
         tk.Tk.config(self, menu=menu)
 
         for F in (
-        homepage.StartPage, cashflowpage.CashFlow, debtpage.Debt, netincomepage.NetIncome, revenuePage.Revenue,
-        cashtoearningspage.CashToEarnings):
+                homepage.StartPage, cashflowpage.CashFlow, debtpage.Debt, netincomepage.NetIncome, revenuePage.Revenue,
+                cashtoearningspage.CashToEarnings):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
