@@ -17,17 +17,17 @@ class Startpage(tk.Frame):
         self.parent = parent
         self.configure(background='grey')
         self.my_font = tkinter.font.Font(self, family="Comic Sans MS", size=20)
-        self.stockSymbolText = Label(self, text="Enter Stock Symbol: ")
-        self.textInputBox = Entry(self,relief=RIDGE, width=10, borderwidth=4)
-        self.analyzeButton = Button(self,
+        self.stock_symbo_text = Label(self, text="Enter Stock Symbol: ")
+        self.text_input_box = Entry(self,relief=RIDGE, width=10, borderwidth=4)
+        self.analyze_button = Button(self,
                                     text='Analyze Stock', relief=RAISED, borderwidth=7, bg='green',
                                     command=self.analyze)
-        self.clearButton = Button(self, text="Clear", relief=RIDGE, command=self.clearValues)
-        self.textInputBox.focus()
-        self.clearButton = Button(self, text="Clear", relief=RIDGE, command=self.clearValues, bg='red')
+        self.clear_button = Button(self, text="Clear", relief=RIDGE, command=self.clearValues)
+        self.text_input_box.focus()
+        self.clear_button = Button(self, text="Clear", relief=RIDGE, command=self.clearValues, bg='red')
         # self.graphCashFlowButton = Button(self, text="See Cash Flow Graph",command=lambda: controller.show_frame(PlotCashFlowChart))
 
-        self.earningsPerShareLabelText = Label(self, text="Earnings Per Share: ", width=30, anchor="w")
+        self.earnings_per_share_label_text = Label(self, text="Earnings Per Share: ", width=30, anchor="w")
         self.peRatioLabelText = Label(self, text="PE Ratio: ", width=30, anchor="w")
         self.returnOnEquityLabelText = Label(self, text="Return on Equity Ratio: ", width=30, anchor="w")
         self.currentStockPriceLabelText = Label(self, text="Current Stock Price: ", width=30, anchor="w")
@@ -80,18 +80,18 @@ class Startpage(tk.Frame):
         self.imageArea.grid(row=19, column=2)
 
         ## Griding Values and Text
-        self.stockSymbolText.grid(row=0, column=3)
-        self.textInputBox.grid(row=0, column=4, sticky="nsew")
-        self.textInputBox.bind('<Return>', self.analyze)
-        self.analyzeButton.grid(row=3, column=3, pady=4, sticky="nsew")
-        self.clearButton.grid(row=3, column=4, ipadx=10)
+        self.stock_symbo_text.grid(row=0, column=3)
+        self.text_input_box.grid(row=0, column=4, sticky="nsew")
+        self.text_input_box.bind('<Return>', self.analyze)
+        self.analyze_button.grid(row=3, column=3, pady=4, sticky="nsew")
+        self.clear_button.grid(row=3, column=4, ipadx=10)
         # self.graphCashFlowButton.grid(row=3, column=5, ipadx=10)
         # self.bind('<Return>', lambda event: self.analyze)
 
         self.companyNameLabelText.grid(row=5, column=4)
         self.companySectorLabelText.grid(row=6, column=4)
         self.currentStockPriceLabelText.grid(row=7, column=4)
-        self.earningsPerShareLabelText.grid(row=8, column=4)
+        self.earnings_per_share_label_text.grid(row=8, column=4)
         self.peRatioLabelText.grid(row=9, column=4)
         self.returnOnEquityLabelText.grid(row=10, column=4)
         self.debtToEquityRatioLabelText.grid(row=11, column=4)
@@ -180,7 +180,7 @@ class Startpage(tk.Frame):
         self.profitMarginValue["text"] = self.profitMarginValue["text"] + str(profitMargin) + '%'
 
     def getTextInput(self):
-        result = self.textInputBox.get()
+        result = self.text_input_box.get()
         result = result.rstrip()
 
         if len(result) > 0:
@@ -192,12 +192,12 @@ class Startpage(tk.Frame):
             messagebox.showErrorMessage(self)
 
     def clearUserInputBox(self):
-        self.textInputBox.delete(0, END)
+        self.text_input_box.delete(0, END)
 
     def clearValues(self):
         self.companyNameLabelText["text"] = ""
         self.companySectorLabelText["text"] = self.companySectorDefaultText
-        self.earningsPerShareLabelText["text"] = self.earningsPerShareDefaultText
+        self.earnings_per_share_label_text["text"] = self.earningsPerShareDefaultText
         self.peRatioLabelText["text"] = self.peRatioDefaultText
         self.returnOnEquityLabelText["text"] = self.returnOnEquityDefaultText
         self.currentStockPriceLabelText["text"] = self.currentStockPriceDefaultText
