@@ -65,6 +65,6 @@ class RevenueGraph:
             quarterly_finaincal_earnings = earnings_data[ticker_symbol]['financialsChart'][frequency]
             return quarterly_finaincal_earnings
 
-    def clearPlotPage(self):
+    def clear_plot(self):
         self.fig.clear()  # clear your figure
         self.canvas.draw_idle()  # redraw your canvas so it becomes empty
