@@ -2,7 +2,7 @@ try:
     import Tkinter as tk
 except:
     import tkinter as tk
-from pages import cashFlowPage,homePage,netIncomePage,cashToEarningsPage,debtPage,earningsPage,revenuePage
+from pages import cashflowpage,homePage,netIncomePage,cashToEarningsPage,debtPage,earningsPage,revenuePage
 
 class UserInterFace(tk.Tk):
     def __init__(self):
@@ -26,7 +26,7 @@ class UserInterFace(tk.Tk):
         Charts = tk.Menu(menu, tearoff=0)
         menu.add_cascade(menu=Charts, label="Charts")
 
-        Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(cashFlowPage.CashFlow))
+        Charts.add_command(label="Cash Flow", command=lambda: self.show_frame(cashflowpage.CashFlow))
         Charts.add_command(label="Cash to Earnings", command=lambda: self.show_frame(cashToEarningsPage.CashToEarnings))
         Charts.add_command(label="Long Term Debt", command=lambda: self.show_frame(debtPage.Debt))
         Charts.add_command(label="Net Income", command=lambda: self.show_frame(netIncomePage.NetIncome))
@@ -36,7 +36,7 @@ class UserInterFace(tk.Tk):
         menu.add_separator()
         tk.Tk.config(self, menu=menu)
 
-        for F in (homePage.Startpage, cashFlowPage.CashFlow, debtPage.Debt, netIncomePage.NetIncome, revenuePage.Revenue,
+        for F in (homePage.Startpage, cashflowpage.CashFlow, debtPage.Debt, netIncomePage.NetIncome, revenuePage.Revenue,
                   cashToEarningsPage.CashToEarnings):
             frame = F(container, self)
             self.frames[F] = frame
