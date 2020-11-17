@@ -3,11 +3,10 @@ matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-from Financials import balancesheet as balancesheet
-from Financials import price as price_data
+from app.Financials import balancesheet as balancesheet, price as price_data
 
-from helpers import tickers as ticker
-from helpers import datecleanup as date
+from app.helpers import datecleanup as date, tickers as ticker
+
 
 class DebtGraph:
     def __init__(self):

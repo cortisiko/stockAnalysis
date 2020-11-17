@@ -2,7 +2,7 @@ try:
     import Tkinter as tk
 except:
     import tkinter as tk
-from pages import cashflowpage, homepage, netincomepage, cashtoearningspage, debtpage, earningspage, revenuePage
+from app.pages import netincomepage, cashtoearningspage, cashflowpage, debtpage, homepage, revenuePage
 
 
 class UserInterFace(tk.Tk):

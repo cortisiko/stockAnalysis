@@ -4,11 +4,9 @@ from matplotlib.lines import Line2D
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-from Financials import cashflowsheet as cash_flow_page
-from Financials import price as price_data
+from app.Financials import cashflowsheet as cash_flow_page, price as price_data
 
-from helpers import tickers as ticker
-from helpers import datecleanup as date
+from app.helpers import datecleanup as date, tickers as ticker
 
 matplotlib.use("TkAgg")
 

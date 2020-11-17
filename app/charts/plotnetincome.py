@@ -4,11 +4,10 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
 
-from Financials import price as priceData
-from Financials import incomestatementsheet as income
+from app.Financials import incomestatementsheet as income, price as priceData
 
-from helpers import tickers as ticker
-from helpers import datecleanup as date
+from app.helpers import datecleanup as date, tickers as ticker
+
 
 class NetIncomeGraph:
     def __init__(self):

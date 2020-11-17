@@ -5,9 +5,9 @@ except:
 import tkinter.font
 from tkinter import *
 
-from pages import homepage
-from helpers import messagebox as messagebox
-from charts import plotcashbasedearnings as _cash_to_earnings
+from app.pages import homepage
+from app.helpers import messagebox as messagebox
+from app.charts import plotcashbasedearnings as _cash_to_earnings
 
 
 class CashToEarnings(tk.Frame):
