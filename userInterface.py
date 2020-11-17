@@ -52,6 +52,11 @@ class UserInterFace(tk.Tk):
         return self.frames[page_class]
 
 
-app = UserInterFace()
-app.geometry("1300x600")
-app.mainloop()
+if __name__ == "__main__":
+
+    try:
+        app = UserInterFace()
+        app.geometry("1300x600")
+        app.mainloop()
+    except KeyboardInterrupt as e:
+        print("closing app")
