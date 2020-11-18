@@ -6,7 +6,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
 
-from app.Financials import earnings as earning, price as price_data
+from app.financials import earnings as earning, price as price_data
 
 from app.helpers import tickers as ticker
 

@@ -3,7 +3,7 @@ matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-from app.Financials import balancesheet as balancesheet, price as price_data
+from app.financials import balancesheet as balancesheet, price as price_data
 
 from app.helpers import datecleanup as date, tickers as ticker
 

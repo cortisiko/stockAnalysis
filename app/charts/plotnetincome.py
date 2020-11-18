@@ -4,7 +4,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
 
-from app.Financials import incomestatementsheet as income, price as priceData
+from app.financials import incomestatementsheet as income, price as priceData
 
 from app.helpers import datecleanup as date, tickers as ticker
 

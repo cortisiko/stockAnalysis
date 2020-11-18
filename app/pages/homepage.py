@@ -6,7 +6,7 @@ import tkinter.font
 from tkinter import *
 from PIL import ImageTk, Image as kkImage
 
-from app.Financials import analyze as anlyze
+from app.financials import analyze as anlyze
 from app.helpers import messagebox as messagebox
 
 

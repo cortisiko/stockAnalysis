@@ -1,6 +1,6 @@
 import pytest
 
-from app.Financials.analyze import get_company_sector, get_current_stock_price
+from app.financials.analyze import get_company_sector, get_current_stock_price
 
 
 def test_get_company_sector():
