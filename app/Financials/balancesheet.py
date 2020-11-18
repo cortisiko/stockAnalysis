@@ -3,7 +3,7 @@ error_message = "Company Does not have debt"
 
 # This is the balance sheet tab on the financials page in yahoo finance
 def get_balance_sheet_data(ticker_symbol, frequency):
-    balanceSheetData = ticker_symbol.balance_sheet(frequency=frequency)
+    balanceSheetData = ticker_symbol.balance_sheet(frequency)
 
     return balanceSheetData
 

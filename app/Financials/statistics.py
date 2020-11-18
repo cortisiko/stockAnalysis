@@ -1,7 +1,5 @@
 # This is the statistics page in yahoo finance
 
-import pandas as pd
-
 
 def get_statistics(ticker_object):
     all_financial_data = ticker_object.financial_data
