@@ -8,8 +8,8 @@ https://www.youtube.com/watch?v=ixqeebhUa-w
 
 
 @pytest.fixture
-def ticker_symbol():
-    ticker_symbol = "C"
+def ticker_object():
+    ticker_symbol = "BA"
     ticker_symbol_object = ticker.get_ticker(
         ticker_symbol)
     assert ticker_symbol_object is not None
