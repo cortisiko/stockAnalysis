@@ -7,7 +7,7 @@ https://stackoverflow.com/questions/34466027/in-pytest-what-is-the-use-of-confte
 
 class TestCashFlow:
 
-    def test_cash_flow_data_frame(self, ticker_object):
+    def test_cash_flow_data_returned(self, ticker_object):
         cash_flow_data = cashflowsheet.get_cash_flow_data(ticker_object, "a")
         assert len(cash_flow_data) > 0, "there is not cash flow data"
 
@@ -17,5 +17,6 @@ class TestCashFlow:
         assert 'FreeCashFlow' in yearly_free_cash_flow, "I do not see the free cash flow data"
 
     def test_operating_cash_flow(self, ticker_object):
-        quarterly_operating_cash_flow = cashflowsheet.get_operating_cash_flow(ticker_object)
-        assert 'OperatingCashFlow' in quarterly_operating_cash_flow, "I do not see the operating cash flow data"
+        quarterly_operating_cash_flow_data = cashflowsheet.get_cash_flow_data(ticker_object,"a")
+
+        assert 'OperatingCashFlow' in quarterly_operating_cash_flow_data, "I do not see the operating cash flow data"

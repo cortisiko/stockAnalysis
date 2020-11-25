@@ -1,4 +1,6 @@
 import app.financials.companyprofile as company_profile
+from tests.conftest import stock_symbol
+
 
 
 class TestCompanyProfile:
@@ -9,10 +11,10 @@ class TestCompanyProfile:
 
     def test_get_company_sector(self, ticker_object):
         conpany_profile = company_profile.get_company_profile(ticker_object)
-        conpany_sector = conpany_profile['BA']
+        conpany_sector = conpany_profile[stock_symbol]
         assert "sector" in conpany_sector, "'Sector' is missing from the company profile data object"
 
     def test_company_details(self,ticker_object):
         conpany_profile = company_profile.get_company_profile(ticker_object)
-        company_details = conpany_profile['BA']
+        company_details = conpany_profile[stock_symbol]
         assert "sector" in company_details, "'longBusinessSummary' is missing from the company profile data object"
