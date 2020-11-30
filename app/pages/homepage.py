@@ -6,8 +6,8 @@ import tkinter.font
 from tkinter import *
 from PIL import ImageTk, Image as kkImage
 
-from Financials import analyze as anlyze
-from helpers import messagebox as messagebox
+from app.financials import analyze as anlyze
+from app.helpers import messagebox as messagebox
 
 
 class StartPage(tk.Frame):
@@ -73,7 +73,7 @@ class StartPage(tk.Frame):
         # photo addition
         self.space = Label(self, text="", bg='grey')
         self.space.grid(row=18, column=0)
-        stock_photo = kkImage.open("MainPage.png")
+        stock_photo = kkImage.open("app/MainPage.png")
         stock_photo = stock_photo.resize((225, 229), kkImage.ANTIALIAS)
         photo_img = ImageTk.PhotoImage(stock_photo)
         self.image_area = Label(self, image=photo_img, justify=RIGHT, bg='grey')

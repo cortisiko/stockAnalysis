@@ -2,9 +2,8 @@ import matplotlib
 import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
-from Financials import price as price_data
-from Financials import earnings as earning
-from helpers import tickers as ticker
+from app.financials import earnings as earning, price as price_data
+from app.helpers import tickers as ticker
 from matplotlib.lines import Line2D
 
 matplotlib.use("TkAgg")

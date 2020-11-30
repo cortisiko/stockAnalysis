@@ -1,11 +1,7 @@
-from Financials import cashflowsheet as cash_flow_page
-from Financials import statistics as statistics_tab
-from Financials import summary as summary_page
-from Financials import price as price_data
+from app.financials import statistics as statistics_tab, balancesheet as balance_sheet, \
+    companyprofile as company_profile, cashflowsheet as cash_flow_page, summary as summary_page, price as price_data
 
-from Financials import balancesheet as balance_sheet
-from helpers import tickers as ticker
-from Financials import companyprofile as company_profile
+from app.helpers import tickers as ticker
 
 error_message = "Invalid Stock Symbol"
 

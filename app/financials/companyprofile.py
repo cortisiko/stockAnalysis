@@ -1,3 +1,9 @@
+"""
+
+I need some try except conditions
+
+"""
+
 def get_company_profile(ticker_object):
     company_profile = ticker_object.summary_profile
     return company_profile

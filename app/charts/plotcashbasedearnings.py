@@ -4,12 +4,9 @@ matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-from Financials import price as price_data
-from Financials import incomestatementsheet as income
-from Financials import cashflowsheet as cash_flow_page
+from app.financials import cashflowsheet as cash_flow_page, incomestatementsheet as income, price as price_data
 
-from helpers import datecleanup as dates
-from helpers import tickers as ticker
+from app.helpers import datecleanup as dates, tickers as ticker
 
 
 class CashBasedEarningGraph:

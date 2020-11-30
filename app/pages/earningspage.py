@@ -4,10 +4,10 @@ except:
     import tkinter as tk
 import tkinter.font
 from tkinter import *
-from pages import homepage
+from app.pages import homepage
 
-from charts import plotearnings as plt_earnings
-from helpers import messagebox as messagebox
+from app.charts import plotearnings as plt_earnings
+from app.helpers import messagebox as messagebox
 
 
 class PlotEarningsChart(tk.Frame):
