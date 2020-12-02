@@ -6,7 +6,7 @@ import tkinter.font
 from tkinter import *
 
 from app.charts import plotnetincome as pltincome
-from app.helpers import message_box as messagebox
+from app.helpers import messagebox as messagebox
 
 
 class NetIncome(tk.Frame):

@@ -6,7 +6,7 @@ from matplotlib.lines import Line2D
 
 from app.financials import incomestatementsheet as income, price as priceData
 
-from app.helpers import dates_cleanup as date, tickers as ticker
+from app.helpers import datescleanup as date, tickers as ticker
 
 
 class NetIncomeGraph:

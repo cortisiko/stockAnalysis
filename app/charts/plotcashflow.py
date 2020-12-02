@@ -6,7 +6,7 @@ from matplotlib.figure import Figure
 
 from app.financials import cashflowsheet as cash_flow_page, price as price_data
 
-from app.helpers import dates_cleanup as date, tickers as ticker
+from app.helpers import datescleanup as date, tickers as ticker
 
 matplotlib.use("TkAgg")
 

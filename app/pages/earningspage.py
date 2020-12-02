@@ -7,7 +7,7 @@ from tkinter import *
 from app.pages import homepage
 
 from app.charts import plotearnings as plt_earnings
-from app.helpers import message_box as messagebox
+from app.helpers import messagebox as messagebox
 
 
 class PlotEarningsChart(tk.Frame):

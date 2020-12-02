@@ -6,7 +6,7 @@ from matplotlib.figure import Figure
 
 from app.financials import cashflowsheet as cash_flow_page, incomestatementsheet as income, price as price_data
 
-from app.helpers import dates_cleanup as dates, tickers as ticker
+from app.helpers import datescleanup as dates, tickers as ticker
 
 
 class CashBasedEarningGraph:
