@@ -7,7 +7,7 @@ from tkinter import *
 from PIL import ImageTk, Image as kkImage
 
 from app.financials import analyze as anlyze
-from app.helpers import messagebox as messagebox
+from app.helpers import message_box as messagebox
 
 
 class StartPage(tk.Frame):

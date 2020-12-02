@@ -5,7 +5,7 @@ from matplotlib.figure import Figure
 
 from app.financials import balancesheet as balancesheet, price as price_data
 
-from app.helpers import datecleanup as date, tickers as ticker
+from app.helpers import dates_cleanup as date, tickers as ticker
 
 
 class DebtGraph:

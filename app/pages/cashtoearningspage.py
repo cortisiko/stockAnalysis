@@ -6,7 +6,7 @@ import tkinter.font
 from tkinter import *
 
 from app.pages import homepage
-from app.helpers import messagebox as messagebox
+from app.helpers import message_box as messagebox
 from app.charts import plotcashbasedearnings as _cash_to_earnings
 
 
