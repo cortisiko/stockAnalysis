@@ -1,4 +1,7 @@
 def get_earnings_data(ticker_symbol):
-    earnings = ticker_symbol.earnings
+    try:
+        earnings = ticker_symbol.earnings
+        return earnings
 
-    return earnings
+    except Exception as e:
+        print(e)
