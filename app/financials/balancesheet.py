@@ -18,11 +18,11 @@ def get_long_term_debt(long_term_debt_data):
         print(error_message)
 
 
-def get_cash_and_expenses(balance_sheet_data):
+def get_cash_and_expenses(balance_sheet_data,ticker_symbol):
     try:
         cash_and_cash_equivalents = balance_sheet_data['CashAndCashEquivalents'].iloc[
         -1]  ## getting the data for the most recent year
         cash_and_cash_equivalents = cash_and_cash_equivalents / 1e3
         return cash_and_cash_equivalents
     except Exception as e:
-        print(e,"I do not see anything on the balance sheet")
+        print(f'I do not see anything on the balance sheet for {ticker_symbol}')

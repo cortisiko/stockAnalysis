@@ -92,7 +92,7 @@ def get_cash_burn_number(ticker_symbol):
     balance_sheet_data_frame = balance_sheet.get_balance_sheet_data(ticker_symbol_object, 'a')
     cash_flow_data_frame = cash_flow_page.get_cash_flow_data(ticker_symbol_object, 'a')
 
-    cash_and_cash_equivalents = balance_sheet.get_cash_and_expenses(balance_sheet_data_frame)
+    cash_and_cash_equivalents = balance_sheet.get_cash_and_expenses(balance_sheet_data_frame,ticker_symbol)
 
     """
     because balance sheet does not have a TTM.## if the size of the cash flow data frame > balance sheet select
@@ -110,4 +110,4 @@ def get_cash_burn_number(ticker_symbol):
         else:
           print(f'It will take {cash_burn:,.1f} months before {ticker_symbol_name} runs out of money')
     except Exception as e:
-        print(e)
+        print(f'yikes, seems like I cannot get the cash burn for {ticker_symbol} because "{e}"')
