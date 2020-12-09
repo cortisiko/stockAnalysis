@@ -20,11 +20,12 @@ def get_operating_cash_flow(cash_flow_data):
 
 
 def get_most_recent_cash_flow_total(cash_flow_data, position):
-    most_recent_cash_flow = cash_flow_data['FreeCashFlow'].iloc[position]  ## takes the most recent cashflow
-    most_recent_cash_flow = most_recent_cash_flow / 1e3
-
-    return most_recent_cash_flow
-
+    try:
+        most_recent_cash_flow = cash_flow_data['FreeCashFlow'].iloc[position]  ## takes the most recent cashflow
+        most_recent_cash_flow = most_recent_cash_flow / 1e3
+        return most_recent_cash_flow
+    except Exception as e:
+        print(e)
 
 def calculate_cash_burn(cash_and_cash_equivalents, free_cash_flow):
     cash_burn = cash_and_cash_equivalents / free_cash_flow

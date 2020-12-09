@@ -110,16 +110,26 @@ class StartPage(tk.Frame):
         # self.companyDetailsValue.grid(row=22,column=5)
 
     def analyze(self, event=None):
-        self.get_company_name()
-        self.get_company_sector()
-        self.get_eps()
-        self.get_pe_ratio()
-        self.get_return_on_equity()
-        self.current_stock_price()
-        self.get_debt_to_equity_ratio()
-        self.get_profit_margin()
+        try:
+            self.get_company_name()
+            self.get_company_sector()
+            self.get_eps()
+            self.get_pe_ratio()
+            self.get_return_on_equity()
+            self.current_stock_price()
+            self.get_debt_to_equity_ratio()
+            self.get_profit_margin()
         # self.getCompanyDetails()
-        self.clear_user_input_box()
+            self.clear_user_input_box()
+
+        except AttributeError as e:
+            print(e)
+            messagebox.showErrorMessage(self)
+        except KeyError as e:
+            user_input = self.get_text_input()
+            print(f'the symbol "{user_input}" does not have {e} in the returned ticker object ')
+            messagebox.showErrorMessage(self)
+
 
     def get_company_name(self):
         ticker_from_user = self.get_text_input()
