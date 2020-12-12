@@ -1,0 +1,25 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  teststocks:
+    executor: python/default
+    steps:
+      - checkout
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+      - run:
+         command: |  # use pipenv to install dependencies
+          sudo pip install pipenv
+          pipenv install
+      - run:
+          command: ./manage.py test
+          name: Tests
+
+workflows:
+  main:
+    jobs:
+      - teststocks
