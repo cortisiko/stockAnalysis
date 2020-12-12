@@ -21,7 +21,7 @@ global ticker_symbol
 
 
 def pytest_addoption(parser):
-    parser.addoption("--ticker", action="store", default="BA", help="By default: BA")
+    parser.addoption("--ticker", action="store", default="V", help="By default: V")
 
 
 @pytest.fixture
