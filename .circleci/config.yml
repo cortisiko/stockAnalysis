@@ -17,7 +17,7 @@ jobs:
           pipenv install
       - run:
           command: ./manage.py test
-          name: Tests
+          name: Test
 
 workflows:
   main:
