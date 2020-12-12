@@ -80,7 +80,7 @@ class StartPage(tk.Frame):
         self.image_area.photo = photo_img
         self.image_area.grid(row=19, column=2)
 
-        ## Griding Values and Text
+        # Griding Values and Text
         self.stock_symbo_text.grid(row=0, column=3)
         self.text_input_box.grid(row=0, column=4, sticky="nsew")
         self.text_input_box.bind('<Return>', self.analyze)
@@ -110,21 +110,30 @@ class StartPage(tk.Frame):
         # self.companyDetailsValue.grid(row=22,column=5)
 
     def analyze(self, event=None):
-        self.get_company_name()
-        self.get_company_sector()
-        self.get_eps()
-        self.get_pe_ratio()
-        self.get_return_on_equity()
-        self.current_stock_price()
-        self.get_debt_to_equity_ratio()
-        self.get_profit_margin()
-        # self.getCompanyDetails()
-        self.clear_user_input_box()
+        try:
+            self.get_company_name()
+            self.get_company_sector()
+            self.get_eps()
+            self.get_pe_ratio()
+            self.get_return_on_equity()
+            self.current_stock_price()
+            self.get_debt_to_equity_ratio()
+            self.get_profit_margin()
+            # self.getCompanyDetails()
+            self.clear_user_input_box()
+
+        except AttributeError as e:
+            print(e)
+            messagebox.showErrorMessage(self)
+        except KeyError as e:
+            user_input = self.get_text_input()
+            print(f'the symbol "{user_input}" does not have {e} in the returned ticker object ')
+            messagebox.showErrorMessage(self)
 
     def get_company_name(self):
         ticker_from_user = self.get_text_input()
         company_name = anlyze.get_stock_name(ticker_from_user)
-        burn = anlyze.get_cash_burn_number(ticker_from_user)  ## can remove whenever. Proof of concept for cash burn
+        burn = anlyze.get_cash_burn_number(ticker_from_user)  # can remove whenever. Proof of concept for cash burn
         self.company_name_label_text["text"] = ""
         self.company_name_label_text["text"] = self.company_name_label_text["text"] + str(company_name)
 

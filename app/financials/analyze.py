@@ -15,7 +15,6 @@ def get_company_sector(ticker_symbol):
     except TypeError:
         return error_message
 
-
 def get_company_details(ticker_symbol_symbol):
     try:
         ticker_symbol_object = ticker.get_ticker(
@@ -92,19 +91,22 @@ def get_cash_burn_number(ticker_symbol):
     balance_sheet_data_frame = balance_sheet.get_balance_sheet_data(ticker_symbol_object, 'a')
     cash_flow_data_frame = cash_flow_page.get_cash_flow_data(ticker_symbol_object, 'a')
 
-    cash_and_cash_equivalents = balance_sheet.get_cash_and_expenses(balance_sheet_data_frame)
+    cash_and_cash_equivalents = balance_sheet.get_cash_and_expenses(balance_sheet_data_frame,ticker_symbol)
 
     """
     because balance sheet does not have a TTM.## if the size of the cash flow data frame > balance sheet select
     the most recent year(not TTM)
     """
-    if cash_flow_data_frame.shape[0] > balance_sheet_data_frame.shape[0]:
-        most_recent_cash_flow = cash_flow_page.get_most_recent_cash_flow_total(cash_flow_data_frame, -2)
+    try:
+        if cash_flow_data_frame.shape[0] > balance_sheet_data_frame.shape[0]:
+            most_recent_cash_flow = cash_flow_page.get_most_recent_cash_flow_total(cash_flow_data_frame, -2)
 
-    cash_burn = cash_flow_page.calculate_cash_burn(cash_and_cash_equivalents, most_recent_cash_flow)
+        cash_burn = cash_flow_page.calculate_cash_burn(cash_and_cash_equivalents, most_recent_cash_flow)
 
-    ticker_symbol_name = get_stock_name(ticker_symbol)
-    if cash_burn < 0:
-        print(f'{ticker_symbol_name} is already running out of money. Their cash burn is:{cash_burn:,.1f} months')
-    else:
-        print(f'It will take {cash_burn:,.1f} months before {ticker_symbol_name} runs out of money')
+        ticker_symbol_name = get_stock_name(ticker_symbol)
+        if cash_burn < 0:
+            print(f'{ticker_symbol_name} is already running out of money. Their cash burn is:{cash_burn:,.1f} months')
+        else:
+          print(f'It will take {cash_burn:,.1f} months before {ticker_symbol_name} runs out of money')
+    except Exception as e:
+        print(f'yikes, seems like I cannot get the cash burn for {ticker_symbol} because "{e}"')

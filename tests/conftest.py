@@ -5,9 +5,6 @@ from app.helpers import tickers as ticker
 learn this tutorial on python pytests. being productive 
 https://www.youtube.com/watch?v=ixqeebhUa-w
 
-and taking args:
-https://stackoverflow.com/questions/44441929/how-to-share-global-variables-between-tests
-
 
 You are up to 'post-process test reports/failures:
 https://docs.pytest.org/en/6.0.1/example/simple.html
@@ -24,7 +21,7 @@ global ticker_symbol
 
 
 def pytest_addoption(parser):
-    parser.addoption("--ticker", action="store", default="BA", help="By default: BA")
+    parser.addoption("--ticker", action="store", default="V", help="By default: V")
 
 
 @pytest.fixture
