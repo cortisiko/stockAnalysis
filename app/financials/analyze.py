@@ -15,7 +15,6 @@ def get_company_sector(ticker_symbol):
     except TypeError:
         return error_message
 
-
 def get_company_details(ticker_symbol_symbol):
     try:
         ticker_symbol_object = ticker.get_ticker(
