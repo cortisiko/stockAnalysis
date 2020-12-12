@@ -1,0 +1,25 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  test_yahoo_data:
+    executor: python/default
+    steps:
+      - checkout
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+      - run:
+         command: |  # use pipenv to install dependencies
+          sudo pip install pipenv
+          pipenv install
+      - run:
+          command: python -m pytest --ticker=SQ
+          name: Test
+
+workflows:
+  main:
+    jobs:
+      - test_yahoo_data
