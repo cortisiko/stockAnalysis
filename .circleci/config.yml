@@ -16,7 +16,7 @@ jobs:
           sudo pip install pipenv
           pipenv install
       - run:
-          command: pytest
+          command: python -m pytest
           name: Test
 
 workflows:
