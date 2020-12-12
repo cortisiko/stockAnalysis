@@ -4,7 +4,7 @@ orbs:
   python: circleci/python@0.2.1
 
 jobs:
-  teststocks:
+  test_yahoo_data:
     executor: python/default
     steps:
       - checkout
@@ -16,10 +16,10 @@ jobs:
           sudo pip install pipenv
           pipenv install
       - run:
-          command: python -m pytest --ticker=SQ
+          command: python -m pytest --ticker=VYM
           name: Test
 
 workflows:
   main:
     jobs:
-      - teststocks
+      - test_yahoo_data
