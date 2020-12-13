@@ -15,7 +15,6 @@ jobs:
          command: |  # use pipenv to install dependencies
           sudo pip install pipenv
           pipenv install
-        name: Spin up virtual environment and install dependencies
       - run:
           command: python -m pytest --ticker=SQ --junitxml=tests/test-results/results.xml
           name: trigging tests
