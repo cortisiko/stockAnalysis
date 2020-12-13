@@ -19,7 +19,7 @@ jobs:
           command: python -m pytest --ticker=SQ
           name: Test
       - store_test_results:
-          path: tests
+          path: tests/test-results
 workflows:
   main:
     jobs:
