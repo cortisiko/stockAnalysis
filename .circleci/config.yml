@@ -16,7 +16,8 @@ jobs:
           sudo pip install pipenv
           pipenv install
       - run:
-          command: python -m pytest --ticker=SQ
+          command: python -m pytest --ticker=SQ --junitxml=tests/test-results/results.xml
+
           name: Test
       - store_test_results:
           path: tests/test-results
