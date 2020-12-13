@@ -18,7 +18,8 @@ jobs:
       - run:
           command: python -m pytest --ticker=SQ
           name: Test
-
+      - store_test_results:
+          path: /tmp/circleci-test-results
 workflows:
   main:
     jobs:
