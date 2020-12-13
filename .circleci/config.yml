@@ -1,7 +1,8 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@0.2.1
+  docker:
+  image: circleci/python@0.2.1
 
 jobs:
   test_yahoo_data:
