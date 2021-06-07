@@ -4,6 +4,7 @@ from app.financials import statistics as statistics_tab, balancesheet as balance
 from app.helpers import tickers as ticker
 
 ## analyze page
+
 error_message = "Invalid Stock Symbol"
 
 
