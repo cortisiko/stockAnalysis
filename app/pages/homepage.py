@@ -6,7 +6,6 @@ import tkinter.font as tkFont
 from tkinter import *
 
 from openai import OpenAI
-# Conditionally import Button from tkmacosx for macOS
 if platform.system() == "Darwin":
     from tkmacosx import Button
 else:
@@ -29,9 +28,6 @@ class StartPage(tk.Frame):
         self.title_frame = Frame(self, background='#2c3e50')
         self.title_frame.grid(row=0, column=0, pady=10, padx=10, sticky='ew')
 
-        # self.title_label = Label(self.title_frame, text="Stock Analysis", font=self.my_font, background='#2c3e50', fg='#ecf0f1')
-        # self.title_label.grid(row=0, column=0, padx=10, pady=10, sticky='ew')
-
         # Center content
         self.content_frame = Frame(self, background='#2c3e50')
         self.content_frame.grid(row=1, column=0, pady=10, padx=10, sticky='nsew')
@@ -50,7 +46,6 @@ class StartPage(tk.Frame):
         self.text_input_box.focus()
         self.text_input_box.bind('<Return>', self.analyze)
 
-        # Use Button from tkmacosx for better styling on macOS
         self.analyze_button = Button(self.input_frame, text='Analyze Stock', bg='#27ae60', fg='#ecf0f1', font=self.label_font, borderless=True, command=self.analyze)
         self.analyze_button.grid(row=0, column=2, padx=10, pady=10, sticky='w')
 
@@ -70,6 +65,8 @@ class StartPage(tk.Frame):
         ]
         self.value_labels = {}
         self.skeleton_loaders = {}
+        self.animation_ids = {}
+        self.row_info = {}
 
         for i, label in enumerate(labels):
             lbl = Label(self.results_frame, text=label, width=25, anchor="w", font=self.label_font, background='#34495e', fg='#ecf0f1')
@@ -78,17 +75,15 @@ class StartPage(tk.Frame):
             canvas.grid(row=i + 1, column=1, padx=10, pady=5, sticky='w')
             self.skeleton_loaders[label] = canvas
             self.value_labels[label] = Label(self.results_frame, text="", width=25, anchor="w", font=self.label_font, background='#34495e', fg='#ecf0f1')
+            self.row_info[label] = {'row': i + 1, 'column': 1}
 
-        # Bindings
         self.parent.bind('<Return>', self.analyze)
 
     def analyze(self, event=None):
         def analyze_thread():
-            # Disable input elements during analysis
-            for widget in (self.text_input_box, self.analyze_button, self.clear_button):
-                widget.config(state='disabled')
-
-            self.set_skeleton_loaders()  # Set skeleton loaders before starting the analysis thread
+            self.controller.after(0, self.clear_values)
+            self.controller.after(0, lambda: self.set_widget_state('disabled'))
+            self.controller.after(0, self.set_skeleton_loaders)
 
             time.sleep(1)  # Simulate delay for demo purposes
             try:
@@ -107,27 +102,38 @@ class StartPage(tk.Frame):
             except Exception as e:
                 print(f"An error occurred: {e}")
             finally:
-                # Enable input elements after analysis
-                for widget in (self.text_input_box, self.analyze_button, self.clear_button):
-                    widget.config(state='normal')
+                self.controller.after(0, lambda: self.set_widget_state('normal'))
                 self.controller.after(0, self.clear_user_input_box)
 
         analysis_thread = threading.Thread(target=analyze_thread)
         analysis_thread.start()
 
+    def set_widget_state(self, state):
+        for widget in (self.text_input_box, self.analyze_button, self.clear_button):
+            widget.config(state=state)
+
     def set_skeleton_loaders(self):
         for label, canvas in self.skeleton_loaders.items():
             canvas.delete("all")
             rect_id = canvas.create_rectangle(10, 2, 190, 18, fill="light gray", outline="")
-            self.animate_loader(canvas, rect_id)
+            self.animate_loader(canvas, rect_id, label)
+            canvas.lift(rect_id)
+            canvas.update_idletasks()
+            print(f"Loader set for {label}")
 
-    def animate_loader(self, canvas, rect_id):
-        def animate():
-            colors = ["#ecf0f1", "#bdc3c7", "#7f8c8d"]
-            for i in range(3):
-                canvas.after(100 * i, lambda c=canvas, col=colors[i], id=rect_id: c.itemconfig(id, fill=col))
+    def animate_loader(self, canvas, rect_id, label):
+        colors = ["#ecf0f1", "#bdc3c7", "#7f8c8d"]
+        def animate_color(idx=0):
+            canvas.itemconfig(rect_id, fill=colors[idx])
+            next_idx = (idx + 1) % len(colors)
+            self.animation_ids[label] = canvas.after(300, animate_color, next_idx)
+            print(f"Animating {label} to color {colors[idx]}")
+        animate_color()
 
-        animate()
+    def stop_animation(self, label):
+        if label in self.animation_ids:
+            self.after_cancel(self.animation_ids[label])
+            del self.animation_ids[label]
 
     def update_company_name(self, value):
         self.company_name_label_text["text"] = value
@@ -135,16 +141,22 @@ class StartPage(tk.Frame):
     def update_value(self, label, value):
         if label in self.value_labels:
             try:
-                row_info = self.skeleton_loaders[label].grid_info()  # Get grid info before removing
-                self.skeleton_loaders[label].grid_remove()
-                self.value_labels[label]["text"] = value
-                self.value_labels[label].grid(row=row_info["row"], column=1, padx=10, pady=5, sticky='w')
+                self.controller.after(0, self._update_value_gui, label, value)
             except KeyError as e:
                 print(f"KeyError: {e} while updating {label} with value {value}")
             except Exception as e:
                 print(f"Unexpected error: {e}")
         else:
             print(f"Label '{label}' not found in value_labels.")
+
+    def _update_value_gui(self, label, value):
+        self.stop_animation(label)
+        row_info = self.row_info.get(label, {})
+        if row_info:
+            self.skeleton_loaders[label].grid_remove()
+            self.value_labels[label]["text"] = value
+            self.value_labels[label].grid(row=row_info["row"], column=row_info["column"], padx=10, pady=5, sticky='w')
+            print(f"Updated {label} to {value}")
 
     def get_text_input(self):
         return self.text_input_box.get().strip().upper()
@@ -187,9 +199,9 @@ class StartPage(tk.Frame):
             label["text"] = ""
         for canvas in self.skeleton_loaders.values():
             canvas.delete("all")
+        for label in self.animation_ids:
+            self.after_cancel(self.animation_ids[label])
+        self.animation_ids.clear()
 
     def clear_user_input_box(self):
         self.text_input_box.delete(0, END)
-
-
-
