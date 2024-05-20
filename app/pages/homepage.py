@@ -23,40 +23,48 @@ class StartPage(tk.Frame):
         self.my_font = tkFont.Font(self, family="Helvetica", size=20, weight="bold")
         self.label_font = tkFont.Font(self, family="Helvetica", size=12)
 
+        # Configure grid layout for the root frame
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
         # Title and Logo
         self.title_frame = Frame(self, background='#2c3e50')
-        self.title_frame.grid(row=0, column=0, pady=10, padx=10, sticky='ew')
+        self.title_frame.grid(row=0, column=0, pady=5, padx=5, sticky='n')
 
         # Center content
         self.content_frame = Frame(self, background='#2c3e50')
-        self.content_frame.grid(row=1, column=0, pady=10, padx=10, sticky='nsew')
+        self.content_frame.grid(row=1, column=0, pady=5, padx=5, sticky='n')
         self.content_frame.grid_rowconfigure(0, weight=1)
         self.content_frame.grid_columnconfigure(0, weight=1)
 
+        # Configure grid layout for the content frame
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
         # Input Frame
         self.input_frame = Frame(self.content_frame, background='#34495e', bd=2, relief=SOLID)
-        self.input_frame.grid(row=0, column=0, pady=10, padx=10, sticky='n')
+        self.input_frame.grid(row=0, column=0, pady=5, padx=5, sticky='n')
 
         self.stock_symbol_text = Label(self.input_frame, text="Enter Stock Symbol:", font=self.label_font, background='#34495e', fg='#ecf0f1')
-        self.stock_symbol_text.grid(row=0, column=0, padx=10, pady=10, sticky='w')
+        self.stock_symbol_text.grid(row=0, column=0, padx=5, pady=5, sticky='w')
 
         self.text_input_box = Entry(self.input_frame, relief=SOLID, width=20, borderwidth=2, font=self.label_font)
-        self.text_input_box.grid(row=0, column=1, padx=10, pady=10, sticky='w')
+        self.text_input_box.grid(row=0, column=1, padx=5, pady=5, sticky='w')
         self.text_input_box.focus()
         self.text_input_box.bind('<Return>', self.analyze)
 
         self.analyze_button = Button(self.input_frame, text='Analyze Stock', bg='#27ae60', fg='#ecf0f1', font=self.label_font, borderless=True, command=self.analyze)
-        self.analyze_button.grid(row=0, column=2, padx=10, pady=10, sticky='w')
+        self.analyze_button.grid(row=0, column=2, padx=5, pady=5, sticky='w')
 
         self.clear_button = Button(self.input_frame, text="Clear", bg='#c0392b', fg='#ecf0f1', font=self.label_font, borderless=True, command=self.clear_values)
-        self.clear_button.grid(row=0, column=3, padx=10, pady=10, sticky='w')
+        self.clear_button.grid(row=0, column=3, padx=5, pady=5, sticky='w')
 
         # Results Frame
         self.results_frame = Frame(self.content_frame, background='#34495e', bd=2, relief=SOLID)
-        self.results_frame.grid(row=1, column=0, pady=10, padx=10, sticky='n')
+        self.results_frame.grid(row=1, column=0, pady=5, padx=5, sticky='n')
 
         self.company_name_label_text = Label(self.results_frame, text="", font=self.my_font, bg='#34495e', fg='#ecf0f1', anchor="w")
-        self.company_name_label_text.grid(row=0, column=0, columnspan=2, pady=10)
+        self.company_name_label_text.grid(row=0, column=0, columnspan=2, pady=5)
 
         labels = [
             "Sector:", "Current Stock Price:", "Earnings Per Share:",
@@ -69,9 +77,9 @@ class StartPage(tk.Frame):
 
         for i, label in enumerate(labels):
             lbl = Label(self.results_frame, text=label, width=25, anchor="w", font=self.label_font, background='#34495e', fg='#ecf0f1')
-            lbl.grid(row=i + 1, column=0, padx=10, pady=5, sticky='w')
+            lbl.grid(row=i + 1, column=0, padx=5, pady=5, sticky='w')
             canvas = Canvas(self.results_frame, width=200, height=20, bg='#34495e', highlightthickness=0)
-            canvas.grid(row=i + 1, column=1, padx=10, pady=5, sticky='w')
+            canvas.grid(row=i + 1, column=1, padx=5, pady=5, sticky='w')
             self.skeleton_loaders[label] = canvas
             self.value_labels[label] = Label(self.results_frame, text="", width=25, anchor="w", font=self.label_font, background='#34495e', fg='#ecf0f1')
             self.row_info[label] = {'row': i + 1, 'column': 1}
@@ -159,7 +167,7 @@ class StartPage(tk.Frame):
         if row_info:
             self.skeleton_loaders[label].grid_remove()
             self.value_labels[label]["text"] = value
-            self.value_labels[label].grid(row=row_info["row"], column=row_info["column"], padx=10, pady=5, sticky='w')
+            self.value_labels[label].grid(row=row_info["row"], column=row_info["column"], padx=5, pady=5, sticky='w')
             print(f"Updated {label} to {value}")
 
     def get_text_input(self):
