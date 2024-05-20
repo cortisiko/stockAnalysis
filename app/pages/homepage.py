@@ -111,8 +111,7 @@ class StartPage(tk.Frame):
                     self.controller.after(0, self.update_value, 'Net Profit Margin:', self.get_profit_margin())
                 else:
                     self.show_error("User did not enter a valid ticker")
-            except Exception as e:
-                self.show_error(f"An error occurred: {e}")
+
             finally:
                 self.controller.after(0, lambda: self.set_widget_state('normal'))
                 self.controller.after(0, self.clear_user_input_box)
