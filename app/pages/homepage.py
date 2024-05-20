@@ -5,7 +5,6 @@ import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import *
 
-from openai import OpenAI
 if platform.system() == "Darwin":
     from tkmacosx import Button
 else:
@@ -81,6 +80,11 @@ class StartPage(tk.Frame):
 
     def analyze(self, event=None):
         def analyze_thread():
+            ticker = self.get_text_input()
+            if not ticker:
+                self.show_error("Please enter a valid stock symbol.")
+                return
+
             self.controller.after(0, self.clear_values)
             self.controller.after(0, lambda: self.set_widget_state('disabled'))
             self.controller.after(0, self.set_skeleton_loaders)
@@ -98,9 +102,9 @@ class StartPage(tk.Frame):
                     self.controller.after(0, self.update_value, 'Debt to Equity Ratio:', self.get_debt_to_equity_ratio())
                     self.controller.after(0, self.update_value, 'Net Profit Margin:', self.get_profit_margin())
                 else:
-                    print("User did not enter a valid ticker")
+                    self.show_error("User did not enter a valid ticker")
             except Exception as e:
-                print(f"An error occurred: {e}")
+                self.show_error(f"An error occurred: {e}")
             finally:
                 self.controller.after(0, lambda: self.set_widget_state('normal'))
                 self.controller.after(0, self.clear_user_input_box)
@@ -205,3 +209,11 @@ class StartPage(tk.Frame):
 
     def clear_user_input_box(self):
         self.text_input_box.delete(0, END)
+
+    def show_error(self, message):
+        error_window = Toplevel(self)
+        error_window.title("Error")
+        error_label = Label(error_window, text=message, font=self.label_font, fg='red')
+        error_label.pack(padx=20, pady=20)
+        ok_button = Button(error_window, text="OK", command=error_window.destroy)
+        ok_button.pack(pady=10)
