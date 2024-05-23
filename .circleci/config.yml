@@ -12,14 +12,15 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-         command: |  # use pipenv to install dependencies
-          sudo pip install pipenv
-          pipenv install
+          command: |
+            sudo pip install pipenv
+            pipenv install
       - run:
           command: python -m pytest --ticker=SQ --junitxml=tests/test-results/results.xml
-          name: trigging tests
+          name: triggering tests
       - store_test_results:
           path: tests/test-results
+
 workflows:
   main:
     jobs:
