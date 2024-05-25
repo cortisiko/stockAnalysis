@@ -38,3 +38,7 @@ typing_extensions==4.11.0
 tzdata==2024.1
 urllib3==2.2.1
 yahooquery==2.3.7
+pytest == 8.2.1
+pytest-cov == 5.0.0
+pytest-html == 4.1.1
+pytest-metadata == 3.1.1

@@ -12,6 +12,12 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
+      - run:
+          name: Install pipenv
+          command: pip install pipenv
+      - run:
+          name: Install dependencies
+          command: pipenv install --dev
       - save_cache:
           paths:
             - ./venv
