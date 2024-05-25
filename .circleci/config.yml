@@ -17,7 +17,10 @@ jobs:
           command: pip install pipenv
       - run:
           name: Install dependencies
-          command: pipenv install --dev
+          command: pipenv install
+      - python/install-packages:
+          args: pytest
+          pkg-manager: pipenv
       - save_cache:
           paths:
             - ./venv
