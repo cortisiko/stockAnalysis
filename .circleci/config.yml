@@ -1,23 +1,33 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@0.2.1
+  python: circleci/python@2.1.1
 
 jobs:
   test_yahoo_data:
-    executor: python/default
+    docker:
+      - image: cimg/python:3.12.1
     steps:
       - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
       - run:
-         command: |  # use pipenv to install dependencies
-          sudo pip install pipenv
-          pipenv install
+          name: Install pipenv
+          command: pip install pipenv
       - run:
-          command: python -m pytest --ticker=SQ --junitxml=tests/test-results/results.xml
-          name: trigging tests
+          name: Install dependencies
+          command: pipenv install --dev
+      - python/install-packages:
+          args: pytest
+          pkg-manager: pipenv
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
+      - run:
+          name: Run Tests
+          command: pipenv run pytest --ticker=SQ --junitxml=tests/test-results/results.xml
       - store_test_results:
           path: tests/test-results
 workflows:
