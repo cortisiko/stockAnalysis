@@ -17,7 +17,7 @@ jobs:
           command: pip install pipenv
       - run:
           name: Install dependencies
-          command: pipenv install
+          command: pipenv install --dev
       - python/install-packages:
           args: pytest
           pkg-manager: pipenv
@@ -27,7 +27,7 @@ jobs:
           key: v1-dependencies-{{ checksum "requirements.txt" }}
       - run:
           name: Run Tests
-          command: python -m pytest --ticker=SQ --junitxml=tests/test-results/results.xml
+          command: pipenv run pytest --ticker=SQ --junitxml=tests/test-results/results.xml
       - store_test_results:
           path: tests/test-results
 workflows:
