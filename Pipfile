@@ -47,6 +47,8 @@ pytest = "*"
 pytest-cov = "*"
 pytest-html = "*"
 pytest-metadata = "*"
+pylint = "*"
+black = "*"
 
 [dev-packages]
 
