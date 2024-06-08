@@ -33,7 +33,7 @@ class StartPage(tk.Frame):
 
         # Center content
         self.content_frame = Frame(self, background='#2c3e50')
-        self.content_frame.grid(row=1, column=0, pady=5, padx=5, sticky='n')
+        self.content_frame.grid(row=1, column=0, pady=(100, 0), padx=5, sticky='n')
         self.content_frame.grid_rowconfigure(0, weight=1)
         self.content_frame.grid_columnconfigure(0, weight=1)
 
@@ -75,20 +75,15 @@ class StartPage(tk.Frame):
             "PE Ratio:", "Return on Equity Ratio:", "Debt to Equity Ratio:", "Net Profit Margin:"
         ]
         self.value_labels = {}
-        self.skeleton_loaders = {}
-        self.animation_ids = {}
-        self.row_info = {}
 
         for i, label in enumerate(labels):
             lbl = Label(self.results_frame, text=label, width=25, anchor="w", font=self.label_font, background='#34495e',
                         fg='#ecf0f1')
             lbl.grid(row=i + 1, column=0, padx=5, pady=5, sticky='w')
-            canvas = Canvas(self.results_frame, width=200, height=20, bg='#34495e', highlightthickness=0)
-            canvas.grid(row=i + 1, column=1, padx=5, pady=5, sticky='w')
-            self.skeleton_loaders[label] = canvas
-            self.value_labels[label] = Label(self.results_frame, text="", width=25, anchor="w", font=self.label_font,
-                                             background='#34495e', fg='#ecf0f1')
-            self.row_info[label] = {'row': i + 1, 'column': 1}
+            value_label = Label(self.results_frame, text="", width=25, anchor="w", font=self.label_font,
+                                background='#34495e', fg='#ecf0f1')
+            value_label.grid(row=i + 1, column=1, padx=5, pady=5, sticky='w')
+            self.value_labels[label] = value_label
 
         self.parent.bind('<Return>', self.analyze)
 
