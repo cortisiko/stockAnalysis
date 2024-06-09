@@ -49,6 +49,7 @@ pytest-html = "*"
 pytest-metadata = "*"
 pylint = "*"
 black = "*"
+pre-commit = "*"
 
 [dev-packages]
 
