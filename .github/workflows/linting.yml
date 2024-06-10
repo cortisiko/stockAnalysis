@@ -21,6 +21,7 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
+    - name: Output solution if failure
       if: failure()
-      shell: | 
+      run: | 
        echo "Run `black *.py"
