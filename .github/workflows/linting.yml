@@ -23,5 +23,5 @@ jobs:
         pylint $(git ls-files '*.py')
     - name: Output Message on Failure
       if: failure()
-      run: echo
-        "To fix, run: black *.py"
+      run: | 
+        echo "To fix, run: black *.py"
