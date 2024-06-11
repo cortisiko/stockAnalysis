@@ -24,4 +24,4 @@ jobs:
     - name: Output Message on Failure
       if: failure()
       run: echo
-        "Run `black *.py`"
+        "To fix, run: black *.py"
