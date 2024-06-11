@@ -23,5 +23,5 @@ jobs:
         pylint $(git ls-files '*.py')
     - name: Output Message on Failure
       if: failure()
-      message:
-        Run `black *.py`
+      run: echo
+        "Run `black *.py`"
