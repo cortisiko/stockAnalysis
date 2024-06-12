@@ -5,7 +5,7 @@ except:
 import tkinter.font
 from tkinter import *
 
-from app.charts import plotcashflow as pltCashFlow
+from app.charts import plot_cash_flow as pltCashFlow
 from app.helpers import messagebox as messagebox
 
 
@@ -54,14 +54,14 @@ class CashFlow(tk.Frame):
 
         radio_button_frequency_option = self.radio_text.get()
         if not cash_flow.canvas:
-            cash_flow.plotCashGraph(self, user_input, radio_button_frequency_option)
+            cash_flow.plot_cash_graph(self, user_input, radio_button_frequency_option)
         else:
-            cash_flow.clearPlotPage()
-            cash_flow.plotCashGraph(self, user_input, radio_button_frequency_option)
+            cash_flow.clear_plot_page()
+            cash_flow.plot_cash_graph(self, user_input, radio_button_frequency_option)
 
     def clear(self):
         self.text_input_box.delete("1.0", "end")
-        cash_flow.clearPlotPage()
+        cash_flow.clear_plot_page()
         self.yearly_radio_button.deselect()
         self.quarterly_radio_button.deselect()
         self.text_input_box.focus()

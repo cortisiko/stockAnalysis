@@ -1,5 +1,5 @@
 from app.financials import statistics as statistics_tab, balancesheet as balance_sheet, \
-    companyprofile as company_profile, cashflowsheet as cash_flow_page, summary as summary_page, price as price_data
+    companyprofile as company_profile, cash_flow_sheet as cash_flow_page, summary as summary_page, price as price_data
 
 from app.helpers import tickers as ticker
 

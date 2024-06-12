@@ -17,8 +17,6 @@ from app.pages import (
     revenuePage,
 )
 
-
-
 # Add the project root directory to the Python path
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
@@ -28,6 +26,7 @@ class UserInterFace(tk.Tk):
     """
       User interface class
       """
+
     def __init__(self):
         tk.Tk.__init__(self)
         self.window_title = self.title("Stock Analyzer")
@@ -74,12 +73,12 @@ class UserInterFace(tk.Tk):
         tk.Tk.config(self, menu=menu)
 
         for F in (
-            homepage.StartPage,
-            cashflowpage.CashFlow,
-            debtpage.Debt,
-            netincomepage.NetIncome,
-            revenuePage.Revenue,
-            cashtoearningspage.CashToEarnings,
+                homepage.StartPage,
+                cashflowpage.CashFlow,
+                debtpage.Debt,
+                netincomepage.NetIncome,
+                revenuePage.Revenue,
+                cashtoearningspage.CashToEarnings,
         ):
             frame = F(container, self)
             self.frames[F] = frame
