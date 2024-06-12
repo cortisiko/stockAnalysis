@@ -19,6 +19,7 @@ class CashFlowGraph:
     """
     Free cash flow graph class.
     """
+
     def __init__(self):
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)
@@ -26,13 +27,13 @@ class CashFlowGraph:
 
     def plot_cash_graph(self, container, ticker_symbol, frequency):
         """
-             Plots the Cash flow for a given stock symbol and frequency.
+        Plots the Cash flow for a given stock symbol and frequency.
 
-             :param container: The container widget where the plot will be displayed.
-             :param ticker_symbol: The stock symbol.
-             :param frequency: The frequency of the data (annual or quarterly).
-             :return: None
-             """
+        :param container: The container widget where the plot will be displayed.
+        :param ticker_symbol: The stock symbol.
+        :param frequency: The frequency of the data (annual or quarterly).
+        :return: None
+        """
         ticker_object = ticker.get_ticker(
             ticker_symbol
         )  ## Gets the ticker object so you can access the various objects

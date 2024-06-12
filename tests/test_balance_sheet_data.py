@@ -10,4 +10,6 @@ class TestBalanceSheet:
 
     def test_long_term_debt(self, ticker_object):
         balance_sheet = _balance_sheet.get_balance_sheet_data(ticker_object, "a")
-        assert 'LongTermDebt' in balance_sheet, "'LongTermDebt' is not in the balance sheet data frame"
+        assert (
+            "LongTermDebt" in balance_sheet
+        ), "'LongTermDebt' is not in the balance sheet data frame"

@@ -10,4 +10,6 @@ class TestIncomeStatement:
     def test_net_income_data_returned(self, user_ticker, ticker_object):
         income_data = income_statement.get_income_statement(ticker_object, "a")
 
-        assert 'NetIncome' in income_data, "'NetIncome' is not in the incomesheet dataframe"
+        assert (
+            "NetIncome" in income_data
+        ), "'NetIncome' is not in the incomesheet dataframe"

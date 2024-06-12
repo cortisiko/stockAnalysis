@@ -29,10 +29,10 @@ def ticker_object(pytestconfig):
     global ticker_symbol
 
     ticker_symbol = pytestconfig.getoption("--ticker").upper()
-    ticker_symbol_object = ticker.get_ticker(
-        ticker_symbol)
+    ticker_symbol_object = ticker.get_ticker(ticker_symbol)
     assert ticker_symbol_object is not None
     return ticker_symbol_object
+
 
 @pytest.fixture
 def user_ticker():

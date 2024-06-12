@@ -14,9 +14,15 @@ class TestCashFlow:
     def test_free_cash_flow(self, ticker_object):
         yearly_free_cash_flow = cash_flow_sheet.get_cash_flow_data(ticker_object, "a")
 
-        assert 'FreeCashFlow' in yearly_free_cash_flow, "I do not see the free cash flow data"
+        assert (
+            "FreeCashFlow" in yearly_free_cash_flow
+        ), "I do not see the free cash flow data"
 
     def test_operating_cash_flow(self, ticker_object):
-        quarterly_operating_cash_flow_data = cash_flow_sheet.get_cash_flow_data(ticker_object,"a")
+        quarterly_operating_cash_flow_data = cash_flow_sheet.get_cash_flow_data(
+            ticker_object, "a"
+        )
 
-        assert 'OperatingCashFlow' in quarterly_operating_cash_flow_data, "I do not see the operating cash flow data"
+        assert (
+            "OperatingCashFlow" in quarterly_operating_cash_flow_data
+        ), "I do not see the operating cash flow data"

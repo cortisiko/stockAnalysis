@@ -54,7 +54,6 @@ class CashBasedEarningGraph:
         else:
             print(f"{company_name} has low quality earnings")
 
-
         ax = self.fig.add_subplot(111)
         y_label_text = "Amount in $"
         graph_title = company_name + " " + self.title

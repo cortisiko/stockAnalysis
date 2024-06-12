@@ -16,15 +16,14 @@ matplotlib.use("TkAgg")
 
 class EarningsGraph:
     """
-      Earnings graph class.
-      """
+    Earnings graph class.
+    """
+
     def __init__(self):
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)
         self.y_label_text = "Amount in $"
         self.earnings_title = "Earnings"
-
-
 
     def plot_earnings(self, container, ticker_symbol, frequency):
         ticker_object = ticker.get_ticker(
