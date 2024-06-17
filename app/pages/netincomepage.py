@@ -5,7 +5,7 @@ except:
 import tkinter.font
 from tkinter import *
 
-from app.charts import plotnetincome as pltincome
+from app.charts import plot_net_income as pltincome
 from app.helpers import messagebox as messagebox
 
 
@@ -58,12 +58,12 @@ class NetIncome(tk.Frame):
             income.plot_net_income(self, user_input, radio_button_frequency_option)
 
         else:
-            income.clearPlotPage()
+            income.clear_plot()
             income.plot_net_income(self, user_input, radio_button_frequency_option)
 
     def clear(self):
         self.text_input_box.delete("1.0", "end")
-        income.clearPlotPage()
+        income.clear_plot()
         self.yearly_radio_button.deselect()
         self.quarterly_radio_button.deselect()
 
