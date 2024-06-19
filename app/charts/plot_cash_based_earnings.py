@@ -1,10 +1,8 @@
 """
-This is the class that plots the cash-based earnings graph.
-"""
+ This is the class that plots the cash-based earnings graph.
+ """
 
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
-import matplotlib
+from app.charts.base_graph import BaseGraph
 from app.financials import (
     cash_flow_sheet as cash_flow_page,
     incomestatementsheet as income,
@@ -12,27 +10,35 @@ from app.financials import (
 )
 from app.helpers import datescleanup as dates, tickers as ticker
 
-matplotlib.use("TkAgg")
 
-
-class CashBasedEarningGraph:
+class CashBasedEarningGraph(BaseGraph):
     """
     Cash-based earnings graph class.
+
+    This class provides functionality to plot cash-based earnings graphs for a given stock symbol
+    and frequency (annual or quarterly). It utilizes matplotlib for plotting and
+    displays the graph in a Tkinter container.
     """
+    # pylint: disable=too-few-public-methods
 
     def __init__(self):
-        self.canvas = None
-        self.fig = Figure(figsize=(12, 5), dpi=80)
+        """
+        Initializes the CashBasedEarningGraph class.
+        """
+        super().__init__("Amount in $")
         self.title = "Cash Based Earnings"
 
     def plot_cash_to_earnings(self, container, ticker_symbol, frequency):
         """
         Plots the Cash to Earnings ratio for a given stock symbol and frequency.
 
-        :param container: The container widget where the plot will be displayed.
-        :param ticker_symbol: The stock symbol.
-        :param frequency: The frequency of the data (annual or quarterly).
-        :return: None
+        Parameters:
+        container (tkinter.Frame): The container widget where the plot will be displayed.
+        ticker_symbol (str): The stock symbol.
+        frequency (str): The frequency of the data (annual or quarterly).
+
+        Returns:
+        None
         """
         ticker_object = ticker.get_ticker(ticker_symbol)
         income_statements_df = income.get_income_statement(ticker_object, frequency)
@@ -55,29 +61,11 @@ class CashBasedEarningGraph:
             print(f"{company_name} has low quality earnings")
 
         ax = self.fig.add_subplot(111)
-        y_label_text = "Amount in $"
-        graph_title = company_name + " " + self.title
-        ax.set_title(graph_title)
-        ax.set_xlabel("Period")
-        ax.set_ylabel(y_label_text)
-
-        ax.get_yaxis().set_major_formatter(
-            matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ","))
-        )
+        graph_title = f"{company_name} {self.title}"
+        self.setup_ax(ax, graph_title, "Period", self.ylabel_text)
 
         ax.plot(all_dates, operating_cash_flow, "-o", label="Cash From Operations")
         ax.plot(all_dates, net_income, "-o", label="Net Income")
 
         ax.legend()
-
-        if not self.canvas:
-            self.canvas = FigureCanvasTkAgg(self.fig, container)
-            self.canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
-        self.canvas.draw_idle()
-
-    def clear_plot_page(self):
-        """
-        This method clears the canvas.
-        """
-        self.fig.clear()  # clear your figure
-        self.canvas.draw_idle()  # redraw your canvas so it becomes empty
+        self.draw_canvas(container)

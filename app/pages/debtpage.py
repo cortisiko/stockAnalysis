@@ -70,7 +70,7 @@ class Debt(tk.Frame):
 
     def clear(self):
         self.text_input_box.delete("1.0", "end")
-        long_term_debt.clearPlotPage()
+        long_term_debt.clear_plot()
         self.yearly_radio_button.deselect()
         self.quarterly_radio_button.deselect()
 

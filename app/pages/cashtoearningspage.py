@@ -60,12 +60,12 @@ class CashToEarnings(tk.Frame):
             cash_to_earnings.plot_cash_to_earnings(self, user_input, radio_button_frequency_option)
 
         else:
-            cash_to_earnings.clear_plot_page()
+            cash_to_earnings.clear_plot()
             cash_to_earnings.plot_cash_to_earnings(self, user_input, radio_button_frequency_option)
 
     def clear(self):
         self.text_input_box.delete("1.0", "end")
-        cash_to_earnings.clear_plot_page()
+        cash_to_earnings.clear_plot()
         self.yearly_radio_button.deselect()
         self.quarterly_radio_button.deselect()
 

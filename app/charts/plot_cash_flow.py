@@ -1,42 +1,40 @@
 """
-This is the class that plots the free cash flow graph.
-"""
+ This is the class that plots the cash-based earnings graph.
+ """
 
-import matplotlib
-
-from matplotlib.lines import Line2D
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
-
+from app.charts.base_graph import BaseGraph
 from app.financials import cash_flow_sheet as cash_flow_page, price as price_data
-
 from app.helpers import datescleanup as date, tickers as ticker
 
-matplotlib.use("TkAgg")
 
-
-class CashFlowGraph:
+class CashFlowGraph(BaseGraph):
     """
     Free cash flow graph class.
+
+    This class provides functionality to plot free cash flow graphs for a given stock symbol
+    and frequency (annual or quarterly). It utilizes matplotlib for plotting and
+    displays the graph in a Tkinter container.
     """
 
     def __init__(self):
-        self.canvas = None
-        self.fig = Figure(figsize=(12, 5), dpi=80)
-        self.y_label_text = "Free Cash Flow in $"
+        """
+        Initializes the CashFlowGraph class.
+        """
+        super().__init__("Free Cash Flow in $")
 
     def plot_cash_graph(self, container, ticker_symbol, frequency):
         """
         Plots the Cash flow for a given stock symbol and frequency.
 
-        :param container: The container widget where the plot will be displayed.
-        :param ticker_symbol: The stock symbol.
-        :param frequency: The frequency of the data (annual or quarterly).
-        :return: None
+        Parameters:
+        container (tkinter.Frame): The container widget where the plot will be displayed.
+        ticker_symbol (str): The stock symbol.
+        frequency (str): The frequency of the data (annual or quarterly).
+
+        Returns:
+        None
         """
-        ticker_object = ticker.get_ticker(
-            ticker_symbol
-        )  ## Gets the ticker object so you can access the various objects
+        ticker_object = ticker.get_ticker(ticker_symbol)
         cash_flow_data_frame = cash_flow_page.get_cash_flow_data(
             ticker_object, frequency
         )
@@ -46,46 +44,31 @@ class CashFlowGraph:
         cash_flow_graph_title = "Free Cash Flow"
 
         ax = self.fig.add_subplot(111)
-
-        graph_title = company_name + " " + cash_flow_graph_title
-        ax.set_title(graph_title)
-        ax.set_xlabel("Period")
-        ax.set_ylabel(self.y_label_text)
-
-        ax.get_yaxis().set_major_formatter(
-            matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ","))
+        self.setup_ax(
+            ax, f"{company_name} {cash_flow_graph_title}", "Period", self.ylabel_text
         )
-
         ax.bar(
             dates, free_cash_flow, color=["r" if v < 0 else "g" for v in free_cash_flow]
         )
+
         for i, v in enumerate(free_cash_flow):
             ax.text(
                 i, v * 0.75, f"${v:,.0f}", fontweight="bold", va="center", ha="center"
             )
 
-        legend_handles = [
-            Line2D(
-                [0],
-                [0],
-                linewidth=0,
-                marker="o",
-                markerfacecolor=color,
-                markersize=12,
-                markeredgecolor="none",
-            )
-            for color in ["g", "r"]
-        ]
-        ax.legend(legend_handles, ["positive cash flow", "negative cash flow"])
+        self.add_legend(ax, "positive cash flow", "negative cash flow")
+        self.draw_canvas(container)
 
-        if not self.canvas:
-            self.canvas = FigureCanvasTkAgg(self.fig, container)
-            self.canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
-        self.canvas.draw_idle()
+    def get_freqency(self, earnings_data, ticker_symbol, frequency):
+        """
+        Retrieves the earnings data for a given stock symbol and frequency.
 
-    def clear_plot_page(self):
+        Parameters:
+        earnings_data (dict): The dictionary containing earnings data.
+        ticker_symbol (str): The stock symbol.
+        frequency (str): The frequency of the data (annual or quarterly).
+
+        Returns:
+        dict: A dictionary containing the earnings data for the specified frequency.
         """
-        This method clears the canvas.
-        """
-        self.fig.clear()  # clear your figure
-        self.canvas.draw_idle()  # redraw your canvas so it becomes empty
+        return earnings_data[ticker_symbol]["financialsChart"][frequency]
