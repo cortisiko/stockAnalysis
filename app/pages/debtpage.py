@@ -62,11 +62,11 @@ class Debt(tk.Frame):
             long_term_debt.plot_debt_graph(self, user_input, radio_button_frequency_option)
 
         else:
-            long_term_debt.clearPlotPage()
+            long_term_debt.clear_plot()
             long_term_debt.plot_debt_graph(self, user_input, radio_button_frequency_option)
 
     def clear_graph(self):
-        long_term_debt.clearPlotPage()
+        long_term_debt.clear_plot()
 
     def clear(self):
         self.text_input_box.delete("1.0", "end")
