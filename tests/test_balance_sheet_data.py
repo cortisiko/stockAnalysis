@@ -1,7 +1,7 @@
 """
    Unit tests for validating the balance sheet data used within the app.
    """
-import app.financials.balancesheet as _balance_sheet
+import app.financials.balance_sheet as _balance_sheet
 
 
 class TestBalanceSheet:
