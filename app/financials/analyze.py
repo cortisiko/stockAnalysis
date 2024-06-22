@@ -29,10 +29,12 @@ Functions:
     get_cash_burn_number(ticker_symbol)
 """
 
+import logging
+
 from app.financials import (
     statistics as statistics_tab,
-    balance_sheet as balance_sheet,
-    company_profile as company_profile,
+    balance_sheet,
+    company_profile,
     cash_flow_sheet as cash_flow_page,
     summary as summary_page,
     price as price_data,
@@ -73,7 +75,7 @@ def get_company_details(ticker_symbol_symbol):
         ticker_symbol_symbol (str): The stock ticker symbol.
 
     Returns:
-        dict: A dictionary containing company details or an error message if the stock symbol is invalid.
+    dict: A dictionary containing company details or an error message if the stock symbol is invalid
     """
     try:
         ticker_symbol_object = ticker.get_ticker(
@@ -107,9 +109,6 @@ def get_stock_name(ticker_symbol_symbol):
         return stock_name
     except TypeError:
         return ERROR_MESSAGE
-
-
-## Fundamentals ###
 
 
 def get_current_stock_price(ticker_symbol_symbol):
@@ -237,7 +236,7 @@ def get_cash_burn_number(ticker_symbol):
     Returns:
         None
     """
-    global most_recent_cash_flow
+
     ticker_symbol_object = ticker.get_ticker(
         ticker_symbol
     )  # Gets the ticker_symbol object so you can access the various objects
@@ -250,11 +249,14 @@ def get_cash_burn_number(ticker_symbol):
         balance_sheet_data_frame, ticker_symbol
     )
 
+    # pylint: disable=pointless-string-statement
     """
     because balance sheet does not have a TTM.## 
     if the size of the cash flow data frame > balance sheet select
     the most recent year(not TTM)
     """
+    # pylint: disable=global-variable-undefined
+    most_recent_cash_flow = None
     try:
         if cash_flow_data_frame.shape[0] > balance_sheet_data_frame.shape[0]:
             most_recent_cash_flow = cash_flow_page.get_most_recent_cash_flow_total(
@@ -262,19 +264,20 @@ def get_cash_burn_number(ticker_symbol):
             )
 
         cash_burn = cash_flow_page.calculate_cash_burn(
+            # pylint: disable=used-before-assignment
             cash_and_cash_equivalents, most_recent_cash_flow
         )
 
         ticker_symbol_name = get_stock_name(ticker_symbol)
         if cash_burn < 0:
             print(
-                f"{ticker_symbol_name} is already running out of money. Their cash burn is:{cash_burn:,.1f} months"
+                # pylint: disable=line-too-long
+                f"{ticker_symbol_name} is running out of money. Their cash burn is:{cash_burn:,.1f} months"
             )
         else:
             print(
+                # pylint: disable=line-too-long
                 f"It will take {cash_burn:,.1f} months before {ticker_symbol_name} runs out of money"
             )
-    except Exception as e:
-        print(
-            f'yikes, seems like I cannot get the cash burn for {ticker_symbol} because "{e}"'
-        )
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
+        logging.error('Failed to calculate cash burn for %s: "%s"', ticker_symbol, e)
