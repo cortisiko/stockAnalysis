@@ -46,10 +46,9 @@ def get_current_stock_price(ticker_object, ticker_symbol):
         current_stock_price = summary_data[ticker_symbol]["currentPrice"]
         current_stock_price = float(round(current_stock_price, 2))
         return current_stock_price
-    except KeyError as e:
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(f"KeyError: {e}")
-    except Exception as e:
-        print(e)
+
 
 
 def get_debt_to_equity(ticker_object, ticker_symbol):
