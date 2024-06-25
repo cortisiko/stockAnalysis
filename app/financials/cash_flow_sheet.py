@@ -78,8 +78,9 @@ def get_most_recent_cash_flow_total(cash_flow_data, position):
         ]  ## takes the most recent cashflow
         most_recent_cash_flow = most_recent_cash_flow / 1e3
         return most_recent_cash_flow
-    except Exception as e:
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(e)
+        return None
 
 
 def calculate_cash_burn(cash_and_cash_equivalents, free_cash_flow):

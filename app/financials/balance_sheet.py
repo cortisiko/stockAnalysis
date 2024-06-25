@@ -26,11 +26,12 @@ def get_balance_sheet_data(ticker_symbol, frequency):
         DataFrame: A DataFrame containing the balance sheet data.
     """
     try:
-        balanceSheetData = ticker_symbol.balance_sheet(frequency)
-        return balanceSheetData
-    except Exception as e:
-        print(e)
+        balance_sheet_data = ticker_symbol.balance_sheet(frequency)
+        return balance_sheet_data
 
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
+        print(e)
+        return None
 
 def get_long_term_debt(long_term_debt_data):
     """
@@ -47,9 +48,9 @@ def get_long_term_debt(long_term_debt_data):
         long_term_debt = long_term_debt / 1e3
 
         return long_term_debt
-    except KeyError:
-        print(ERROR_MESSAGE)
-
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
+        print(ERROR_MESSAGE,e)
+        return None
 
 def get_cash_and_expenses(balance_sheet_data, ticker_symbol):
     """
@@ -68,5 +69,7 @@ def get_cash_and_expenses(balance_sheet_data, ticker_symbol):
         ]  ## getting the data for the most recent year
         cash_and_cash_equivalents = cash_and_cash_equivalents / 1e3
         return cash_and_cash_equivalents
-    except Exception as e:
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(f"I do not see anything on the balance sheet for {ticker_symbol}")
+        print(f"KeyError: {e}")
+        return None
