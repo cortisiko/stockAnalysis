@@ -7,7 +7,7 @@ import tkinter.font
 from tkinter import *
 
 from app.charts import plot_long_term_debt as plt_debt
-from app.helpers import messagebox as messagebox
+from app.helpers import message_box as messagebox
 
 
 class Debt(tk.Frame):
@@ -49,7 +49,7 @@ class Debt(tk.Frame):
             self.yearly_radio_button.deselect()
             self.quarterly_radio_button.deselect()
 
-            messagebox.showErrorMessage(self)
+            messagebox.show_error_message()
 
     def selected_radio_button_option(self):
         user_input = self.get_text_input()

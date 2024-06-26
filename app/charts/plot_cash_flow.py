@@ -4,7 +4,7 @@
 
 from app.charts.base_graph import BaseGraph
 from app.financials import cash_flow_sheet as cash_flow_page, price as price_data
-from app.helpers import datescleanup as date, tickers as ticker
+from app.helpers import dates_cleanup as date, tickers as ticker
 
 
 class CashFlowGraph(BaseGraph):

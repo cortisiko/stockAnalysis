@@ -8,7 +8,7 @@ from app.financials import (
     income_statement_sheet as income,
     price as price_data,
 )
-from app.helpers import datescleanup as dates, tickers as ticker
+from app.helpers import dates_cleanup as dates, tickers as ticker
 
 
 class CashBasedEarningGraph(BaseGraph):

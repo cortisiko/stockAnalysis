@@ -4,7 +4,7 @@ This is the class that plots the Net Income graph.
 
 from app.charts.base_graph import BaseGraph
 from app.financials import income_statement_sheet as income, price as priceData
-from app.helpers import datescleanup as date, tickers as ticker
+from app.helpers import dates_cleanup as date, tickers as ticker
 
 
 class NetIncomeGraph(BaseGraph):

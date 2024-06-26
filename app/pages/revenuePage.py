@@ -7,7 +7,7 @@ from tkinter import *
 
 from app.pages import homepage
 from app.charts import plot_revenue as pltrevenue
-from app.helpers import messagebox as messagebox
+from app.helpers import message_box as messagebox
 
 
 class Revenue(tk.Frame):
@@ -49,7 +49,7 @@ class Revenue(tk.Frame):
         else:
             self.yearly_radio_button.deselect()
             self.quarterly_radio_button.deselect()
-            messagebox.showErrorMessage(self)
+            messagebox.show_error_message()
 
     def selected_radio_button_option(self):
         user_input = self.get_text_input()

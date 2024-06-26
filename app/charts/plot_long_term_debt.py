@@ -4,7 +4,7 @@
 
 from app.charts.base_graph import BaseGraph
 from app.financials import balance_sheet, price as price_data
-from app.helpers import tickers as ticker, datescleanup as date
+from app.helpers import tickers as ticker, dates_cleanup as date
 
 
 class DebtGraph(BaseGraph):
@@ -36,10 +36,10 @@ class DebtGraph(BaseGraph):
         None
         """
         ticker_object = ticker.get_ticker(ticker_symbol)
-        balance_sheet_data_frame = balancesheet.get_balance_sheet_data(
+        balance_sheet_data_frame = balance_sheet.get_balance_sheet_data(
             ticker_object, frequency
         )
-        long_term_debt = balancesheet.get_long_term_debt(balance_sheet_data_frame)
+        long_term_debt = balance_sheet.get_long_term_debt(balance_sheet_data_frame)
         company_name = price_data.get_company_name(ticker_object, ticker_symbol)
         dates = date.get_dates(balance_sheet_data_frame)
 
