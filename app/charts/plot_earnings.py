@@ -4,7 +4,7 @@
 
 import pandas as pd
 from app.charts.base_graph import BaseGraph
-from app.financials import earnings as earning, price as price_data
+from app.financials import price as price_data
 from app.helpers import tickers as ticker
 
 
