@@ -26,9 +26,9 @@ def get_stock_statistics(ticker_object):
     """
     try:
         return ticker_object.financial_data
-    except Exception as e:
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(e)
-
+    return None
 
 def get_current_stock_price(ticker_object, ticker_symbol):
     """
@@ -48,7 +48,7 @@ def get_current_stock_price(ticker_object, ticker_symbol):
         return current_stock_price
     except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(f"KeyError: {e}")
-
+    return None
 
 
 def get_debt_to_equity(ticker_object, ticker_symbol):
@@ -69,12 +69,11 @@ def get_debt_to_equity(ticker_object, ticker_symbol):
             debt_to_equity = debt_to_equity / 100
             debt_to_equity = float(round(debt_to_equity, 2))
             return debt_to_equity
-        else:
-            print("There is no Debt to Equity Ratio for", ticker_symbol)
-    except KeyError as e:
+        print("There is no Debt to Equity Ratio for", ticker_symbol)
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(f"KeyError: {e}")
-    except Exception as e:
-        print(e)
+    return None
+
 
 
 def get_return_on_equity(ticker_object, ticker_symbol):
@@ -94,12 +93,10 @@ def get_return_on_equity(ticker_object, ticker_symbol):
         if return_on_equity is not None:
             return_on_equity = float(round(return_on_equity * 100, 2))
             return return_on_equity
-        else:
-            print("There is no return on equity ratio for", ticker_symbol)
-    except KeyError as e:
+        print("There is no return on equity ratio for", ticker_symbol)
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(f"KeyError: {e}")
-    except Exception as e:
-        print(e)
+    return None
 
 
 def get_profit_margins(ticker_object, ticker_symbol):
@@ -119,9 +116,7 @@ def get_profit_margins(ticker_object, ticker_symbol):
         if profit_margins is not None:
             profit_margins = float(round(profit_margins * 100, 2))
             return profit_margins
-        else:
-            print("There is no net profit margin for", ticker_symbol)
-    except KeyError as e:
+        print("There is no net profit margin for", ticker_symbol)
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(f"KeyError: {e}")
-    except Exception as e:
-        print(e)
+    return None

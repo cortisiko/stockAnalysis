@@ -8,6 +8,7 @@ Functions:
     get_earnings_per_share(income_statement_data)
 """
 
+
 # This is the income statement tab on the financials page in yahoo finance
 
 
@@ -25,8 +26,9 @@ def get_income_statement(ticker_object, frequency):
     try:
         income_statements = ticker_object.income_statement(frequency)
         return income_statements
-    except Exception as e:
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(e)
+    return None
 
 
 def get_net_income(income_statement_data):
@@ -44,12 +46,10 @@ def get_net_income(income_statement_data):
         if net_income is not None:
             net_income = net_income / 1e3
             return net_income
-        else:
-            print("There is no net income for", net_income)
-    except KeyError as e:
+        print("There is no net income for", net_income)
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
         print(f"KeyError: {e}")
-    except Exception as e:
-        print(e)
+    return None
 
 
 def get_earnings_per_share(income_statement_data):
@@ -66,9 +66,7 @@ def get_earnings_per_share(income_statement_data):
         basic_eps = income_statement_data["BasicEPS"]
         if basic_eps is not None:
             return basic_eps
-        else:
-            print("There is no basic EPS for", basic_eps)
-    except KeyError as e:
-        print(f"KeyError: {e}")
-    except Exception as e:
-        print(e)
+        print("There is no basic EPS for", basic_eps)
+    except (AttributeError, KeyError, TypeError, ValueError) as e:
+        print(f"Error: {e}")
+    return None
