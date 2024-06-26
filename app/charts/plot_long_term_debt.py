@@ -3,7 +3,7 @@
  """
 
 from app.charts.base_graph import BaseGraph
-from app.financials import balancesheet, price as price_data
+from app.financials import balance_sheet, price as price_data
 from app.helpers import tickers as ticker, datescleanup as date
 
 

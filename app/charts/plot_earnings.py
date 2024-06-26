@@ -37,7 +37,7 @@ class EarningsGraph(BaseGraph):
         None
         """
         ticker_object = ticker.get_ticker(ticker_symbol)
-        earnings_data = earning.get_earnings_data(ticker_object)
+        earnings_data = ticker_symbol.earnings
         company_name = price_data.get_company_name(ticker_object, ticker_symbol)
 
         data = self.get_freqency(earnings_data, ticker_symbol, frequency)

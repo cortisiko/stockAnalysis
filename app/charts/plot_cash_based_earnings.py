@@ -5,7 +5,7 @@
 from app.charts.base_graph import BaseGraph
 from app.financials import (
     cash_flow_sheet as cash_flow_page,
-    incomestatementsheet as income,
+    income_statement_sheet as income,
     price as price_data,
 )
 from app.helpers import datescleanup as dates, tickers as ticker
