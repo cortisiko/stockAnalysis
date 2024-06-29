@@ -11,7 +11,7 @@ from PIL import Image, ImageTk
 from app.pages import (
     netincomepage,
     cashtoearningspage,
-    cashflowpage,
+    cash_flow_page,
     debtpage,
     homepage,
     revenuePage,
@@ -74,7 +74,7 @@ class UserInterFace(tk.Tk):
 
         for F in (
                 homepage.StartPage,
-                cashflowpage.CashFlow,
+                cash_flow_page.CashFlow,
                 debtpage.Debt,
                 netincomepage.NetIncome,
                 revenuePage.Revenue,
