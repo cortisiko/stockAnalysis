@@ -10,7 +10,7 @@ from PIL import Image, ImageTk
 
 from app.pages import (
     netincomepage,
-    cashtoearningspage,
+    cash_to_earnings_page,
     cash_flow_page,
     debtpage,
     homepage,
@@ -78,7 +78,7 @@ class UserInterFace(tk.Tk):
                 debtpage.Debt,
                 netincomepage.NetIncome,
                 revenuePage.Revenue,
-                cashtoearningspage.CashToEarnings,
+                cash_to_earnings_page.CashToEarnings,
         ):
             frame = F(container, self)
             self.frames[F] = frame
