@@ -6,8 +6,8 @@ except:
 import tkinter.font
 from tkinter import *
 
-from app.charts import plotlongtermdebt as plt_debt
-from app.helpers import messagebox as messagebox
+from app.charts import plot_long_term_debt as plt_debt
+from app.helpers import message_box as messagebox
 
 
 class Debt(tk.Frame):
@@ -49,7 +49,7 @@ class Debt(tk.Frame):
             self.yearly_radio_button.deselect()
             self.quarterly_radio_button.deselect()
 
-            messagebox.showErrorMessage(self)
+            messagebox.show_error_message()
 
     def selected_radio_button_option(self):
         user_input = self.get_text_input()
@@ -62,15 +62,15 @@ class Debt(tk.Frame):
             long_term_debt.plot_debt_graph(self, user_input, radio_button_frequency_option)
 
         else:
-            long_term_debt.clearPlotPage()
+            long_term_debt.clear_plot()
             long_term_debt.plot_debt_graph(self, user_input, radio_button_frequency_option)
 
     def clear_graph(self):
-        long_term_debt.clearPlotPage()
+        long_term_debt.clear_plot()
 
     def clear(self):
         self.text_input_box.delete("1.0", "end")
-        long_term_debt.clearPlotPage()
+        long_term_debt.clear_plot()
         self.yearly_radio_button.deselect()
         self.quarterly_radio_button.deselect()
 

@@ -6,8 +6,8 @@ import tkinter.font
 from tkinter import *
 
 from app.pages import homepage
-from app.helpers import messagebox as messagebox
-from app.charts import plotcashbasedearnings as _cash_to_earnings
+from app.helpers import message_box as messagebox
+from app.charts import plot_cash_based_earnings as _cash_to_earnings
 
 
 class CashToEarnings(tk.Frame):
@@ -51,21 +51,21 @@ class CashToEarnings(tk.Frame):
         else:
             self.yearly_radio_button.deselect()
             self.quarterly_radio_button.deselect()
-            messagebox.showErrorMessage(self)
+            messagebox.show_error_message()
 
     def selected_radio_button_option(self):
         user_input = self.get_text_input()
         radio_button_frequency_option = self.radio_text.get()
         if not cash_to_earnings.canvas:
-            cash_to_earnings.plotCashToEarnings(self, user_input, radio_button_frequency_option)
+            cash_to_earnings.plot_cash_to_earnings(self, user_input, radio_button_frequency_option)
 
         else:
-            cash_to_earnings.clearPlotPage()
-            cash_to_earnings.plotCashToEarnings(self, user_input, radio_button_frequency_option)
+            cash_to_earnings.clear_plot()
+            cash_to_earnings.plot_cash_to_earnings(self, user_input, radio_button_frequency_option)
 
     def clear(self):
         self.text_input_box.delete("1.0", "end")
-        cash_to_earnings.clearPlotPage()
+        cash_to_earnings.clear_plot()
         self.yearly_radio_button.deselect()
         self.quarterly_radio_button.deselect()
 
