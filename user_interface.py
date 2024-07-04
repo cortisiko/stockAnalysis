@@ -53,11 +53,11 @@ class UserInterFace(tk.Tk):
         menu.add_cascade(menu=charts, label="Charts")
 
         charts.add_command(
-            label="Cash Flow", command=lambda: self.show_frame(cashflowpage.CashFlow)
+            label="Cash Flow", command=lambda: self.show_frame(cash_flow_page.CashFlow)
         )
         charts.add_command(
             label="Cash to Earnings",
-            command=lambda: self.show_frame(cashtoearningspage.CashToEarnings),
+            command=lambda: self.show_frame(cash_to_earnings_page.CashToEarnings),
         )
         charts.add_command(
             label="Long Term Debt", command=lambda: self.show_frame(debtpage.Debt)
