@@ -1,57 +1,15 @@
-try:
-    import Tkinter as tk
-except:
-    import tkinter as tk
-import tkinter.font
-from tkinter import *
+from app.pages import homepage
+from app.charts import plot_cash_flow
+from app.helpers import message_box
+from app.pages.base_page import BasePage
 
-from app.charts import plot_cash_flow as pltCashFlow
-from app.helpers import message_box as messagebox
-from app.charts.base_graph import BaseGraph
 
-class CashFlow(tk.Frame):
-
+class CashFlow(BasePage):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-        self['bg'] = '#1B6666'
-        self.my_font = tkinter.font.Font(self, family="Sans Serif", size=20)
-        self.page_title = Label(self, text="Cash Flow Charts", font=self.my_font)
-        self.radio_text = StringVar()
-        self.quarterly_text_string = 'q'
-        self.yearly_text_string = 'a'
-
-        self.text_input_box = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
-        # self.text_input_box.focus()
-        self.frequency_text = Label(self, text="Frequency")
-        self.quarterly_radio_button = Radiobutton(self, text="Quarterly", variable=self.radio_text,
-                                                  value=self.quarterly_text_string,
-                                                  command=self.selected_radio_button_option)
-        self.yearly_radio_button = Radiobutton(self, text="Annual", variable=self.radio_text,
-                                               value=self.yearly_text_string,
-                                               command=self.selected_radio_button_option)
-        self.clear_button = Button(self, text='Clear', bg='red', command=self.clear)
-        self.page_title.pack()
-        self.text_input_box.pack()
-        self.clear_button.pack()
-        self.quarterly_radio_button.pack(side='left', padx=50)
-        self.yearly_radio_button.pack(side='right', padx=50)
-
-    def get_text_input(self):
-        result = self.text_input_box.get("1.0", "end")
-        result = result.rstrip()
-        if len(result) > 0:
-            results = result.upper()
-            results = str(results)
-            return results
-        else:
-            self.yearly_radio_button.deselect()
-            self.quarterly_radio_button.deselect()
-            messagebox.show_error_message()
+        super().__init__(parent, controller, "Cash Flow Charts", 'q', 'a')
 
     def selected_radio_button_option(self):
         user_input = self.get_text_input()
-
         radio_button_frequency_option = self.radio_text.get()
         if not cash_flow.canvas:
             cash_flow.plot_cash_graph(self, user_input, radio_button_frequency_option)
@@ -59,13 +17,13 @@ class CashFlow(tk.Frame):
             cash_flow.clear_plot()
             cash_flow.plot_cash_graph(self, user_input, radio_button_frequency_option)
 
+    def show_error_message(self):
+        message_box.show_error_message()
 
     def clear(self):
-        self.text_input_box.delete("1.0", "end")
+        super().clear()
         cash_flow.clear_plot()
-        self.yearly_radio_button.deselect()
-        self.quarterly_radio_button.deselect()
         self.text_input_box.focus()
 
 
-cash_flow = pltCashFlow.CashFlowGraph()
+cash_flow = plot_cash_flow.CashFlowGraph()

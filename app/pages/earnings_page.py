@@ -5,7 +5,7 @@ from base_page import BasePage
 
 class PlotEarningsChart(BasePage):
     def __init__(self, parent, controller):
-        super().__init__(parent, controller, "Earnings Charts")
+        super().__init__(parent, controller, "Earnings Charts", 'quarterly', 'yearly')
 
     def selected_radio_button_option(self):
         user_input = self.get_text_input()

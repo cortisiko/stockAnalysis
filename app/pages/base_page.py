@@ -4,7 +4,7 @@ from tkinter import Label, StringVar, Text, Radiobutton, Button
 
 
 class BasePage(tk.Frame):
-    def __init__(self, parent, controller, title, bg_color='#1B6666'):
+    def __init__(self, parent, controller, title, quarterly_text, yearly_text, bg_color='#1B6666'):
         tk.Frame.__init__(self, parent)
         self['bg'] = bg_color
         self.controller = controller
@@ -12,8 +12,8 @@ class BasePage(tk.Frame):
         self.page_title = Label(self, text=title, font=self.my_font)
 
         self.radio_text = StringVar()
-        self.quarterly_text_string = 'quarterly'
-        self.yearly_text_string = 'yearly'
+        self.quarterly_text_string = quarterly_text
+        self.yearly_text_string = yearly_text
 
         self.text_input_box = Text(self, relief=tk.RIDGE, height=1, width=6, borderwidth=2)
         self.frequency_text = Label(self, text="Frequency")
