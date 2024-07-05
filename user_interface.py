@@ -9,12 +9,12 @@ import os
 from PIL import Image, ImageTk
 
 from app.pages import (
-    netincomepage,
+    net_income_page,
     cash_to_earnings_page,
     cash_flow_page,
-    debtpage,
+    debt_page,
     homepage,
-    revenuePage,
+    revenue_page,
 )
 
 # Add the project root directory to the Python path
@@ -60,13 +60,13 @@ class UserInterFace(tk.Tk):
             command=lambda: self.show_frame(cash_to_earnings_page.CashToEarnings),
         )
         charts.add_command(
-            label="Long Term Debt", command=lambda: self.show_frame(debtpage.Debt)
+            label="Long Term Debt", command=lambda: self.show_frame(debt_page.Debt)
         )
         charts.add_command(
-            label="Net Income", command=lambda: self.show_frame(netincomepage.NetIncome)
+            label="Net Income", command=lambda: self.show_frame(net_income_page.NetIncome)
         )
         charts.add_command(
-            label="Revenue", command=lambda: self.show_frame(revenuePage.Revenue)
+            label="Revenue", command=lambda: self.show_frame(revenue_page.Revenue)
         )
 
         menu.add_separator()
@@ -75,9 +75,9 @@ class UserInterFace(tk.Tk):
         for F in (
                 homepage.StartPage,
                 cash_flow_page.CashFlow,
-                debtpage.Debt,
-                netincomepage.NetIncome,
-                revenuePage.Revenue,
+                debt_page.Debt,
+                net_income_page.NetIncome,
+                revenue_page.Revenue,
                 cash_to_earnings_page.CashToEarnings,
         ):
             frame = F(container, self)

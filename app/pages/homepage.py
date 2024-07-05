@@ -12,6 +12,7 @@ else:
 
 from app.financials import analyze as analyze
 
+
 class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -77,7 +78,8 @@ class StartPage(tk.Frame):
         self.value_labels = {}
 
         for i, label in enumerate(labels):
-            lbl = Label(self.results_frame, text=label, width=25, anchor="w", font=self.label_font, background='#34495e',
+            lbl = Label(self.results_frame, text=label, width=25, anchor="w", font=self.label_font,
+                        background='#34495e',
                         fg='#ecf0f1')
             lbl.grid(row=i + 1, column=0, padx=5, pady=5, sticky='w')
             value_label = Label(self.results_frame, text="", width=25, anchor="w", font=self.label_font,
@@ -107,7 +109,8 @@ class StartPage(tk.Frame):
                     self.controller.after(0, self.update_value, 'Earnings Per Share:', self.get_eps())
                     self.controller.after(0, self.update_value, 'PE Ratio:', self.get_pe_ratio())
                     self.controller.after(0, self.update_value, 'Return on Equity Ratio:', self.get_return_on_equity())
-                    self.controller.after(0, self.update_value, 'Debt to Equity Ratio:', self.get_debt_to_equity_ratio())
+                    self.controller.after(0, self.update_value, 'Debt to Equity Ratio:',
+                                          self.get_debt_to_equity_ratio())
                     self.controller.after(0, self.update_value, 'Net Profit Margin:', self.get_profit_margin())
                 else:
                     self.show_error("User did not enter a valid ticker")

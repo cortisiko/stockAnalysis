@@ -3,11 +3,10 @@ try:
 except:
     import tkinter as tk
 import tkinter.font
-from tkinter import *
-
+from tkinter import Label,StringVar,Text,Radiobutton,Button
 from app.pages import homepage
-from app.charts import plot_revenue as pltrevenue
-from app.helpers import message_box as messagebox
+from app.charts import plot_revenue
+from app.helpers import message_box
 
 
 class Revenue(tk.Frame):
@@ -36,8 +35,6 @@ class Revenue(tk.Frame):
         self.quarterly_radio_button.pack(side='left', padx=50)
         self.yearly_radio_button.pack(side='right', padx=50)
         self.clear_button.pack()
-        button1 = Button(self, text="Back to Home",
-                         command=lambda: controller.show_frame(homepage.Startpage))
 
     def get_text_input(self):
         result = self.text_input_box.get("1.0", "end")
@@ -49,7 +46,7 @@ class Revenue(tk.Frame):
         else:
             self.yearly_radio_button.deselect()
             self.quarterly_radio_button.deselect()
-            messagebox.show_error_message()
+            message_box.show_error_message()
 
     def selected_radio_button_option(self):
         user_input = self.get_text_input()
@@ -67,4 +64,4 @@ class Revenue(tk.Frame):
         self.quarterly_radio_button.deselect()
 
 
-revenue = pltrevenue.RevenueGraph()
+revenue = plot_revenue.RevenueGraph()
