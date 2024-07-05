@@ -1,4 +1,3 @@
-from app.pages import homepage
 from app.charts import plot_cash_flow
 from app.helpers import message_box
 from app.pages.base_page import BasePage

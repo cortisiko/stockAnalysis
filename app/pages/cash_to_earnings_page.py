@@ -2,8 +2,6 @@ try:
     import Tkinter as tk
 except ImportError:
     import tkinter as tk
-import tkinter.font
-from tkinter import Label, StringVar, Text, Radiobutton, Button
 
 from app.helpers import message_box
 from app.charts import plot_cash_based_earnings

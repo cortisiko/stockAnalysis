@@ -3,7 +3,7 @@ import threading
 import time
 import tkinter as tk
 import tkinter.font as tkFont
-from tkinter import *
+from tkinter import Frame, Label, Entry, Toplevel, END, SOLID
 
 if platform.system() == "Darwin":
     from tkmacosx import Button

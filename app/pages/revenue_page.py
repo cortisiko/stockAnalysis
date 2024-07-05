@@ -6,6 +6,7 @@ from app.pages.base_page import BasePage
 class Revenue(BasePage):
     def __init__(self, parent, controller):
         super().__init__(parent, controller, "Revenue Charts", 'quarterly', 'yearly')
+
     def selected_radio_button_option(self):
         user_input = self.get_text_input()
         radio_button_frequency_option = self.radio_text.get()
