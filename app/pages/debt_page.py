@@ -8,7 +8,11 @@ from app.helpers import message_box as messagebox
 from app.pages.base_page import BasePage
 
 
-class Debt(BasePage):
+class Debt(BasePage): # pylint: disable=too-many-ancestors
+    """
+    Debt class represents the page for displaying a company's debt.
+
+    """
     def __init__(self, parent, controller):
         super().__init__(parent, controller, "Long Term Debt Charts", 'q', 'a', bg_color='#1B6666')
         self.text_input_box.config(width=6)

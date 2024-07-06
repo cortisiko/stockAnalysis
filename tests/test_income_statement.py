@@ -1,7 +1,7 @@
 """"
  Testing whether the correct data is returned in the income statement object
  """
-import app.financials.income_statement_sheet as income_statement
+import app.financials.income_statements as income_statement
 
 
 class TestIncomeStatement:

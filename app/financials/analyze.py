@@ -35,7 +35,7 @@ from app.financials import (
     statistics as statistics_tab,
     balance_sheet,
     company_profile,
-    cash_flow_sheet as cash_flow_page,
+    cash_flow as cash_flow_page,
     summary as summary_page,
     price as price_data,
 )

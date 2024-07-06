@@ -3,7 +3,7 @@ This is the class that plots the Net Income graph.
 """
 
 from app.charts.base_graph import BaseGraph
-from app.financials import income_statement_sheet as income, price as priceData
+from app.financials import income_statements as income, price as priceData
 from app.helpers import dates_cleanup as date, tickers as ticker
 
 

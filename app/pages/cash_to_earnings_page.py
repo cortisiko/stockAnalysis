@@ -6,7 +6,7 @@ from app.charts import plot_cash_based_earnings
 from app.pages.base_page import BasePage
 
 
-class CashToEarnings(BasePage):
+class CashToEarnings(BasePage): # pylint: disable=too-many-ancestors
     """
     CashToEarnings class represents the page for displaying cash to earnings charts.
 

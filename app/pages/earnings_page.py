@@ -8,7 +8,11 @@ from app.charts import plot_earnings as plt_earnings
 from app.helpers import message_box as messagebox
 
 
-class PlotEarningsChart(BasePage):
+class Earnings(BasePage):
+    """
+      CEarnings class represents the page for displaying a company earnings.
+
+      """
     def __init__(self, parent, controller):
         super().__init__(parent, controller, "Earnings Charts", 'quarterly', 'yearly')
 

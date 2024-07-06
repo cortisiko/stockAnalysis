@@ -7,7 +7,7 @@ from app.helpers import message_box
 from app.pages.base_page import BasePage
 
 
-class CashFlow(BasePage):
+class CashFlow(BasePage): # pylint: disable=too-many-ancestors
     """
     Cash Flow class represents the page for displaying cash to earnings charts.
     """
