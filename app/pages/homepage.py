@@ -49,7 +49,7 @@ class StartPage(tk.Frame):
             controller (tk.Tk): The main controller handling the different frames.
         """
         tk.Frame.__init__(self, parent)
-        # pylint: disable=too-many-instance-attributes)
+        # pylint: disable=too-many-instance-attributes
         self.controller = controller
         self.parent = parent
         self.configure(background='#2c3e50')

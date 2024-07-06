@@ -1,9 +1,14 @@
+"""
+BasePage is a base class for creating different chart pages in a Tkinter application.
+
+"""
 import tkinter as tk
 import tkinter.font
 from tkinter import Label, StringVar, Text, Radiobutton, Button
 
 
 class BasePage(tk.Frame):
+    # pylint: disable=too-many-instance-attributes
     """
     BasePage is a base class for creating different chart pages in a Tkinter application.
     This class provides common functionalities such as text input, radio buttons, and a clear button
@@ -16,8 +21,10 @@ class BasePage(tk.Frame):
     yearly_text (str): The text value for the annual option in the radio button.
     bg_color (str): The background color of the frame.
     """
+    # pylint: disable=line-too-long
 
     def __init__(self, parent, controller, title, quarterly_text, yearly_text, bg_color='#1B6666'):
+        # pylint: disable=too-many-arguments
         """
         Initializes the BasePage with a title, text for quarterly and annual radio buttons, and background color.
 

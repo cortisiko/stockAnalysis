@@ -31,6 +31,9 @@ class NetIncome(BasePage): # pylint: disable=too-many-ancestors
         self.text_input_box.config(width=6)
 
     def selected_radio_button_option(self):
+        """
+        Handles the selection of the radio button option and updates the chart accordingly.
+        """
         user_input = self.get_text_input()
         radio_button_frequency_option = self.radio_text.get()
         if not income.canvas:
@@ -40,9 +43,15 @@ class NetIncome(BasePage): # pylint: disable=too-many-ancestors
             income.plot_net_income(self, user_input, radio_button_frequency_option)
 
     def show_error_message(self):
+        """
+        Displays an error message using the message box helper.
+        """
         message_box.show_error_message()
 
     def clear(self):
+        """
+        Clears the input and the chart plot.
+        """
         super().clear()
         income.clear_plot()
 
