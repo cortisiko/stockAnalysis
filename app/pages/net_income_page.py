@@ -1,8 +1,6 @@
-try:
-    import Tkinter as tk
-except ImportError:
-    import tkinter as tk
-
+"""
+Net income page
+"""
 from app.charts import plot_net_income
 from app.helpers import message_box
 from app.pages.base_page import BasePage

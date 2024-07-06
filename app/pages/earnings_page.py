@@ -1,3 +1,7 @@
+"""
+earnings page
+"""
+
 from base_page import BasePage
 
 from app.charts import plot_earnings as plt_earnings

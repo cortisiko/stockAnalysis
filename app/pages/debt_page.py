@@ -1,7 +1,6 @@
-try:
-    import Tkinter as tk
-except ImportError:
-    import tkinter as tk
+"""
+debt page
+"""
 
 
 from app.charts import plot_long_term_debt as plt_debt
