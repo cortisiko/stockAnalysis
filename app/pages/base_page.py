@@ -81,6 +81,7 @@ class BasePage(tk.Frame):
             self.show_error_message()
 
     def selected_radio_button_option(self):
+        # pylint: disable=unnecessary-pass)
         """
         Placeholder method to be overridden in derived classes.
         """
@@ -95,6 +96,7 @@ class BasePage(tk.Frame):
         self.quarterly_radio_button.deselect()
 
     def show_error_message(self):
+        # pylint: disable=unnecessary-pass)
         """
         Placeholder method to show an error message, to be overridden in derived classes.
         """
