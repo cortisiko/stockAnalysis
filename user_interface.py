@@ -109,7 +109,7 @@ class UserInterFace(tk.Tk):
 if __name__ == "__main__":
     try:
         app = UserInterFace()
-        app.geometry("800x600")
+        app.geometry("1200x800")
         app.protocol("WM_DELETE_WINDOW", app.on_closing)
         app.mainloop()
     except KeyboardInterrupt as e:

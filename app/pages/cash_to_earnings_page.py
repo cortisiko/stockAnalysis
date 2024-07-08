@@ -36,7 +36,7 @@ class CashToEarnings(BasePage): # pylint: disable=too-many-ancestors
             controller (tk.Tk): The main controller handling the different frames.
         """
         # pylint: disable=line-too-long
-        super().__init__(parent, controller, "Cash to Earnings Charts", 'q', 'a', bg_color='#1B6666')
+        super().__init__(parent, controller, "Cash to Earnings Charts", 'q', 'a')
         self.text_input_box.config(width=8)
         self.text_input_box.focus()
 

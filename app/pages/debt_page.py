@@ -14,7 +14,7 @@ class Debt(BasePage): # pylint: disable=too-many-ancestors
 
     """
     def __init__(self, parent, controller):
-        super().__init__(parent, controller, "Long Term Debt Charts", 'q', 'a', bg_color='#1B6666')
+        super().__init__(parent, controller, "Long Term Debt Charts", 'q', 'a')
         self.text_input_box.config(width=6)
 
     def selected_radio_button_option(self):

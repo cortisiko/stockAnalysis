@@ -1,6 +1,7 @@
 """
-This is the class that plots the graphs.
-"""
+ This is the class that plots the graphs.
+ """
+
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import matplotlib
@@ -23,6 +24,7 @@ class BaseGraph:
         """
         self.canvas = None
         self.fig = Figure(figsize=(12, 5), dpi=80)
+        self.fig.patch.set_facecolor('#2C3E50')  # Set background color of the figure
         self.ylabel_text = ylabel_text
 
     def setup_ax(self, ax, title, xlabel, ylabel):
@@ -35,14 +37,16 @@ class BaseGraph:
         xlabel (str): The label for the x-axis.
         ylabel (str): The label for the y-axis.
         """
-        ax.set_title(title)
-        ax.set_xlabel(xlabel)
-        ax.set_ylabel(ylabel)
+        ax.set_title(title, color='white')
+        ax.set_xlabel(xlabel, color='white')
+        ax.set_ylabel(ylabel, color='white')
         ax.get_yaxis().set_major_formatter(
-            matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ","))
-        )
+            matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), ",")))
+        ax.set_facecolor('#2C3E50')  # Set background color of the axes
+        ax.tick_params(axis='x', colors='white')
+        ax.tick_params(axis='y', colors='white')
 
-    def add_legend(self, ax, positive_label="positive", negative_label="negative"):
+    def add_legend(self, ax, positive_label="positive cash flow", negative_label="negative cash flow"):
         """
         Adds a legend to the graph.
 
@@ -61,9 +65,10 @@ class BaseGraph:
                 markersize=12,
                 markeredgecolor="none",
             )
-            for color in ["g", "r"]
+            for color in ["green", "red"]
         ]
-        ax.legend(legend_handles, [positive_label, negative_label])
+        ax.legend(legend_handles, [positive_label, negative_label], facecolor='#2C3E50', framealpha=1,
+                  edgecolor='white', fontsize=10, labelcolor='white')
 
     def draw_canvas(self, container):
         """
