@@ -13,7 +13,7 @@ To profile which tests run the slowest, use the --durations=3 flag.
 import pytest
 from app.helpers import tickers as ticker
 
-
+# pylint: disable=redefined-outer-name
 def pytest_addoption(parser):
     """
     Add a custom command-line option to pytest.
