@@ -1,7 +1,7 @@
 """
 Helper function to get stock ticker object
 """
-from yahooquery import Ticker
+from  yahooquery import Ticker
 
 
 def get_ticker(ticker):

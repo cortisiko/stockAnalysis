@@ -123,6 +123,7 @@ class StartPage(tk.Frame):
         self.parent.bind('<Return>', self.analyze)
 
     def analyze(self, event=None):
+        # pylint: disable=unused-argument
         """
         Initiates stock analysis in a separate thread.
 

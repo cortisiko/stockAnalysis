@@ -4,7 +4,7 @@ tests for validating the company profile data used within the app.
 
 """
 
-import app.financials.company_profile as company_profile
+from app.financials import company_profile
 
 
 class TestCompanyProfile:

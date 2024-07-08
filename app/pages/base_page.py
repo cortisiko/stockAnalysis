@@ -67,7 +67,7 @@ class BasePage(tk.Frame):
         Retrieves and processes the text input from the text box.
 
         Returns:
-        str: The processed text input in uppercase if valid, else None.
+            str: The processed text input in uppercase if valid, else None.
         """
         result = self.text_input_box.get("1.0", "end")
         result = result.rstrip()
@@ -75,10 +75,11 @@ class BasePage(tk.Frame):
             results = result.upper()
             results = str(results)
             return results
-        else:
-            self.yearly_radio_button.deselect()
-            self.quarterly_radio_button.deselect()
-            self.show_error_message()
+
+        self.yearly_radio_button.deselect()
+        self.quarterly_radio_button.deselect()
+        self.show_error_message()
+        return None
 
     def selected_radio_button_option(self):
         # pylint: disable=unnecessary-pass)

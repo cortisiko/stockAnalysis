@@ -13,6 +13,7 @@ To profile which tests run the slowest, use the --durations=3 flag.
 import pytest
 from app.helpers import tickers as ticker
 
+
 def pytest_addoption(parser):
     """
     Add a custom command-line option to pytest.
@@ -21,6 +22,7 @@ def pytest_addoption(parser):
         parser: The pytest parser object used to add custom command-line options.
     """
     parser.addoption("--ticker", action="store", default="V", help="Ticker symbol, default: V")
+
 
 @pytest.fixture(scope="session")
 def get_ticker_symbol(pytestconfig):
@@ -34,6 +36,7 @@ def get_ticker_symbol(pytestconfig):
         str: The ticker symbol in uppercase.
     """
     return pytestconfig.getoption("--ticker").upper()
+
 
 @pytest.fixture(scope="session")
 def ticker_object(get_ticker_symbol):
@@ -52,6 +55,7 @@ def ticker_object(get_ticker_symbol):
     ticker_symbol_obj = ticker.get_ticker(get_ticker_symbol)
     assert ticker_symbol_obj is not None, "Ticker object should not be None"
     return ticker_symbol_obj
+
 
 @pytest.fixture
 def user_ticker(get_ticker_symbol):
