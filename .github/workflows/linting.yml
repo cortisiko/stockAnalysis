@@ -20,7 +20,3 @@ jobs:
       - name: Analysing the code with pylint
         run: |
           pylint $(git ls-files '*.py')
-      - name: Output Message on Failure
-        if: failure()
-        run: |
-          echo "To fix linting issue: black *.py"
