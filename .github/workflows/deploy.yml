@@ -1,4 +1,4 @@
-name: Deploy app and create executable
+name: Deploy app and create executables
 
 on:
   push:
@@ -10,11 +10,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: 'Set up Python'
+      - name: Set up Python
         uses: actions/setup-python@v3
         with:
           python-version: '3.12'
@@ -26,10 +29,22 @@ jobs:
           pip install pyinstaller
 
       - name: Create executable
-        run: pyinstaller --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+        run: |
+          if [ $RUNNER_OS == "Linux" ]; then
+            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+          elif [ $RUNNER_OS == "Windows" ]; then
+            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+          elif [ $RUNNER_OS == "macOS" ]; then
+            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+          fi
 
       - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
-          name: my-application
-          path: dist/
+          name: stock-analysis-${{ matrix.os }}
+          path: |
+            dist/stock-analysis
+            dist/stock-analysis.exe
+            dist/stock-analysis.app
+            dist/stock-analysis.bundle
+            dist/stock-analysis.zip
