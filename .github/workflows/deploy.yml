@@ -31,17 +31,13 @@ jobs:
 
       - name: Create executable
         run: |
-          case "${{ matrix.os }}" in
-            ubuntu-latest)
-              pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
-              ;;
-            windows-latest)
-              pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
-              ;;
-            macos-latest)
-              pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
-              ;;
-          esac
+          if [ $RUNNER_OS == "Linux" ]; then
+            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+          if [ $RUNNER_OS == "Windows" ]; then
+            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+          if [ $RUNNER_OS == "macOS" ]; then
+            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+          fi
 
       - name: Upload executable
         uses: actions/upload-artifact@v3
