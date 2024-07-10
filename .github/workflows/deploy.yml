@@ -33,8 +33,8 @@ jobs:
         run: |
           if [ $RUNNER_OS == "Linux" ]; then
             pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
-#          if [ $RUNNER_OS == "Windows" ]; then
-#            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+          elif [ $RUNNER_OS == "Windows" ]; then
+            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
           elif [ $RUNNER_OS == "macOS" ]; then
             pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
           fi
