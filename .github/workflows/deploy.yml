@@ -28,13 +28,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
+          pip install yahooquery
+          pip install yahooquery tkmacosx
 
       - name: Create executable
         run: |
           if [ $RUNNER_OS == "Linux" ]; then
-            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico user_interface.py
           elif [ $RUNNER_OS == "macOS" ]; then
-            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico --hidden-import=yahooquery --hidden-import=yahooquery.asyncio user_interface.py
+            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico user_interface.py
           fi
 
       - name: Upload executable
