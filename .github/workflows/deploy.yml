@@ -44,8 +44,8 @@ jobs:
         with:
           name: stock-analysis-${{ matrix.os }}
           path: |
-            dist/stock-analysis
-            dist/stock-analysis.exe
-            dist/stock-analysis.app
-            dist/stock-analysis.bundle
-            dist/stock-analysis.zip
+            dist/user_interface
+            dist/user_interface.exe
+            dist/user_interface.app
+            dist/user_interface.bundle
+            dist/user_interface.zip
