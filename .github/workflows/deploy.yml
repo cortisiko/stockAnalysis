@@ -44,8 +44,8 @@ jobs:
         with:
           name: user_interface-${{ matrix.os }}
           path: |
-            dist/user_interface
-            dist/user_interface.exe
-            dist/user_interface.app
-            dist/user_interface.bundle
+            dist/
+            dist/
+            dist/
+            dist/
             dist/user_interface.zip
