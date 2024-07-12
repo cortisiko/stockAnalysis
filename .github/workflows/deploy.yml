@@ -42,7 +42,7 @@ jobs:
       - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
-          name: stock-analysis-${{ matrix.os }}
+          name: user_interface-${{ matrix.os }}
           path: |
             dist/user_interface
             dist/user_interface.exe
