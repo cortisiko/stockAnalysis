@@ -41,6 +41,7 @@ jobs:
 
       - name: Set executable permissions
         run: |
+          cd dist/
           chmod +x user_interface
 
       - name: Upload executable
