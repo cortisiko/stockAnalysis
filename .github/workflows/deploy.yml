@@ -39,7 +39,7 @@ jobs:
             pyinstaller --onefile --add-data "assets:assets" user_interface.py
           fi
 
-      - name: Set executable permissions
+      - name: Set executable permission
         run: |
           cd dist/
           chmod +x user_interface
