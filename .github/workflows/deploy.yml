@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
@@ -34,9 +34,9 @@ jobs:
       - name: Create executable
         run: |
           if [ $RUNNER_OS == "Linux" ]; then
-            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico user_interface.py
+            pyinstaller --name stock-analysis --onefile user_interface.py
           elif [ $RUNNER_OS == "macOS" ]; then
-            pyinstaller --name stock-analysis --icon=assets/charticon2ICO.ico user_interface.py
+            pyinstaller --name stock-analysis --onefile user_interface.py
           fi
 
       - name: Upload executable
