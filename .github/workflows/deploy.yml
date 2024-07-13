@@ -34,9 +34,9 @@ jobs:
       - name: Create executable
         run: |
           if [ $RUNNER_OS == "Linux" ]; then
-            pyinstaller --name stock-analysis --onefile user_interface.py
+            pyinstaller --onefile --add-data "assets:assets" user_interface.py
           elif [ $RUNNER_OS == "macOS" ]; then
-            pyinstaller --name stock-analysis --onefile user_interface.py
+            pyinstaller --onefile --add-data "assets:assets" user_interface.py
           fi
 
       - name: Upload executable
