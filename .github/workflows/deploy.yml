@@ -38,8 +38,7 @@ jobs:
         run: |
           if [ "${{ runner.os }}" == "Linux" ]; then
             pyinstaller --onefile --add-data "assets:assets" user_interface.py
-            # Create AppImage
-            sudo apt-get install -y appimagekit
+            # Download AppImage tool
             wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
             chmod +x appimagetool-x86_64.AppImage
             ./appimagetool-x86_64.AppImage dist/ user_interface.AppImage
