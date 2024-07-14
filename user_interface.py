@@ -112,6 +112,7 @@ class UserInterFace(tk.Tk):
         """
         print("Cleaning up and closing the application...")
         self.destroy()
+        sys.exit(0)  # Ensure the application exits
 
 
 if __name__ == "__main__":

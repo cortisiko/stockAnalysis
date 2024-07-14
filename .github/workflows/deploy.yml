@@ -33,24 +33,20 @@ jobs:
 
       - name: Create executable
         run: |
-          if [ $RUNNER_OS == "Linux" ]; then
+          if [ ${{ matrix.os }} == "ubuntu-latest" ]; then
             pyinstaller --onefile --add-data "assets:assets" user_interface.py
-          elif [ $RUNNER_OS == "macOS" ]; then
-            pyinstaller --onefile --add-data "assets:assets" user_interface.py
-          fi
-
-      - name: Set executable permission
-        run: |
-          cd dist/
-          chmod +x user_interface
+            # Create AppImage
+            sudo apt-get install -y appimagekit
+            ./appimagetool-x86_64.AppImage dist/ user_interface.AppImage
+          elif [ ${{ matrix.os }} == "macos-latest" ]; then
+            pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
+            # Create .dmg file
+            hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
 
       - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-${{ matrix.os }}
           path: |
-            dist/
-            dist/
-            dist/
-            dist/
-            dist/user_interface.zip
+            dist/user_interface.AppImage
+            dist/user_interface.dmg
