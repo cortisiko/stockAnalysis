@@ -15,6 +15,7 @@ jobs:
       matrix:
         os:
           - macos-latest
+          -  windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -39,7 +40,7 @@ jobs:
           if [ "${{ runner.os }}" == "macOS" ]; then
             pyinstaller --onefile --name stockAnalysis --add-data "assets:assets" user_interface.py
             # Create .dmg file
-            hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
+            hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO stockAnalysis.dmg
           elif [ "${{ runner.os }}" == "Windows" ]; then
              pyinstaller --onefile --name stockAnalysis --noconsole --add-data "assets:assets" user_interface.py
           else
