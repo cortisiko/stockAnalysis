@@ -47,10 +47,11 @@ jobs:
         with:
           name: user_interface-${{ runner.os }}
           path: |
-            user_interface
+            dist/
 
       - name: Set executable permission
         if: runner.os == 'macOS'
         run: |
-          chmod +x dist/user_interface
+          cd dist/
+          chmod +x user_interface
 
