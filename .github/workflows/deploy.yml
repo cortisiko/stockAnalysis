@@ -38,7 +38,7 @@ jobs:
             # Create AppImage
             sudo apt-get install -y appimagekit
             ./appimagetool-x86_64.AppImage dist/ user_interface.AppImage
-          elif [ $RUNNER_OS == "macOS" ];; then
+          elif [ $RUNNER_OS == "macOS" ]; then
             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
             # Create .dmg file
             hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
