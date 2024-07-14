@@ -37,9 +37,11 @@ jobs:
         run: |
         
           if [ "${{ runner.os }}" == "macOS" ]; then
-            pyinstaller --onefile --name stockAnalysis --noconsole --add-data "assets:assets" user_interface.py
+            pyinstaller --onefile --name stockAnalysis --add-data "assets:assets" user_interface.py
             # Create .dmg file
             hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
+          elif [ "${{ runner.os }}" == "Windows" ]; then
+             pyinstaller --onefile --name stockAnalysis --noconsole --add-data "assets:assets" user_interface.py
           else
             echo "Unsupported OS: ${{ runner.os }}"
             exit 1
@@ -50,4 +52,5 @@ jobs:
         with:
           name: stockAnalysis-${{ runner.os }}
           path: |
-            dist/
+            dist/stockAnalysis
+            dist/stockAnalysis
