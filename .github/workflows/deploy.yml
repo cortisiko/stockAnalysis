@@ -1,11 +1,13 @@
 name: Deploy app and create executables
-'on':
+
+on:
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
+
 jobs:
   build:
     strategy:
@@ -14,13 +16,16 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-    runs-on: '${{ matrix.os }}'
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -28,21 +33,29 @@ jobs:
           pip install pyinstaller
           pip install yahooquery
           pip install yahooquery tkmacosx
+
       - name: Create executable
         run: |
-          if [ $RUNNER_OS == "Linux" ]; then
+          if [ "${{ runner.os }}" == "Linux" ]; then
             pyinstaller --onefile --add-data "assets:assets" user_interface.py
             # Create AppImage
             sudo apt-get install -y appimagekit
+            wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+            chmod +x appimagetool-x86_64.AppImage
             ./appimagetool-x86_64.AppImage dist/ user_interface.AppImage
-          elif [ $RUNNER_OS == "macOS" ]; then
+          elif [ "${{ runner.os }}" == "macOS" ]; then
             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
             # Create .dmg file
             hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
+          else
+            echo "Unsupported OS: ${{ runner.os }}"
+            exit 1
+          fi
+
       - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
-          name: 'user_interface-${{ matrix.os }}'
+          name: user_interface-${{ runner.os }}
           path: |
             dist/user_interface.AppImage
             dist/user_interface.dmg
