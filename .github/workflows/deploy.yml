@@ -37,7 +37,7 @@ jobs:
         run: |
         
           if [ "${{ runner.os }}" == "macOS" ]; then
-            pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
+            pyinstaller --onefile --name stockAnalysis --noconsole --add-data "assets:assets" user_interface.py
             # Create .dmg file
             hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
           else
@@ -48,7 +48,6 @@ jobs:
       - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
-          name: user_interface-${{ runner.os }}
+          name: stockAnalysis-${{ runner.os }}
           path: |
-            dist/user_interface.AppImage
-            dist/user_interface.dmg
+            dist/
