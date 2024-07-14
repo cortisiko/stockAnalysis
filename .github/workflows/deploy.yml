@@ -35,11 +35,8 @@ jobs:
 
       - name: Create executable
         run: |
-        
           if [ "${{ runner.os }}" == "macOS" ]; then
             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
-            # Create .dmg file
-            hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
           else
             echo "Unsupported OS: ${{ runner.os }}"
             exit 1
@@ -51,4 +48,9 @@ jobs:
           name: user_interface-${{ runner.os }}
           path: |
             dist/
-            dist/
+
+      - name: Set executable permission
+        if: runner.os == 'macOS'
+        run: |
+          chmod +x dist/user_interface
+
