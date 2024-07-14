@@ -50,5 +50,5 @@ jobs:
         with:
           name: user_interface-${{ runner.os }}
           path: |
-            dist/user_interface.AppImage
-            dist/user_interface.dmg
+            dist/
+            dist/
