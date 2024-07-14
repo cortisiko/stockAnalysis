@@ -33,13 +33,12 @@ jobs:
 
       - name: Create executable
         run: |
-          if [ ${{ matrix.os }} == "ubuntu-latest" ]; then
+          if [ $RUNNER_OS == "Linux" ]; then
             pyinstaller --onefile --add-data "assets:assets" user_interface.py
             # Create AppImage
-            wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
-            chmod +x appimagetool-x86_64.AppImage
+            sudo apt-get install -y appimagekit
             ./appimagetool-x86_64.AppImage dist/ user_interface.AppImage
-          elif [ ${{ matrix.os }} == "macos-latest" ]; then
+          elif [ $RUNNER_OS == "macOS" ];; then
             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
             # Create .dmg file
             hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
