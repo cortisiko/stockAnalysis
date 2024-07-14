@@ -15,7 +15,6 @@ jobs:
       matrix:
         os:
           - macos-latest
-          - windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -38,11 +37,9 @@ jobs:
         run: |
         
           if [ "${{ runner.os }}" == "macOS" ]; then
-            pyinstaller --onefile --add-data "assets:assets" user_interface.py
+            pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
             # Create .dmg file
             hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
-          elif [ "${{ runner.os }}" == "Windows" ]; then
-             pyinstaller --onefile --name stockAnalysis --noconsole --add-data "assets:assets" user_interface.py
           else
             echo "Unsupported OS: ${{ runner.os }}"
             exit 1
@@ -51,7 +48,7 @@ jobs:
       - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
-          name: stockAnalysis-${{ runner.os }}
+          name: user_interface-${{ runner.os }}
           path: |
-            dist/user_interface
-            dist/user_interface
+            dist/user_interface.AppImage
+            dist/user_interface.dmg
