@@ -35,12 +35,10 @@ jobs:
         run: |
           if [ ${{ matrix.os }} == "ubuntu-latest" ]; then
             pyinstaller --onefile --add-data "assets:assets" user_interface.py
-            # Create AppImage
             sudo apt-get install -y appimagekit
             ./appimagetool-x86_64.AppImage dist/ user_interface.AppImage
           elif [ ${{ matrix.os }} == "macos-latest" ]; then
             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
-            # Create .dmg file
             hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
 
       - name: Upload executable
