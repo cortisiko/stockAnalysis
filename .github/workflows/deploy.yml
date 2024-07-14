@@ -37,6 +37,7 @@ jobs:
         run: |
           if [ "${{ runner.os }}" == "macOS" ]; then
             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
+            hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
           else
             echo "Unsupported OS: ${{ runner.os }}"
             exit 1
