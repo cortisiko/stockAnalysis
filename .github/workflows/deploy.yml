@@ -37,22 +37,21 @@ jobs:
         run: |
           if [ "${{ runner.os }}" == "macOS" ]; then
             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
+            # Create .dmg file
             hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
-          else
+            # Sign the application locally
+            codesign --deep --force --verbose --sign - dist/user_interface.app
+          else:
             echo "Unsupported OS: ${{ runner.os }}"
             exit 1
-          fi
 
       - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-${{ runner.os }}
-          path: |
-            dist/
+          path: dist/
 
       - name: Set executable permission
         if: runner.os == 'macOS'
-        run: |
-          cd dist/
-          chmod +x user_interface
+        run: chmod +x dist/user_interface.app/Contents/MacOS/*
 
