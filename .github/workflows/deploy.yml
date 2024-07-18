@@ -72,18 +72,18 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-macOS
-          path: user_interface-macOS/user_interface.dmg
+#          path: user_interface.dmg
 
       - name: Upload executable (Linux)
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-Linux
-          path: user_interface-Linux/dist/user_interface
+          path: dist/user_interface
 
       - name: Upload executable (Windows)
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-Windows
-          path: user_interface-Windows/dist/user_interface.exe
+          path: dist/user_interface.exe
