@@ -27,27 +27,44 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
+      - name: Install dependencies (Bash)
+        if: runner.os != 'Windows'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
           pip install yahooquery
-          pip install yahooquery tkmacosx
+          pip install tkmacosx
+        shell: bash
 
-      - name: Create executable
+      - name: Install dependencies (PowerShell)
+        if: runner.os == 'Windows'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+          pip install yahooquery
+          pip install tkmacosx
+        shell: pwsh
+
+      - name: Create executable (Bash)
+        if: runner.os != 'Windows'
         run: |
           if [ "${{ runner.os }}" == "macOS" ]; then
             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
             hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
-          elif [ "${{ runner.os }}" == "Windows" ]; then
+          elif [ "${{ runner.os }}" == "Linux" ]; then
             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
-          elif [ $RUNNER_OS == "Linux" ]; then
-             pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
           else
             echo "Unsupported OS: ${{ runner.os }}"
             exit 1
-          fi
+        shell: bash
+
+      - name: Create executable (PowerShell)
+        if: runner.os == 'Windows'
+        run: |
+          pyinstaller --onefile --noconsole --add-data "assets;assets" user_interface.py
+        shell: pwsh
 
       - name: Upload executable
         uses: actions/upload-artifact@v4
@@ -55,7 +72,8 @@ jobs:
           name: user_interface-${{ runner.os }}
           path: |
             user_interface.dmg
-            dist/user_interface.exe
             dist/user_interface.app
-            dist/user_interface.bundle
+            dist/
             dist/user_interface.zip
+            dist/user_interface.exe
+
