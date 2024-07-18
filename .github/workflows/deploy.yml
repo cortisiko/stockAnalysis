@@ -72,7 +72,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-macOS
-          path: dist/user_interface.dmg
+          path: user_interface.dmg
 
       - name: Upload executable (Linux)
         if: matrix.os == 'ubuntu-latest'
