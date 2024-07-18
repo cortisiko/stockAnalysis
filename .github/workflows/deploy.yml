@@ -79,7 +79,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-Linux
-          path: dist/user_interface
+          path: dist/user_interface.app
 
       - name: Upload executable (Windows)
         if: matrix.os == 'windows-latest'
