@@ -48,32 +48,42 @@ jobs:
           pip install tkmacosx
         shell: pwsh
 
-      - name: Create executable (Bash)
-        if: runner.os != 'Windows'
+      - name: Create executable (macOS)
+        if: matrix.os == 'macos-latest'
         run: |
-          if [ "${{ runner.os }}" == "macOS" ]; then
-            pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
-            hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
-          elif [ "${{ runner.os }}" == "Linux" ]; then
-            pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
-          else
-            echo "Unsupported OS: ${{ runner.os }}"
-            exit 1
+          pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
+          hdiutil create -volname UserInterface -srcfolder dist/ -ov -format UDZO user_interface.dmg
         shell: bash
 
-      - name: Create executable (PowerShell)
-        if: runner.os == 'Windows'
+      - name: Create executable (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          pyinstaller --onefile --noconsole --add-data "assets:assets" user_interface.py
+        shell: bash
+
+      - name: Create executable (Windows)
+        if: matrix.os == 'windows-latest'
         run: |
           pyinstaller --onefile --noconsole --add-data "assets;assets" user_interface.py
         shell: pwsh
 
-      - name: Upload executable
+      - name: Upload executable (macOS)
+        if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: user_interface-${{ runner.os }}
-          path: |
-            user_interface.dmg
-            dist/user_interface.exe
-            dist/user_interface.app
-            dist/user_interface.bundle
-            dist/user_interface.zip
+          name: user_interface-macOS
+          path: user_interface-macOS/user_interface.dmg
+
+      - name: Upload executable (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: user_interface-Linux
+          path: user_interface-Linux/dist/user_interface
+
+      - name: Upload executable (Windows)
+        if: matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: user_interface-Windows
+          path: user_interface-Windows/dist/user_interface.exe
