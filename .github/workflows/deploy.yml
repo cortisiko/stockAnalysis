@@ -15,8 +15,9 @@ jobs:
       matrix:
         os:
           - macos-latest
-          - windows-latest
           - ubuntu-latest
+          - windows-latest
+
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -72,8 +73,7 @@ jobs:
           name: user_interface-${{ runner.os }}
           path: |
             user_interface.dmg
-            dist/user_interface.app
-            dist/
-            dist/user_interface.zip
             dist/user_interface.exe
-
+            dist/user_interface.app
+            dist/user_interface.bundle
+            dist/user_interface.zip
