@@ -86,6 +86,10 @@ jobs:
           name: user_interface-Windows
           path: dist/user_interface.exe
 
+      - name: List files for debugging
+        run: |
+          echo "Listing files in dist directory:"
+          ls dist/
   release:
 
     needs: build
