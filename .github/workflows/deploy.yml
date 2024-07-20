@@ -87,6 +87,7 @@ jobs:
           path: dist/user_interface.exe
 
   release:
+
     needs: build
     runs-on: ubuntu-latest
     env:
@@ -110,7 +111,7 @@ jobs:
 
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: user_interface.dmg
+          asset_path: dist
           asset_name: user_interface.dmg
           asset_content_type: application/octet-stream
 
