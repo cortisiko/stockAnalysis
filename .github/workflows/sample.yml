@@ -89,7 +89,7 @@ jobs:
         uses: actions/create-release@v1
         with:
           tag_name: 'v0.0.1'
-          release_name: Release test
+          release_name: Release testing notes
           draft: true
           prerelease: true
 
