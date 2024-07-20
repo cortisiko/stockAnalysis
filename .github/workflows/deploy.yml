@@ -100,9 +100,9 @@ jobs:
         uses: actions/create-release@v1
 
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
+          tag_name: 'taggers'
+          release_name: Release test
+          draft: true
           prerelease: false
 
       - name: Upload Release Asset (macOS)
