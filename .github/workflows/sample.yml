@@ -1,12 +1,12 @@
-name: Create executables
+name: Create executables and release upload
 
 on:
   push:
-#   branches:
-#    - main
-#  pull_request: null
-    tags:
-      - 'v*.*.*'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -19,6 +19,8 @@ jobs:
           - windows-latest
 
     runs-on: ${{ matrix.os }}
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -87,3 +89,43 @@ jobs:
         with:
           name: user_interface-Windows
           path: dist/user_interface.exe
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+
+        with:
+          tag_name: 'taggers'
+          release_name: Release test
+          draft: true
+          prerelease: false
+
+      - name: List files for debugging
+        run: |
+          echo "Listing files in dist directory:"
+          ls assets
+
+      - name: Upload Release Asset (macOS)
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist
+          asset_name: user_interface
+          asset_content_type: application/octet-stream
+
+      - name: Upload Release Asset (Linux)
+        uses: actions/upload-release-asset@v1
+
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/
+          asset_name: user_interface.app
+          asset_content_type: application/octet-stream
+
+      - name: Upload Release Asset (Windows)
+        uses: actions/upload-release-asset@v1
+
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/user_interface
+          asset_name: user_interface.exe
+          asset_content_type: application/octet-stream

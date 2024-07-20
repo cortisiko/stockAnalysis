@@ -2,11 +2,11 @@ name: Create Release Artifacts
 
 on:
   push:
-   branches:
-    - main
-  pull_request: null
-#    tags:
-#      - 'v*.*.*'
+#   branches:
+#    - main
+#  pull_request: null
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
