@@ -119,7 +119,7 @@ jobs:
       - name: List files for debugging
         run: |
           echo "Listing files in dist directory:"
-          ls
+          ls assets
 
       - name: Upload Release Asset (macOS)
         uses: actions/upload-release-asset@v1
