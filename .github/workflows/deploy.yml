@@ -86,7 +86,8 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -94,8 +95,7 @@ jobs:
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
@@ -104,30 +104,27 @@ jobs:
 
       - name: Upload Release Asset (macOS)
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: path/to/your/macos/artifact/user_interface.dmg
+          asset_path: user_interface.dmg
           asset_name: user_interface.dmg
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Linux)
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: path/to/your/linux/artifact/user_interface
+          asset_path:  dist/user_interface
           asset_name: user_interface
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Windows)
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: path/to/your/windows/artifact/user_interface.exe
+          asset_path: dist/user_interface.exe
           asset_name: user_interface.exe
           asset_content_type: application/octet-stream
