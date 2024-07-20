@@ -68,7 +68,7 @@ jobs:
       - name: List files for debugging
         run: |
           echo "Listing files in dist directory:"
-          ls
+          ls dist
       - name: Upload artifacts (macOS)
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v4
