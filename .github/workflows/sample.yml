@@ -7,12 +7,14 @@ on:
   pull_request: null
 
 jobs:
+
   build_and_release:
     strategy:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
-
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     runs-on: ${{ matrix.os }}
 
     steps:
