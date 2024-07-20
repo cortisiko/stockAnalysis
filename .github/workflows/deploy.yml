@@ -70,21 +70,27 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-macOS
-          path: dist/
+          path:
+            dist/
+            dist/user_interface.zip
 
       - name: Upload artifacts (Linux)
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-Linux
-          path: dist/
+          path:
+            dist/
+            dist/user_interface.zip
 
       - name: Upload artifacts (Windows)
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-Windows
-          path: dist/
+          path:
+            dist/
+            dist/user_interface.zip
 
       - name: List files for debugging
         run: |
@@ -112,10 +118,12 @@ jobs:
 
       - name: Upload Release Asset (macOS)
         uses: actions/upload-release-asset@v1
-
+        run: |
+            echo "Listing files in dist directory:"
+            ls
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/
+          asset_path: dist/user_interface.zip
           asset_name: user_interface
           asset_content_type: application/octet-stream
 
