@@ -104,8 +104,8 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/user_interface-macOS.dmg
-          asset_name: user_interface-macOS.dmg
+          asset_path: dist/user_interface.dmg
+          asset_name: user_interface.dmg
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Linux)
@@ -113,8 +113,8 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/user_interface-Linux
-          asset_name: user_interface-Linux
+          asset_path: dist/user_interface
+          asset_name: user_interface
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Windows)
