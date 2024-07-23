@@ -2,19 +2,16 @@ name: Build and Release
 
 on:
   push:
-     branches:
+    branches:
       - main
-  pull_request: null
 
 jobs:
-
-  build_and_release:
+  build:
     strategy:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -65,10 +62,6 @@ jobs:
           pyinstaller --onefile --noconsole --add-data "assets;assets" user_interface.py
         shell: pwsh
 
-      - name: List files for debugging
-        run: |
-          echo "Listing files in dist directory:"
-          ls dist
       - name: Upload artifacts (macOS)
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v4
@@ -90,38 +83,63 @@ jobs:
           name: user_interface-Windows
           path: dist/user_interface.exe
 
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download macOS artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: user_interface-macOS
+          path: ./artifacts/macos
+
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: user_interface-Linux
+          path: ./artifacts/linux
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: user_interface-Windows
+          path: ./artifacts/windows
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: 'v0.0.1'
-          release_name: Release testing notes
+          tag_name: 'v1.0.0'
+          release_name: Release v1.0.0
           draft: true
-          prerelease: true
+          prerelease: false
 
       - name: Upload Release Asset (macOS)
-        if: matrix.os == 'macos-latest'
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/user_interface.dmg
-          asset_name: user_interface.dmg
+          asset_path: ./artifacts/macos/user_interface.dmg
+          asset_name: user_interface-macOS.dmg
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Linux)
-        if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/user_interface
-          asset_name: user_interface
+          asset_path: ./artifacts/linux/user_interface
+          asset_name: user_interface-Linux
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Windows)
-        if: matrix.os == 'windows-latest'
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/user_interface.exe
+          asset_path: ./artifacts/windows/user_interface.exe
           asset_name: user_interface-Windows.exe
           asset_content_type: application/octet-stream
