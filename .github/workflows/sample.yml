@@ -74,14 +74,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-macOS
-          path: user_interface.dmg
+          path: dist/user_interface.dmg
 
       - name: Upload artifacts (Linux)
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
           name: user_interface-Linux
-          path: dist/user_interface.app
+          path: dist/user_interface
 
       - name: Upload artifacts (Windows)
         if: matrix.os == 'windows-latest'
@@ -104,7 +104,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/
+          asset_path: dist/user_interface.dmg
           asset_name: user_interface.dmg
           asset_content_type: application/octet-stream
 
@@ -113,7 +113,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/
+          asset_path: dist/user_interface
           asset_name: user_interface
           asset_content_type: application/octet-stream
 
