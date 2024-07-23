@@ -11,7 +11,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
-
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -61,6 +60,11 @@ jobs:
         run: |
           pyinstaller --onefile --noconsole --add-data "assets;assets" user_interface.py
         shell: pwsh
+
+      - name: List files for debugging
+        run: |
+          echo "Listing files in dist directory:"
+          ls dist
 
       - name: Upload artifacts (macOS)
         if: matrix.os == 'macos-latest'
@@ -115,17 +119,17 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: 'v1.0.0'
-          release_name: Release v1.0.0
+          tag_name: 'v0.0.1'
+          release_name: Release v0.0.1
           draft: true
-          prerelease: false
+          prerelease: true
 
       - name: Upload Release Asset (macOS)
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./artifacts/macos/user_interface.dmg
-          asset_name: user_interface-macOS.dmg
+          asset_name: user_interface.dmg
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Linux)
@@ -133,7 +137,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./artifacts/linux/user_interface
-          asset_name: user_interface-Linux
+          asset_name: user_interface
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Windows)
