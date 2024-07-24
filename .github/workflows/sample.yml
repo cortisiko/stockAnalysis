@@ -1,10 +1,12 @@
-name: Build and Release
+name: Build and Create Release
 
 on:
   push:
-    branches:
-      - main
+   branches:
+    - main
   pull_request: null
+#    tags:
+#      - 'v*.*.*'
 
 jobs:
   build:
@@ -62,11 +64,6 @@ jobs:
           pyinstaller --onefile --noconsole --add-data "assets;assets" user_interface.py
         shell: pwsh
 
-      - name: List files for debugging
-        run: |
-          echo "Listing files in dist directory:"
-          ls dist
-
       - name: Upload artifacts (macOS)
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v4
@@ -116,12 +113,23 @@ jobs:
           name: user_interface-Windows
           path: ./artifacts/windows
 
+      - name: Install Ruby
+        run: sudo apt-get install ruby-full
+
+      - name: Install GitHub Changelog Generator
+        run: sudo gem install github_changelog_generator
+
+      - name: Generate CHANGELOG
+        run: |
+          github_changelog_generator -u cortisiko -p stockAnalysis --token ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: 'v0.0.1'
-          release_name: Release v0.0.1
+          tag_name: {{ github.ref }}
+          release_name: Release {{ github.ref }}
+          body_path: CHANGELOG.md
           draft: true
           prerelease: true
 
