@@ -121,7 +121,7 @@ jobs:
 
       - name: Generate CHANGELOG
         run: |
-          github_changelog_generator -u your-github-username -p your-repository-name \
+          github_changelog_generator -u cortisiko -p stockAnalysis --token ${{ secrets.GITHUB_TOKEN }} \
             --token ${{ secrets.GITHUB_TOKEN }} \
             --pr-label "Infra" \
             --pr-label "Tests" \
