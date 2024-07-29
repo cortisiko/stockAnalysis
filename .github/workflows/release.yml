@@ -123,12 +123,11 @@ jobs:
         run: |
           github_changelog_generator -u your-github-username -p your-repository-name \
             --token ${{ secrets.GITHUB_TOKEN }} \
-            --exclude-labels "ignore-for-release, dependencies" \
             --exclude-tags-regex "^v" \
-            --categories "Infrastructure Changes 🛠:Infra, Tests" \
-                         "Exciting New Features 🎉:enhancement" \
-                         "Bug Fixes 🐛:Semver-Minor,bug-fix" \
-                         "Other Changes:*"
+            --pr-label "Infrastructure Changes 🛠:Infra, Tests" \
+            --enhancement-label "Exciting New Features 🎉:enhancement" \
+            --pr-label "bug-fix" \
+            --exclude-labels "dependencies"
         env:
           CHANGELOG_PATH: ./CHANGELOG.md
 
