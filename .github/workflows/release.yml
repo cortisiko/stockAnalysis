@@ -123,8 +123,7 @@ jobs:
         run: |
           github_changelog_generator -u cortisiko -p stockAnalysis --token ${{ secrets.GITHUB_TOKEN }} \
           --enhancement-label "New Features 🎉" \
-          --add-sections "[\"Infra Changes 🛠\",\"Tests Changes 🤖\",\"Bug Fixes 🐛\"]" \
-          --configure-sections "{\"Infra Changes 🛠\": [\"Infra\", \"infrastructure\"], \"Tests Changes 🤖\": [\"Tests\", \"tests\"], \"Bug Fixes 🐛\": [\"bug\", \"bug-fix\"]}" \
+          --add-sections "{\"Infra Changes 🛠\": [\"Infra\", \"infrastructure\"], \"Tests Changes 🤖\": [\"Tests\", \"tests\"], \"Bug Fixes 🐛\": [\"bug\", \"bug-fix\"]}" \
           --exclude-labels "dependencies"
 
         env:
