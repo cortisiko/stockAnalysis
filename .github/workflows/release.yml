@@ -123,9 +123,9 @@ jobs:
         run: |
           github_changelog_generator -u your-github-username -p your-repository-name \
             --token ${{ secrets.GITHUB_TOKEN }} \
-            --exclude-tags-regex "^v" \
-            --pr-label "Infrastructure Changes 🛠:Infra, Tests" \
-            --enhancement-label "Exciting New Features 🎉:enhancement" \
+            --pr-label "Infra" \
+            --pr-label "Tests" \
+            --enhancement-label "enhancement" \
             --pr-label "bug-fix" \
             --exclude-labels "dependencies"
         env:
