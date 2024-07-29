@@ -122,12 +122,11 @@ jobs:
       - name: Generate CHANGELOG
         run: |
           github_changelog_generator -u cortisiko -p stockAnalysis --token ${{ secrets.GITHUB_TOKEN }} \
-            --token ${{ secrets.GITHUB_TOKEN }} \
-            --pr-label "Infra" \
-            --pr-label "Tests" \
-            --enhancement-label "enhancement" \
-            --pr-label "bug-fix" \
-            --exclude-labels "dependencies"
+          --enhancement-label "Exciting New Features 🎉" \
+          --add-sections "[\"Infra Changes 🛠\",\"Tests Changes 🤖\",\"Bug Fixes 🐛\"]" \
+          --label-section-map "{\"Infra Changes 🛠\": [\"Infra\", \"infrastructure\"], \"Tests Changes 🤖\": [\"Tests\", \"tests\"], \"Bug Fixes 🐛\": [\"bug\", \"bug-fix\"]}" \
+          --exclude-labels "dependencies"
+
         env:
           CHANGELOG_PATH: ./CHANGELOG.md
 
