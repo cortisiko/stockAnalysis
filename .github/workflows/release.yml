@@ -2,11 +2,11 @@ name: Build and Create Release
 
 on:
   push:
-    branches:
-      - main
-  pull_request: null
-#    tags:
-#      - 'v*.*.*'
+#   branches:
+#    - main
+#  pull_request: null
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -121,24 +121,17 @@ jobs:
 
       - name: Generate CHANGELOG
         run: |
-          github_changelog_generator -u cortisiko -p stockAnalysis --token ${{ secrets.GITHUB_TOKEN }} \
-          --enhancement-label "New Features 🎉" \
-          --configure-sections "{\"Infra Changes 🛠\": [\"Infra\", \"infrastructure\"], \"Tests Changes 🤖\": [\"Tests\", \"tests\"], \"Bug Fixes 🐛\": [\"bug\", \"bug-fix\"]}" \
-          --exclude-labels "dependencies"
-
-        env:
-          CHANGELOG_PATH: ./CHANGELOG.md
+          github_changelog_generator -u cortisiko -p stockAnalysis --token ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: 0.0.11
-#          tag_name: ${{ github.ref }}
-          release_name: Release 0.0.11
+          tag_name: {{ github.ref }}
+          release_name: Release {{ github.ref }}
           body_path: CHANGELOG.md
-          draft: false
-          prerelease: false
+          draft: true
+          prerelease: true
 
       - name: Upload Release Asset (macOS)
         uses: actions/upload-release-asset@v1
