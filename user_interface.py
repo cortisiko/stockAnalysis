@@ -19,7 +19,15 @@ from app.pages import (
 
 # Add the project root directory to the Python path
 
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+if getattr(sys, 'frozen', False):
+    # If running as a PyInstaller bundle
+    # pylint: disable=protected-access
+    bundle_dir = sys._MEIPASS
+else:
+    # If running in a normal Python environment
+    bundle_dir = os.path.abspath(os.path.dirname(__file__))
+
+icon_path = os.path.join(bundle_dir, "assets/charticon2ICO.ico")
 
 
 class UserInterFace(tk.Tk):
@@ -31,7 +39,7 @@ class UserInterFace(tk.Tk):
         tk.Tk.__init__(self)
         self.window_title = self.title("Stock Analyzer")
         container = tk.Frame(self)
-        self.icon_image = Image.open("app/charticon2ICO.ico")
+        self.icon_image = Image.open(icon_path)
         self.icon_photo = ImageTk.PhotoImage(self.icon_image)
 
         # Set the window icon
@@ -104,6 +112,7 @@ class UserInterFace(tk.Tk):
         """
         print("Cleaning up and closing the application...")
         self.destroy()
+        sys.exit(0)  # Ensure the application exits
 
 
 if __name__ == "__main__":
