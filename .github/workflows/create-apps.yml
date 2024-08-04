@@ -1,13 +1,14 @@
 name: Create executables
 
 on:
-  push:
-   branches:
-    - main
-  pull_request: null
+  pull_request:
+    branches:
+      - main
+    types: [labeled]
 
 jobs:
   build:
+    if: contains(github.event.issue.labels.*.name, 'create-builds')
     strategy:
       fail-fast: false
       matrix:
