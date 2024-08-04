@@ -1,6 +1,5 @@
 # Changelog
 
-## DRAFT
 
 ### New Features 🎉
 
