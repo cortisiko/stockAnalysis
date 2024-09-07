@@ -1,42 +1,69 @@
-# stockAnalysis
-The stock analysis app was written in python using the yahooquery package to fetch stock data. The data is then displayed on the frontend using tkinter. 
-The goal of this application is to perform ratio analysis as well as give a visual representation (in the form of bar charts) of [line items](https://pakaccountants.com/what-is-line-item/#:~:text=In%20financial%20statement%20line%20items,next%20line%20or%20different%20line.) on the financial statements.
 
+# Stock Analysis App
 
-### This application is not a recommendation or endorsement of any particular investment or investment strategy. 
+The **Stock Analysis** application is a Python-based tool that leverages the `yahooquery` package to fetch real-time stock data. The frontend is built using `Tkinter`, allowing users to analyze financial ratios and view visual representations of key financial statement line items through bar and trend charts.
 
-DEMO
----------------
-When a user enters a stock symbol, multiple [finanical ratios](https://www.investopedia.com/financial-ratios-4689817) 
-appear: 
-![StockAnalysisHomePage](http://g.recordit.co/Ms9TtEM4I9.gif)
+### Purpose
+The goal of this application is to provide users with ratio analysis and visualize data from financial statements in a user-friendly manner. The application helps you assess the financial health of a company by displaying:
+- Free Cash Flow (from the Cash Flow statement)
+- Long Term Debt (from the Balance Sheet)
+- Net Income (from the Income Statement)
+- Total Revenue
 
+Additionally, it provides a trend analysis comparing Cash from Operations and Net Income, supporting [cash-based earnings quality analysis](https://www.investopedia.com/terms/q/qualityofearnings.asp).
 
-The data plotted into the bar graphs comes from: 
+**Note:** This application does not constitute investment advice or recommendations for any particular stock or investment strategy.
 
-* Free Cash Flow (From the Cash Flow statement)
+---
 
-* Long Term Debt (From the Balance sheet)
+## Demo
 
-* Net income     (From the Income statement)
+When a user enters a stock symbol, multiple [financial ratios](https://www.investopedia.com/financial-ratios-4689817) are displayed:
+![StockAnalysisHomePage](assets/home-page.png)
 
-* There's a bar graph for a company's Total Revenue. 
+The bar graphs show:
+- **Free Cash Flow** (from the Cash Flow statement)
+- **Long Term Debt** (from the Balance Sheet)
+- **Net Income** (from the Income Statement)
+- **Total Revenue**
 
+Each graph allows the user to toggle between quarterly and yearly views for better comparison.
+![Charts](assets/cash-flow.png)
 
-There is a trend graph comparing the difference between Cash from Operations and Net Income. Basically performing [cash based earnings quality analysis](https://www.investopedia.com/terms/q/qualityofearnings.asp) on a stock    
+The application also features a trend graph comparing **Cash from Operations** and **Net Income**, aiding in the analysis of earnings quality.
 
-On each graph, you can choose either a quarterly or yearly view.
-![Charts](http://g.recordit.co/eu6GjJB1yV.gif)
+---
 
+## Installation and Usage
 
+### Prerequisites
+- Python 3.x
+- `pipenv` for package management
 
+### Installation Steps
+1. Install `pipenv` if you don't already have it:
+   ```bash
+   pip install pipenv
+   ```
 
-To run:
+2. Install the required dependencies:
+   ```bash
+   pipenv sync
+   ```
+   If you're in a development environment, use:
+   ```bash
+   pipenv sync --dev
+   ```
 
-* [Install pipenv](https://pypi.org/project/pipenv/)
+3. Run the application:
+   ```bash
+   python userInterface.py
+   ```
 
-* use `pipenv sync` or `pipenv sync --dev` to install the packages in the pipfile.
+### Optional
+If `Tkinter` is not installed on your machine, you can install it by running:
+```bash
+sudo apt-get install python3-tk
+```
 
-* Finally, run the code via terminal: `python userInterface.py` 
-
-__In the off chance that tkinter isn’t install:__ `sudo apt-get install python3-tk`
+---
