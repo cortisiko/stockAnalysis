@@ -1,11 +1,13 @@
 
-# Stock Analysis App
+# Stock Analysis 📈
 
 The **Stock Analysis** application is a Python-based tool that leverages the `yahooquery` package to fetch real-time stock data. The frontend is built using `Tkinter`, allowing users to analyze financial ratios and view visual representations of key financial statement line items through bar and trend charts.
 
 ### Purpose
-The goal of this application is to provide users with ratio analysis and visualize data from financial statements in a user-friendly manner. The application helps you assess the financial health of a company by displaying:
+This application provides users with ratio analysis and visualize data from financial statements in a user-friendly manner. The ratios focused on in this application includes: PE, Return on Equity and Debt to equity ratios. Furthermore, the Profit margin, EPS are also displayed. 
+The application helps you visualize the financial health of a company by displaying charts in the following areas:
 - Free Cash Flow (from the Cash Flow statement)
+- Cash to Earnings (from the Cash Flow statement)
 - Long Term Debt (from the Balance Sheet)
 - Net Income (from the Income Statement)
 - Total Revenue
@@ -23,14 +25,13 @@ When a user enters a stock symbol, multiple [financial ratios](https://www.inves
 
 The bar graphs show:
 - **Free Cash Flow** (from the Cash Flow statement)
+- **Cash to Earnings** (from the Cash Flow statement)
 - **Long Term Debt** (from the Balance Sheet)
 - **Net Income** (from the Income Statement)
 - **Total Revenue**
 
 Each graph allows the user to toggle between quarterly and yearly views for better comparison.
 ![Charts](assets/cash-flow.png)
-
-The application also features a trend graph comparing **Cash from Operations** and **Net Income**, aiding in the analysis of earnings quality.
 
 ---
 
