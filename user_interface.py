@@ -6,6 +6,7 @@ except ImportError:
     import tkinter as tk
 import sys
 import os
+import multiprocessing
 from PIL import Image, ImageTk
 
 from app.pages import (
@@ -116,10 +117,13 @@ class UserInterFace(tk.Tk):
 
 
 if __name__ == "__main__":
+
+    multiprocessing.freeze_support()  # This prevents double-execution
+
     try:
         app = UserInterFace()
         app.geometry("1200x800")
         app.protocol("WM_DELETE_WINDOW", app.on_closing)
         app.mainloop()
     except KeyboardInterrupt as e:
-        print("closing app")
+        print("Closing app")
