@@ -13,8 +13,6 @@ Modules:
     price_data: Handles price data retrieval.
     ticker: Handles ticker symbol retrieval.
 
-Constants:
-    ERROR_MESSAGE (str): Error message to return in case of invalid stock symbol.
 
 Functions:
     get_company_sector(ticker_symbol)
