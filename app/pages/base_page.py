@@ -11,6 +11,8 @@ if platform.system() == "Darwin":
     from tkmacosx import Button
 else:
     from tkinter import Button
+
+
 class BasePage(tk.Frame):
     # pylint: disable=too-many-instance-attributes
     """
@@ -25,6 +27,7 @@ class BasePage(tk.Frame):
     yearly_text (str): The text value for the annual option in the radio button.
     bg_color (str): The background color of the frame.
     """
+
     # pylint: disable=line-too-long
 
     def __init__(self, parent, controller, title, quarterly_text, yearly_text, bg_color='#2C3E50', fg_color='white'):
